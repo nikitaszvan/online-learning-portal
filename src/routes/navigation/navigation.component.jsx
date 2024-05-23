@@ -9,7 +9,7 @@ import { selectIsCartOpen } from '../../store/cart/cart.selector';
 import { selectCurrentUser } from '../../store/user/user.selector';
 import { signOutStart } from '../../store/user/user.action';
 
-import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
+import schoolLogo from '../../assets/school-logo.png';
 
 import {
   NavigationContainer,
@@ -37,7 +37,7 @@ String.prototype.toTitleCase = function () {
     <Fragment>
       <NavigationContainer>
         <LogoContainer to='/'>
-          <CrwnLogo className='logo' />
+          <img src={schoolLogo} alt="School Logo" />
         </LogoContainer>
         <NavLinks>
           <NavLink to='/shop'>Hi, {currentUser?.displayName.toTitleCase()}</NavLink>

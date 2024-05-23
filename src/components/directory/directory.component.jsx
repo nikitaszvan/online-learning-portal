@@ -6,31 +6,31 @@ const categories = [
   {
     id: 1,
     title: 'hats',
-    imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
+    imageUrl: 'https://images.pexels.com/photos/2156/sky-earth-space-working.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     route: 'shop/hats',
   },
   {
     id: 2,
     title: 'jackets',
-    imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
+    imageUrl: 'https://images.pexels.com/photos/276452/pexels-photo-276452.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     route: 'shop/jackets',
   },
   {
     id: 3,
     title: 'sneakers',
-    imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
+    imageUrl: 'https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     route: 'shop/sneakers',
   },
   {
     id: 4,
     title: 'womens',
-    imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
+    imageUrl: 'https://images.pexels.com/photos/132477/pexels-photo-132477.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     route: 'shop/womens',
   },
   {
     id: 5,
     title: 'mens',
-    imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
+    imageUrl: 'https://images.pexels.com/photos/63332/science-world-false-creek-vancouver-british-columbia-63332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     route: 'shop/mens',
   },
 ];
