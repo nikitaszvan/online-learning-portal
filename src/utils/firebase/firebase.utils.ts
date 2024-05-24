@@ -96,27 +96,27 @@ export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
     next step or returns control to the caller if this is the last step in the function */
 };
 
-type CategoryItem = {
+type CourseItem = {
   id: number;
   imageUrl: string;
   name: string;
   price: number;
 };
-/* CategoryItem object is expected to have specific properties such as id, imageUrl, name, and price, each with a designated data type */
+/* CourseItem object is expected to have specific properties such as id, imageUrl, name, and price, each with a designated data type */
 
-type CategoryData = {
+type CourseData = {
   imageUrl: string;
-  items: CategoryItem[];
+  items: CourseItem[];
   title: string;
 };
 
-/* items: This property is an array of CategoryItem objects.
-It represents the collection of items belonging to the category.
-Each item in this array conforms to the CategoryItem type.*/
+/* items: This property is an array of CourseItem objects.
+It represents the collection of items belonging to the course.
+Each item in this array conforms to the CourseItem type.*/
 
-export const getCategoriesAndDocuments = async (): Promise<CategoryData[]> => {
+export const getCoursesAndDocuments = async (): Promise<CourseData[]> => {
   /* This part represents the function's parameter list, which is empty in this case. 
-  The function takes no parameters. It returns a Promise that resolves to an array of CategoryData objects */
+  The function takes no parameters. It returns a Promise that resolves to an array of CourseData objects */
   const collectionRef = collection(db, 'categories');
   /* const created from the reference to the 'categories' collection obtained by calling the collection
   function with the database instance db and the collection name 'categories' as arguments. */
@@ -126,10 +126,10 @@ export const getCategoriesAndDocuments = async (): Promise<CategoryData[]> => {
 
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs.map(
-    (docSnapshot) => docSnapshot.data() as CategoryData
+    (docSnapshot) => docSnapshot.data() as CourseData
   );
-  /* retrieves the data of each document in the querySnapshot, converts it to the CategoryData type,
-    and returns an array of CategoryData objects representing the retrieved documents from the
+  /* retrieves the data of each document in the querySnapshot, converts it to the CourseData type,
+    and returns an array of CourseData objects representing the retrieved documents from the
     Firestore collection or query */
 };
 
