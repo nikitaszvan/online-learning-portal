@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectCoursesReducer = (state) => state.courses.coursesMap;
+const selectCoursesReducer = (state) => state.courses;
 
 export const selectCourses = createSelector(
   [selectCoursesReducer],

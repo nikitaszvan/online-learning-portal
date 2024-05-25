@@ -117,7 +117,7 @@ Each item in this array conforms to the CourseItem type.*/
 export const getCoursesAndDocuments = async (): Promise<CourseData[]> => {
   /* This part represents the function's parameter list, which is empty in this case. 
   The function takes no parameters. It returns a Promise that resolves to an array of CourseData objects */
-  const collectionRef = collection(db, 'categories');
+  const collectionRef = collection(db, 'courses');
   /* const created from the reference to the 'categories' collection obtained by calling the collection
   function with the database instance db and the collection name 'categories' as arguments. */
   const q = query(collectionRef);
