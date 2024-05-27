@@ -10,6 +10,8 @@ import { selectCurrentUser } from '../../store/user/user.selector';
 import { signOutStart } from '../../store/user/user.action';
 
 import schoolLogo from '../../assets/school-logo.png';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import {
   NavigationContainer,
@@ -39,16 +41,16 @@ String.prototype.toTitleCase = function () {
           <img src={schoolLogo} alt="School Logo" />
         </LogoContainer>
         <NavLinks>
-          <NavLink to='/shop'>Hi, {currentUser?.displayName.toTitleCase()}</NavLink>
+          <NavLink to='/shop'>Hi, {currentUser ? currentUser.displayName.toTitleCase() : 'Firstname Lastname'}</NavLink>
 
-          {currentUser ? (
+          {/* {currentUser ? (
             <NavLink as='span' onClick={signOutUser}>
               SIGN OUT
             </NavLink>
           ) : (
             <NavLink to='/auth'>SIGN IN</NavLink>
-          )}
-          <CartIcon />
+          )} */}
+          <FontAwesomeIcon icon={faUser} />
         </NavLinks>
         {isCartOpen && <CartDropdown />}
       </NavigationContainer>

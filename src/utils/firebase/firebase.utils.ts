@@ -133,6 +133,8 @@ export const getCoursesAndDocuments = async (): Promise<CourseData[]> => {
     Firestore collection or query */
 };
 
+console.log('test', getCoursesAndDocuments());
+
 export type AdditionalInformation = {
   displayName?: string;
 };

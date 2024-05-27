@@ -8,15 +8,18 @@ import {
 } from '../../store/courses/courses.selector';
 const SideNavigationBar = () => {
 const coursesMap = useSelector(selectCoursesMap);
+
+
 console.log(coursesMap);
     return (
       <SideNavigationContainer>
         <Sidebar>
             <Menu>
                 <SubMenu label="Enrolled Courses - Fall 2024">
-                    {Object.keys(coursesMap)?.map((course) => (
-                        <MenuItem to=''>{course}</MenuItem>
-                    ))}
+                {Object.entries(coursesMap)?.map(([key, course]) => {
+                    const { courseCode } = course;
+                    return <MenuItem to='' key={key}>{courseCode}</MenuItem>;
+                  })}
                 </SubMenu>
             </Menu>
         </Sidebar>

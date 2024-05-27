@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import DirectoryItem from '../directory-item/directory-item.component';
 import { useSelector } from 'react-redux';
 // import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
-import { DirectoryContainer } from './directory.styles';
+
+import { DirectoryContainer, CourseCardsContainer } from './directory.styles';
 import { fetchCoursesStart } from '../../store/courses/courses.action';
 import {
   selectCoursesMap,
@@ -12,19 +12,19 @@ import {
 } from '../../store/courses/courses.selector';
 const Directory = () => {
   // const { course } = useParams();
-  const dispatch = useDispatch();
+
   const coursesMap = useSelector(selectCoursesMap);
 
-  useEffect(() => {
-    dispatch(fetchCoursesStart());
-  }, []);
 
   return (
     <DirectoryContainer>
-      {Object.keys(coursesMap).map((course) => (
-        <DirectoryItem key={course.id} title={course} />
-      ))}
-          </DirectoryContainer>
+      <h1>My Courses</h1>
+      <CourseCardsContainer>
+        {Object.entries(coursesMap).map(([key, course]) => (
+          <DirectoryItem key={key} course={course} />
+        ))}
+      </CourseCardsContainer>
+    </DirectoryContainer>
   );
 };
 
