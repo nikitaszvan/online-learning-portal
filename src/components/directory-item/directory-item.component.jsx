@@ -4,11 +4,13 @@ import {
   BackgroundImage,
   CardDescription,
   CardHeader,
+  CardHeaderText,
   DirectoryItemContainer,
+  GradeStatus
 } from './directory-item.styles';
 
 const DirectoryItem = ({ course }) => {
-  const { courseName, courseTerm, imageUrl } = course;
+  const { courseName, courseTerm, imageUrl, currentGrade } = course;
   const navigate = useNavigate();
 
   // const onNavigateHandler = () => navigate(route);
@@ -16,8 +18,11 @@ const DirectoryItem = ({ course }) => {
   return (
     <DirectoryItemContainer /*onClick={onNavigateHandler}*/>
       <CardHeader>
-        <h1>{ courseName }</h1>
-        <h3>{ courseTerm }</h3>
+        <GradeStatus><p>{ currentGrade }</p></GradeStatus>
+        <CardHeaderText>
+          <h2>{ courseName }</h2>
+          <p>{ courseTerm }</p>
+        </CardHeaderText>
       </CardHeader>
       <BackgroundImage imageUrl={imageUrl} />
       <CardDescription> 

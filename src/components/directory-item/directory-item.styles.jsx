@@ -2,15 +2,35 @@ import styled from 'styled-components';
 
 export const CardHeader = styled.div`
   width: 100%;
-  height: 25%;
+  height: 18%;
   background-color: white;
+  border-radius: 5px 5px 0 0;
+  display: flex;
 
-  h1 {
+`
 
+export const CardHeaderText = styled.div`
+  display: block;
+  
+  h2 {
+    margin: 0;
+    margin-top: 10px;
   }
 
-  h3 {
+  p {
+    margin: 0;
+  }
+`
+export const GradeStatus = styled.div`
+  height: 50%;
+  width: 10%;
+  border-radius: 50%;
+  background-color: red;
+  margin: 5% 5% 5% 5%;
+  display: flex;
 
+  p {
+    text-align: center;
   }
 `
 
@@ -25,12 +45,13 @@ export const BackgroundImage = styled.div`
 
 export const CardDescription = styled.div`
   width: 100%;
-  height: 25%;
+  height: 33%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: white;
+  border-radius: 0 0 5px 5px;
 
   h2 {
     font-weight: bold;
@@ -47,13 +68,15 @@ export const CardDescription = styled.div`
 `;
 
 export const DirectoryItemContainer = styled.div`
-  width: 450px;
-  height: 500px;
+  width: 330px;
+  height: 363px;
   flex-direction: column;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 7.5px 15px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px 0px rgba(180,180,180,0.85);
 
   &:hover {
     cursor: pointer;
