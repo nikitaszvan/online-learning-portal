@@ -4,7 +4,7 @@ export const CardHeader = styled.div`
   width: 100%;
   height: 18%;
   background-color: white;
-  border-radius: 5px 5px 0 0;
+  border-radius: 10px 10px 0 0;
   display: flex;
 
 `
@@ -26,11 +26,17 @@ export const GradeStatus = styled.div`
   width: 10%;
   border-radius: 50%;
   background-color: red;
-  margin: 5% 5% 5% 5%;
+  margin: 4.5% 5% 5% 5%;
   display: flex;
 
   p {
     text-align: center;
+    vertical-align: middle;
+    line-height: 33px;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    line-weight: 700;
   }
 `
 
@@ -51,7 +57,8 @@ export const CardDescription = styled.div`
   align-items: center;
   justify-content: center;
   background-color: white;
-  border-radius: 0 0 5px 5px;
+  border-radius: 0 0 10px 10px;
+  padding: 10px;
 
   h2 {
     font-weight: bold;
@@ -75,7 +82,7 @@ export const DirectoryItemContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin: 0 7.5px 15px;
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: 3px 3px 3px 0px rgba(180,180,180,0.85);
 
   &:hover {

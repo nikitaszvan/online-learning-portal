@@ -1,23 +1,28 @@
-import { Fragment } from 'react';
+import { Fragment, useState, useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
-
 import { selectIsCartOpen } from '../../store/cart/cart.selector';
 import { selectCurrentUser } from '../../store/user/user.selector';
 import { signOutStart } from '../../store/user/user.action';
-
-import schoolLogo from '../../assets/school-logo.png';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faGrip, faGear} from '@fortawesome/free-solid-svg-icons';
+import { faMessage, faBell, faUser } from '@fortawesome/free-regular-svg-icons'
+import SchoolLogo from '../../assets/school-logo.png';
+import CompanyLogo from '../../assets/company-logo.png'
+
 
 import {
   NavigationContainer,
+  NavHeaderRight,
+  NavHeaderRightMiddleIcon,
   NavLinks,
   NavLink,
   LogoContainer,
+  ProfileName,
+  VerticalLine
 } from './navigation.styles';
 
 const Navigation = () => {
@@ -27,32 +32,35 @@ const Navigation = () => {
 
   const signOutUser = () => dispatch(signOutStart());
 
+ 
 
 String.prototype.toTitleCase = function () {
   return this.replace(/\w\S*/g, function(txt) {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
 }
+/* https://react-bootstrap.github.io/docs/components/dropdowns */
 
   return (
     <Fragment>
       <NavigationContainer>
         <LogoContainer to='/'>
-          <img src={schoolLogo} alt="School Logo" />
+          <img src={ SchoolLogo }/>
+          <VerticalLine />
+          <img src={ CompanyLogo }/>
         </LogoContainer>
-        <NavLinks>
-          <NavLink to='/shop'>Hi, {currentUser ? currentUser.displayName.toTitleCase() : 'Firstname Lastname'}</NavLink>
-
-          {/* {currentUser ? (
-            <NavLink as='span' onClick={signOutUser}>
-              SIGN OUT
-            </NavLink>
-          ) : (
-            <NavLink to='/auth'>SIGN IN</NavLink>
-          )} */}
-          <FontAwesomeIcon icon={faUser} />
-        </NavLinks>
+      <NavHeaderRight>
+      <FontAwesomeIcon icon={faGrip} />
+      
+        <NavHeaderRightMiddleIcon>
+          <FontAwesomeIcon icon={faMessage} />
+          <FontAwesomeIcon icon={faBell} />
+        </NavHeaderRightMiddleIcon>
         {isCartOpen && <CartDropdown />}
+        <ProfileName>Hi, {currentUser ? currentUser.displayName.toTitleCase() : 'Nikita Van'}</ProfileName>
+        <FontAwesomeIcon icon={faUser} />
+        <FontAwesomeIcon icon={faGear} />
+        </NavHeaderRight>
       </NavigationContainer>
       <Outlet />
     </Fragment>
