@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { toggleGradeVisibility } from '../../store/courses/courses.action';
 
 import {
   BackgroundImage,
@@ -9,10 +11,15 @@ import {
   GradeStatus
 } from './directory-item.styles';
 
-const DirectoryItem = ({ course }) => {
-  const { courseName, courseTerm, imageUrl, currentGrade } = course;
+const DirectoryItem = ({ course, courseId }) => {
+  const id = courseId;
+  const { courseName, courseTerm, imageUrl, currentGrade, showGrade } = course;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  const handleToggle = (id) => {
+    dispatch(toggleGradeVisibility(id));
+  }
   // const onNavigateHandler = () => navigate(route);
   const checkColour = (number) => {
     if (number >= 90) {
@@ -24,14 +31,14 @@ const DirectoryItem = ({ course }) => {
     } else if (number >= 60 && number < 70 ) {
       return "orange";
     } else {
-      return "red"; // assuming anything else is failing grade or unspecified
+      return "red";
     }
   }
   
   return (
     <DirectoryItemContainer /*onClick={onNavigateHandler}*/>
       <CardHeader>
-        <GradeStatus style={{backgroundColor: checkColour(currentGrade)}}><p>{ currentGrade }</p></GradeStatus>
+        <GradeStatus style={{backgroundColor: showGrade? checkColour(currentGrade) : 'grey'}} onClick={() => handleToggle(id)}><p>{ showGrade && currentGrade }</p></GradeStatus>
         <CardHeaderText>
           <h2>{ courseName }</h2>
           <p>{ courseTerm }</p>

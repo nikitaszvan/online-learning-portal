@@ -56,6 +56,11 @@ export const NavHeaderRight = styled.div`
     font-size: 30px;
     color: #68696D;
   }
+
+  #dropdown-basic {
+    background-color: transparent;
+    border: none;
+  }
 `
 
 export const NavHeaderRightMiddleIcon = styled.div`

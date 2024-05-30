@@ -9,8 +9,6 @@ import {
 const SideNavigationBar = () => {
 const coursesMap = useSelector(selectCoursesMap);
 
-
-console.log(coursesMap);
     return (
       <SideNavigationContainer>
         <Sidebar>

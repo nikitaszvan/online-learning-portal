@@ -19,6 +19,20 @@ export const coursesReducer = (
       return { ...state, courses: payload, isLoading: false };
     case COURSES_ACTION_TYPES.FETCH_COURSES_FAILED:
       return { ...state, error: payload, isLoading: false };
+      case COURSES_ACTION_TYPES.TOGGLE_GRADE_VISIBILITY:
+        const { payload: courseId } = action;
+        return {
+          ...state,
+          courses: state.courses.map(course => {
+            if (course.id === courseId) {
+              return {
+                ...course,
+                showGrade: !course.showGrade
+              };
+            }
+            return course;
+          })
+        };
     default:
       return state;
   }

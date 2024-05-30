@@ -1,7 +1,7 @@
 import { Fragment, useState, useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-
+import Dropdown from 'react-bootstrap/Dropdown';
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
 import { selectIsCartOpen } from '../../store/cart/cart.selector';
@@ -50,11 +50,38 @@ String.prototype.toTitleCase = function () {
           <img src={ CompanyLogo }/>
         </LogoContainer>
       <NavHeaderRight>
-      <FontAwesomeIcon icon={faGrip} />
-      
+      <Dropdown>
+        <Dropdown.Toggle id="dropdown-basic">
+          <FontAwesomeIcon icon={faGrip} />
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item href="/">Action</Dropdown.Item>
+          <Dropdown.Item href="/">Another action</Dropdown.Item>
+          <Dropdown.Item href="/">Something else</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
         <NavHeaderRightMiddleIcon>
-          <FontAwesomeIcon icon={faMessage} />
-          <FontAwesomeIcon icon={faBell} />
+        <Dropdown>
+        <Dropdown.Toggle id="dropdown-basic">
+        <FontAwesomeIcon icon={faMessage} />
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item href="/">Action</Dropdown.Item>
+          <Dropdown.Item href="/">Another action</Dropdown.Item>
+          <Dropdown.Item href="/">Something else</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+
+        <Dropdown>
+        <Dropdown.Toggle id="dropdown-basic">
+        <FontAwesomeIcon icon={faBell} />
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item href="/">Action</Dropdown.Item>
+          <Dropdown.Item href="/">Another action</Dropdown.Item>
+          <Dropdown.Item href="/">Something else</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
         </NavHeaderRightMiddleIcon>
         {isCartOpen && <CartDropdown />}
         <ProfileName>Hi, {currentUser ? currentUser.displayName.toTitleCase() : 'Nikita Van'}</ProfileName>

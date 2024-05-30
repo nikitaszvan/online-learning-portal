@@ -12,16 +12,16 @@ import {
 } from '../../store/courses/courses.selector';
 const Directory = () => {
   // const { course } = useParams();
-
   const coursesMap = useSelector(selectCoursesMap);
 
+  console.log(coursesMap);
 
   return (
     <DirectoryContainer>
       <h1>My Courses</h1>
       <CourseCardsContainer>
         {Object.entries(coursesMap).map(([key, course]) => (
-          <DirectoryItem key={key} course={course} />
+          <DirectoryItem key={key} course={course} courseId={key}/>
         ))}
       </CourseCardsContainer>
     </DirectoryContainer>
