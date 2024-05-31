@@ -1,11 +1,19 @@
 import { useState, useEffect } from 'react';
 import DirectoryItem from '../directory-item/directory-item.component';
 import { useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { Dropdown } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 // import { useParams } from 'react-router-dom';
 
 
-import { DirectoryContainer, CourseCardsContainer } from './directory.styles';
-import { fetchCoursesStart } from '../../store/courses/courses.action';
+import { 
+  DirectoryContainer,
+  DirectoryHeaderContainer,
+  CourseCardsContainer,
+ } from './directory.styles';
+
 import {
   selectCoursesMap,
   selectCoursesIsLoading,
@@ -14,11 +22,35 @@ const Directory = () => {
   // const { course } = useParams();
   const coursesMap = useSelector(selectCoursesMap);
 
-  console.log(coursesMap);
-
   return (
     <DirectoryContainer>
-      <h1>My Courses</h1>
+      <DirectoryHeaderContainer>
+        <h1>My Courses</h1>
+        <Dropdown>
+          <Dropdown.Toggle id="dropdown-basic">
+            <FontAwesomeIcon icon={faFilter} />
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+              <div key='default-checkbox' className="mb-3">
+              <Form.Check // prettier-ignore
+                type='checkbox'
+                label='Action'
+              />
+              </div>
+              <div key='default-checkbox' className="mb-3">
+              <Form.Check // prettier-ignore
+                type='checkbox'
+                label='Action'
+              />
+              </div><div key='default-checkbox' className="mb-3">
+              <Form.Check // prettier-ignore
+                type='checkbox'
+                label='Action'
+              />
+              </div>
+          </Dropdown.Menu>
+      </Dropdown>
+      </DirectoryHeaderContainer>
       <CourseCardsContainer>
         {Object.entries(coursesMap).map(([key, course]) => (
           <DirectoryItem key={key} course={course} courseId={key}/>

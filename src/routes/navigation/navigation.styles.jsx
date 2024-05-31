@@ -53,7 +53,7 @@ export const NavHeaderRight = styled.div`
   justify-content: space-between;
 
   svg {
-    font-size: 30px;
+    font-size: 20px;
     color: #68696D;
   }
 
@@ -67,14 +67,20 @@ export const NavHeaderRightMiddleIcon = styled.div`
   display: flex;
   border-left: 2px solid #68696D;
   border-right: 2px solid #68696D;
-  width: 40%;
+  width: 30%;
   justify-content: space-evenly;
 
-  svg:nth-of-type(1) {
-    font-size: 28px;
+  svg {
+    font-size: 20px;
+  }
+
+  svg:nth-child(1) {
+    font-size: 18px;
   }
 `
 
-export const ProfileName = styled.h2`
+export const ProfileName = styled.p`
+  font-size: 15px;
   color: black;
+  width: 25%;
 `

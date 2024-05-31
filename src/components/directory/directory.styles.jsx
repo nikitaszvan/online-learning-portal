@@ -7,6 +7,30 @@ export const DirectoryContainer = styled.div`
   border-radius: 10px;
 `
 
+export const DirectoryHeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    background-color: transparent;
+    border: 1px solid grey;
+  }
+
+  svg {
+    font-size: 25px;
+    color: grey;
+  }
+
+  .dropdown-menu {
+    padding-left: 10px;
+    padding-top: 10px;
+  }
+
+  .dropdown-toggle::after {
+    border-top-color: grey;
+  }
+`
+
 export const CourseCardsContainer = styled.div`
   width: 100%;
   display: flex;

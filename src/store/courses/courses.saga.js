@@ -8,7 +8,6 @@ import {
 import {
   fetchCoursesSuccess,
   fetchCoursesFailed,
-  setCourseGradeToggle,
   toggleGradeVisibility
 } from './courses.action';
 
@@ -32,13 +31,25 @@ export function* onFetchCourses() {
 
 export function* toggleGradeVisibilityAsync(action) {
   try {
-    const {courseId} = action;
-    yield call(updateGradeVisibilityInDatabase, courseId);
+    const { payload: {courseId, showGrade} } = action;
+    console.log(courseId);
+    yield call(updateGradeVisibilityInDatabase, courseId, showGrade);
   } catch (error) {
-    yield 
+    console.log(error);
   }
 }
 
+export function* watchToggleGradeVisibility() {
+  yield takeLatest(
+    COURSES_ACTION_TYPES.TOGGLE_GRADE_VISIBILITY,
+    toggleGradeVisibilityAsync
+  );
+}
+
 export function* coursesSaga() {
-  yield all([call(onFetchCourses)]);
+  yield all([
+    call(onFetchCourses),
+    call(watchToggleGradeVisibility)
+  ]);
+
 }

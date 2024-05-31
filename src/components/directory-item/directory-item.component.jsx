@@ -17,8 +17,8 @@ const DirectoryItem = ({ course, courseId }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleToggle = (id) => {
-    dispatch(toggleGradeVisibility(id));
+  const handleToggle = (id, show) => {
+    dispatch(toggleGradeVisibility(id, show));
   }
   // const onNavigateHandler = () => navigate(route);
   const checkColour = (number) => {
@@ -38,9 +38,9 @@ const DirectoryItem = ({ course, courseId }) => {
   return (
     <DirectoryItemContainer /*onClick={onNavigateHandler}*/>
       <CardHeader>
-        <GradeStatus style={{backgroundColor: showGrade? checkColour(currentGrade) : 'grey'}} onClick={() => handleToggle(id)}><p>{ showGrade && currentGrade }</p></GradeStatus>
+        <GradeStatus style={{backgroundColor: showGrade? checkColour(currentGrade) : 'grey'}} onClick={() => handleToggle(id, showGrade)}><p>{ showGrade && currentGrade }</p></GradeStatus>
         <CardHeaderText>
-          <h2>{ courseName }</h2>
+          <h2 style={{fontSize: courseName.length >= 26 ? '1.6rem' : '2.325rem' , marginTop: courseName.length >= 26 ? '15px' : '10px'}}>{ courseName }</h2>
           <p>{ courseTerm }</p>
         </CardHeaderText>
       </CardHeader>

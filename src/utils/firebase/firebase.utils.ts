@@ -23,6 +23,7 @@ import {
   query,
   getDocs,
   QueryDocumentSnapshot,
+  FieldValue
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -252,11 +253,11 @@ export const getCurrentUser = new Promise<User | null>((resolve, reject) => {
 
 /* fetches the current user's authentication state. When the authentication state changes,
 it resolves the promise with the user's authentication information or null if there's no user authenticated */
-export const updateGradeVisibilityInDatabase = async (courseId: string): Promise<void> => {
+export const updateGradeVisibilityInDatabase = async (courseId: number, showGrade: boolean): Promise<void> => {
 
   try {
-    const courseRef = doc(db, 'courses', courseId);
-    await updateDoc(courseRef, { showGrade: true })
+    const courseRef = doc(db, 'courses', `${courseId}`);
+    await updateDoc(courseRef, {'courseDescription.showGrade': !showGrade})
   } catch (err) {
       console.error('Error updating document: ', err);
       throw err
