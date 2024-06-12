@@ -1,33 +1,41 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
-
 import Home from './routes/home/home.component';
-import Navigation from './routes/navigation/navigation.component';
+import { Layout } from './components/layout/layout.component';
+import Directory from './components/directory/directory.component';
+import Navigation from './components/navigation/navigation.component';
 import Authentication from './routes/authentication/authentication.component';
 import Shop from './routes/shop/shop.component';
 import Checkout from './routes/checkout/checkout.component';
+import { CoursePage } from './routes/course-page/course-page.component';
 import { checkUserSession } from './store/user/user.action';
-
+import { fetchCoursesStart } from './store/courses/courses.action';
+import {
+  selectCoursesMap,
+  selectCoursesIsLoading,
+} from './store/courses/courses.selector';
+import SideNavigationBar from './components/side-navigation/side-navigation.component';
 const App = () => {
   const dispatch = useDispatch();
-  /* The dispatch function is used to dispatch actions to the Redux store. */
-
+const coursesMap = useSelector(selectCoursesMap);
   useEffect(() => {
     dispatch(checkUserSession());
-    /* This action creator likely dispatches an action to check the user's session or authentication status */
+    dispatch(fetchCoursesStart());
   }, []);
 
   return (
     <Routes>
-      <Route path='/' element={<Navigation />}>
-        <Route index element={<Home />} />
-        <Route path='shop/*' element={<Shop />} />
-        <Route path='auth' element={<Authentication />} />
-        {/* <Route path='checkout' element={<Checkout />} /> */}
-      </Route>
+        <Route path="/" element={<Layout children={<Directory />}/>} />
+        {/* <Route index element={<Home />} /> */}
+      {/* <Route path='/' element={<Navigation />}>
+        
+        <Route path='auth' element={<Authentication />} /> */}
+        {Object.entries(coursesMap).map(([key, course]) => (
+          <Route key={key} path={`course/${course.courseSlug}`} element={<Layout children={<CoursePage courseId={key} />} pageTitle={course.courseName}/>} />        
+        ))}
     </Routes>
   );
 };

@@ -18,6 +18,7 @@ import {
   selectCoursesMap,
   selectCoursesIsLoading,
 } from '../../store/courses/courses.selector';
+import { Link } from 'react-router-dom';
 const Directory = () => {
   // const { course } = useParams();
   const coursesMap = useSelector(selectCoursesMap);
@@ -31,19 +32,19 @@ const Directory = () => {
             <FontAwesomeIcon icon={faFilter} />
           </Dropdown.Toggle>
           <Dropdown.Menu>
-              <div key='default-checkbox' className="mb-3">
-              <Form.Check // prettier-ignore
+              <div className="mb-3">
+              <Form.Check
                 type='checkbox'
                 label='Action'
               />
               </div>
-              <div key='default-checkbox' className="mb-3">
-              <Form.Check // prettier-ignore
+              <div className="mb-3">
+              <Form.Check
                 type='checkbox'
                 label='Action'
               />
-              </div><div key='default-checkbox' className="mb-3">
-              <Form.Check // prettier-ignore
+              </div><div className="mb-3">
+              <Form.Check
                 type='checkbox'
                 label='Action'
               />
@@ -53,7 +54,9 @@ const Directory = () => {
       </DirectoryHeaderContainer>
       <CourseCardsContainer>
         {Object.entries(coursesMap).map(([key, course]) => (
-          <DirectoryItem key={key} course={course} courseId={key}/>
+          <Link to={`/course/${course.courseSlug}`}>
+            <DirectoryItem key={key} course={course} courseId={key}/>
+          </Link>
         ))}
       </CourseCardsContainer>
     </DirectoryContainer>

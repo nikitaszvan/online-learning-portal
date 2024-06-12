@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+
 import { useEffect } from 'react';
 import { fetchCoursesStart } from '../../store/courses/courses.action';
 import { HomeContainer } from './home.styles';
@@ -15,7 +15,6 @@ const Home = () => {
     <HomeContainer>
       <SideNavigationBar />
       <Directory />
-      <Outlet />
     </HomeContainer>
   );
 };
