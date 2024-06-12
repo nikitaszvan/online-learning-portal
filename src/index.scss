@@ -1,6 +1,6 @@
 :root {
   --color-primary: #FFFFFF;
-  --color-primary-var: #FAFBFD;
+  --color-primary-var: #ECEFF3;
   --color-on-primary: #8951FF;
   --color-secondary: ;
   --color-secondary-var: ;
@@ -10,8 +10,7 @@
 
 body {
   margin: 0;
-  padding: 20px 40px;
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Inter';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

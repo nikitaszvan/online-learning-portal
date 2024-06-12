@@ -6,9 +6,18 @@ import {
   selectCoursesMap,
   selectCoursesIsLoading,
 } from '../../store/courses/courses.selector';
-const SideNavigationBar = () => {
-const coursesMap = useSelector(selectCoursesMap);
 
+import {
+  selectSideNavMenuMap
+} from '../../store/side-nav/side-nav.selector';
+
+const SideNavigationBar = () => {
+      
+const coursesMap = useSelector(selectCoursesMap);
+const sideNavMenuMap = useSelector(selectSideNavMenuMap);
+
+
+console.log(sideNavMenuMap);
     return (
       <SideNavigationContainer>
         <Sidebar>
@@ -20,18 +29,6 @@ const coursesMap = useSelector(selectCoursesMap);
                 })}
               </SubMenu>
           </Menu>
-          {
-  Array.from({ length: 10 }, (_, index) => index + 1).map((key) => (
-    <Menu key={key}>
-      <SubMenu label={key}>
-        {Object.entries(coursesMap)?.map(([courseKey, course]) => {
-          const { courseCode } = course;
-          return <MenuItem to='' key={courseKey}>{courseCode}</MenuItem>;
-        })}
-      </SubMenu>
-    </Menu>
-  ))
-}
         </Sidebar>
       </SideNavigationContainer>
     );

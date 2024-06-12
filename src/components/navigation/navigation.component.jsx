@@ -7,15 +7,17 @@ import { signOutStart } from '../../store/user/user.action';
 import SchoolLogo from '../../assets/school-logo.png';
 import CompanyLogo from '../../assets/company-logo.png'
 
-
 import {
   NavigationContainer,
   NavHeaderRight,
+  NavSearchBar,
+  NavSearchIcon,
   LogoContainer,
   VerticalLine
 } from './navigation.styles';
 
 const Navigation = ({ sectionTitle }) => {
+
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
   const isCartOpen = useSelector(selectIsCartOpen);
@@ -43,8 +45,9 @@ String.prototype.toTitleCase = function () {
           <>
             <h3>{sectionTitle}</h3>
           </>}
-      <NavHeaderRight>
-    
+        <NavHeaderRight>
+          <NavSearchIcon />
+          <NavSearchBar placeholder='Search...'/>
         </NavHeaderRight>
       </NavigationContainer>
       <Outlet />

@@ -13,6 +13,7 @@ import Checkout from './routes/checkout/checkout.component';
 import { CoursePage } from './routes/course-page/course-page.component';
 import { checkUserSession } from './store/user/user.action';
 import { fetchCoursesStart } from './store/courses/courses.action';
+import { fetchSideNavMenuStart } from './store/side-nav/side-nav.action';
 import {
   selectCoursesMap,
   selectCoursesIsLoading,
@@ -24,6 +25,7 @@ const coursesMap = useSelector(selectCoursesMap);
   useEffect(() => {
     dispatch(checkUserSession());
     dispatch(fetchCoursesStart());
+    dispatch(fetchSideNavMenuStart());
   }, []);
 
   return (

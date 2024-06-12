@@ -112,27 +112,37 @@ type CourseData = {
   title: string;
 };
 
+type sideNavMenuSubItem = {
+  [key: number]: string
+};
+
+type sideNavMenuData = {
+  id: number;
+  menuIcon: string;
+  menuTitle: string;
+  subMenuOptions: sideNavMenuSubItem[];
+};
+
 /* items: This property is an array of CourseItem objects.
 It represents the collection of items belonging to the course.
 Each item in this array conforms to the CourseItem type.*/
 
 export const getCoursesAndDocuments = async (): Promise<CourseData[]> => {
-  /* This part represents the function's parameter list, which is empty in this case. 
-  The function takes no parameters. It returns a Promise that resolves to an array of CourseData objects */
-  const collectionRef = collection(db, 'courses');
-  /* const created from the reference to the 'categories' collection obtained by calling the collection
-  function with the database instance db and the collection name 'categories' as arguments. */
-  const q = query(collectionRef);
-  /* creates a query object using the query function and passes the collectionRef as an argument.
-  By default, this creates a query that retrieves all documents from the specified collection.*/
-
-  const querySnapshot = await getDocs(q);
-  return querySnapshot.docs.map(
+  const collectionRef1 = collection(db, 'courses');
+  const q1 = query(collectionRef1);
+  const querySnapshot1 = await getDocs(q1);
+  return querySnapshot1.docs.map(
     (docSnapshot) => docSnapshot.data() as CourseData
   );
-  /* retrieves the data of each document in the querySnapshot, converts it to the CourseData type,
-    and returns an array of CourseData objects representing the retrieved documents from the
-    Firestore collection or query */
+};
+
+export const getSideNavMenuOptions = async (): Promise<sideNavMenuData[]> => {
+  const collectionRef = collection(db, 'student-side-bar-menu');
+  const q = query(collectionRef);
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.map(
+    (docSnapshot) => docSnapshot.data() as sideNavMenuData
+  );
 };
 
 
