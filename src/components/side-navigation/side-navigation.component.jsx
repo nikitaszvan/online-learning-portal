@@ -10,14 +10,14 @@ import {
 import {
   selectSideNavMenuMap
 } from '../../store/side-nav/side-nav.selector';
+import DynamicIcon from '../dynamic-icon.component';
 
 const SideNavigationBar = () => {
       
 const coursesMap = useSelector(selectCoursesMap);
 const sideNavMenuMap = useSelector(selectSideNavMenuMap);
 
-
-console.log(sideNavMenuMap);
+console.log('side nav rendered')
     return (
       <SideNavigationContainer>
         <Sidebar>
@@ -28,7 +28,21 @@ console.log(sideNavMenuMap);
                   return <MenuItem to='' key={key}>{courseCode}</MenuItem>;
                 })}
               </SubMenu>
-          </Menu>
+             
+          
+        {
+                Object.entries(sideNavMenuMap)?.map(([key, sideNavSubMenu]) => {
+                  const { menuIcon, menuTitle, subMenuOptions } = sideNavSubMenu;
+                  return (
+                    <SubMenu icon={<DynamicIcon key={key} iconName={menuIcon}/>} label={menuTitle}>
+                      {Object.entries(subMenuOptions).map(([key, subMenuOption]) => {
+                    return <MenuItem to='' key={key}>{subMenuOption}</MenuItem>;
+                  })}
+                    </SubMenu>
+                  )
+                })
+              }
+              </Menu>
         </Sidebar>
       </SideNavigationContainer>
     );

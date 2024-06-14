@@ -9,7 +9,7 @@ import Directory from './components/directory/directory.component';
 import Navigation from './components/navigation/navigation.component';
 import Authentication from './routes/authentication/authentication.component';
 import Shop from './routes/shop/shop.component';
-import Checkout from './routes/checkout/checkout.component';
+// import Checkout from './routes/checkout/checkout.component';
 import { CoursePage } from './routes/course-page/course-page.component';
 import { checkUserSession } from './store/user/user.action';
 import { fetchCoursesStart } from './store/courses/courses.action';
@@ -19,6 +19,7 @@ import {
   selectCoursesIsLoading,
 } from './store/courses/courses.selector';
 import SideNavigationBar from './components/side-navigation/side-navigation.component';
+
 const App = () => {
   const dispatch = useDispatch();
 const coursesMap = useSelector(selectCoursesMap);
@@ -27,6 +28,7 @@ const coursesMap = useSelector(selectCoursesMap);
     dispatch(fetchCoursesStart());
     dispatch(fetchSideNavMenuStart());
   }, []);
+
 
   return (
     <Routes>

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const SideNavigationContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 320px;
   padding: 30px 10px;
   
   .css-dip3t8 {
@@ -19,10 +18,21 @@ export const SideNavigationContainer = styled.div`
   }
 
   a.ps-menu-button {
-    border-radius: 15px;
+    border-radius: 8px;
+    height: 35px;
+    margin: 5px 0;
 
     &:hover {
       background-color: var(--color-primary-var);
+    }
+  }
+
+  .css-1tqrhto > a {
+
+    &:hover {
+      background-color: var(--color-secondary);
+      color: var(--color-on-primary);
+      font-weight: 600;
     }
   }
 `;

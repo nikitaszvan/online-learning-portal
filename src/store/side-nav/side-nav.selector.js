@@ -11,8 +11,8 @@ export const selectSideNavMenuMap = createSelector(
   [selectSideNavMenu],
   (sideNavMenu) =>
     sideNavMenu.reduce((acc, sideNavMenu) => {
-      const { id, subMenuOptions } = sideNavMenu;
-      acc[id] = subMenuOptions;
+      const { id, menuIcon, menuTitle, subMenuOptions } = sideNavMenu;
+      acc[id] = {menuIcon, menuTitle, subMenuOptions};
       return acc;
     }, {})
 );

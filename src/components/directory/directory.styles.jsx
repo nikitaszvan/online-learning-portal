@@ -9,26 +9,7 @@ export const DirectoryContainer = styled.div`
 
 export const DirectoryHeaderContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-
-  button {
-    background-color: transparent;
-    border: 1px solid grey;
-  }
-
-  svg {
-    font-size: 25px;
-    color: grey;
-  }
-
-  .dropdown-menu {
-    padding-left: 10px;
-    padding-top: 10px;
-  }
-
-  .dropdown-toggle::after {
-    border-top-color: grey;
-  }
+  flex-direction: row-reverse;
 `
 
 export const CourseCardsContainer = styled.div`

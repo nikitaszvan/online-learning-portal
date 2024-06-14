@@ -128,10 +128,10 @@ It represents the collection of items belonging to the course.
 Each item in this array conforms to the CourseItem type.*/
 
 export const getCoursesAndDocuments = async (): Promise<CourseData[]> => {
-  const collectionRef1 = collection(db, 'courses');
-  const q1 = query(collectionRef1);
-  const querySnapshot1 = await getDocs(q1);
-  return querySnapshot1.docs.map(
+  const collectionRef = collection(db, 'courses');
+  const q = query(collectionRef);
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.map(
     (docSnapshot) => docSnapshot.data() as CourseData
   );
 };
