@@ -1,91 +1,89 @@
 import styled from 'styled-components';
-
-export const CardHeader = styled.div`
-  width: 100%;
-  height: 18%;
-  background-color: white;
-  border-radius: 10px 10px 0 0;
-  display: flex;
-
-`
-
-export const CardHeaderText = styled.div`
-  display: block;
-  
-  h2 {
-    margin: 0;
-    margin-top: 10px;
-  }
-
-  p {
-    margin: 0;
-  }
-`
-export const GradeStatus = styled.div`
-  height: 50%;
-  width: 10%;
-  border-radius: 50%;
-  background-color: red;
-  margin: 4.5% 5% 5% 5%;
-  display: flex;
-
-  p {
-    text-align: center;
-    vertical-align: middle;
-    line-height: 33px;
-    margin: 0;
-    height: 100%;
-    width: 100%;
-    line-weight: 700;
-  }
-`
-
-export const BackgroundImage = styled.div`
-  width: 100%;
-  height: 50%;
-  background-size: cover;
-  background-position: center;
-  background-image: ${({ imageUrl }) => `url(${imageUrl})`};
-`;
-
-
-export const CardDescription = styled.div`
-  width: 100%;
-  height: 33%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  border-radius: 0 0 10px 10px;
-  padding: 10px;
-
-  h2 {
-    font-weight: bold;
-    margin: 0 6px 0;
-    font-size: 22px;
-    color: #4a4a4a;
-    text-transform: uppercase;
-  }
-
-  p {
-    font-weight: lighter;
-    font-size: 16px;
-  }
-`;
+import { ProgressBar } from 'react-bootstrap';
 
 export const DirectoryItemContainer = styled.div`
-  width: 330px;
-  height: 363px;
+  width: 298px;
+  height: 293px;
   flex-direction: column;
+  background-color: var(--color-primary);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 7.5px 15px;
-  border-radius: 10px;
-  box-shadow: 3px 3px 3px 0px rgba(180,180,180,0.85);
+  border-radius: 20px;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 12px 14px;
+  // box-shadow: 3px 3px 3px 0px rgba(180,180,180,0.85);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
   &:hover {
     cursor: pointer;
   }
 `;
+
+export const CardImage = styled.div`
+  width: 100%;
+  height: 50%;
+  border-radius: 15px;
+  background-size: cover;
+  background-position: center;
+  align-self: center;
+  background-image: ${({ imageUrl }) => `url(${imageUrl})`};
+`;
+
+export const CardTag = styled.div`
+  border-radius: 50px;
+  background-color: var(--color-secondary-var);
+  color: var(--color-on-primary);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 15px 1.5px 15px;
+`
+
+export const CardCourseTitle = styled.h2`
+  font-size: 16px;
+  margin: 0;
+  width: 274px;
+  height: 38.4px;
+  display: flex;
+  align-items: center;
+`
+export const CardCourseProgressBar = styled(ProgressBar)`
+  width: 100%;
+  height: 6px;
+  background-color: #D9D9D9;
+  
+  .progress-bar {
+    background-color: #702DFF;
+  }
+
+`
+
+export const CardCourseInfoContainer = styled.div`
+
+  display: flex;
+
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }  
+
+  > div {
+  display: flex;
+  flex-direction: column;
+    justify-content: space-between;
+    > p {
+      margin: 0;
+    }
+
+    > p:first-of-type {
+      font-size: 11px;
+    }
+
+    > p:nth-child(2) {
+      font-size: 8px;
+    }
+}
+
+`;
+

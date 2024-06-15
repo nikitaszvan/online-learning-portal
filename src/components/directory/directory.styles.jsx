@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 export const DirectoryContainer = styled.div`
-  background-color: #F9F9F9;
+  background-color: #F9FAFC;
   padding: 2%;
   padding-top: 1%;
   border-radius: 10px;
+  max-width: 1050px;
 `
 
 export const DirectoryHeaderContainer = styled.div`

@@ -1,9 +1,13 @@
 import styled from 'styled-components';
+import { Sidebar } from 'react-pro-sidebar';
 
-export const SideNavigationContainer = styled.div`
+export const SideNavigationContainer = styled(Sidebar)`
   display: flex;
   flex-direction: column;
-  padding: 30px 10px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  z-index: 5;
+  width: 15%;
+  min-width: 150px;
   
   .css-dip3t8 {
     background-color: var(--color-primary);
@@ -20,7 +24,11 @@ export const SideNavigationContainer = styled.div`
   a.ps-menu-button {
     border-radius: 8px;
     height: 35px;
-    margin: 5px 0;
+    padding-right: 5px;
+
+    > .ps-menu-icon {
+      margin: 0;
+    }
 
     &:hover {
       background-color: var(--color-primary-var);

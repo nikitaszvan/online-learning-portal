@@ -1,6 +1,6 @@
 
 import { SideNavigationContainer } from './side-navigation.styles';
-import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+import { Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { useSelector } from 'react-redux';
 import {
   selectCoursesMap,
@@ -20,9 +20,8 @@ const sideNavMenuMap = useSelector(selectSideNavMenuMap);
 console.log('side nav rendered')
     return (
       <SideNavigationContainer>
-        <Sidebar>
           <Menu>
-              <SubMenu label="Enrolled Courses - Fall 2024">
+              <SubMenu label="Enrolled Courses">
               {Object.entries(coursesMap)?.map(([key, course]) => {
                   const { courseCode } = course;
                   return <MenuItem to='' key={key}>{courseCode}</MenuItem>;
@@ -43,7 +42,6 @@ console.log('side nav rendered')
                 })
               }
               </Menu>
-        </Sidebar>
       </SideNavigationContainer>
     );
   };

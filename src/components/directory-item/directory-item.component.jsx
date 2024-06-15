@@ -1,53 +1,33 @@
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { toggleGradeVisibility } from '../../store/courses/courses.action';
 
 import {
-  BackgroundImage,
-  CardDescription,
-  CardHeader,
-  CardHeaderText,
-  DirectoryItemContainer,
-  GradeStatus
+  CardImage,
+  CardCourseInfoContainer,
+  CardCourseProgressBar,
+  CardCourseTitle,
+  CardTag,
+  DirectoryItemContainer
 } from './directory-item.styles';
+
 
 const DirectoryItem = ({ course, courseId }) => {
   const id = courseId;
-  const { courseName, courseTerm, imageUrl, currentGrade, showGrade } = course;
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { courseName, courseTerm, imageUrl, currentGrade, showGrade, courseDepartment, lecturerName, totalTasks, completedTasks, courseTag } = course;
 
-  const handleToggle = (id, show) => {
-    dispatch(toggleGradeVisibility(id, show));
-  }
-  // const onNavigateHandler = () => navigate(route);
-  const checkColour = (number) => {
-    if (number >= 90) {
-      return "green";
-    } else if (number >= 80 && number < 90) {
-      return "blue";
-    } else if (number >= 70 && number < 80 ) {
-      return "yellow";
-    } else if (number >= 60 && number < 70 ) {
-      return "orange";
-    } else {
-      return "red";
-    }
-  }
-  
+
+  console.log(Math.trunc((completedTasks / totalTasks) * 100));
   return (
     <DirectoryItemContainer /*onClick={onNavigateHandler}*/>
-      <CardHeader>
-        <GradeStatus style={{backgroundColor: showGrade? checkColour(currentGrade) : 'grey'}} onClick={() => handleToggle(id, showGrade)}><p>{ showGrade && currentGrade }</p></GradeStatus>
-        <CardHeaderText>
-          <h2 style={{fontSize: courseName.length >= 26 ? '1.6rem' : '2.325rem' , marginTop: courseName.length >= 26 ? '15px' : '10px'}}>{ courseName }</h2>
-          <p>{ courseTerm }</p>
-        </CardHeaderText>
-      </CardHeader>
-      <BackgroundImage imageUrl={imageUrl} />
-      <CardDescription> 
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-      </CardDescription>
+      <CardImage imageUrl={imageUrl} />
+      <CardTag>{ courseTag }</CardTag>
+      <CardCourseTitle style={{fontSize: courseName.length >= 28 ? '18px' : '22px'}}>{ courseName }</CardCourseTitle>
+      <CardCourseProgressBar now={ Math.trunc((completedTasks / totalTasks) * 100) } />
+      <CardCourseInfoContainer>
+        <img src={require(`../../assets/lecturers/lecturer-${id}.jpg`)} alt={`lecturer ${id}`} />
+        <div>
+          <p>{ lecturerName }</p>
+          <p>{ courseDepartment }</p>
+        </div>
+      </CardCourseInfoContainer>
     </DirectoryItemContainer>
   );
 };
