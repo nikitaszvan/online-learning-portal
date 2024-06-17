@@ -1,6 +1,10 @@
 
-import { SideNavigationContainer } from './side-navigation.styles';
-import { Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+import { 
+  BottomSideBarContainer,
+  SideNavigationContainer,
+  UserContainer
+ } from './side-navigation.styles';
+import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { useSelector } from 'react-redux';
 import {
   selectCoursesMap,
@@ -20,6 +24,7 @@ const sideNavMenuMap = useSelector(selectSideNavMenuMap);
 console.log('side nav rendered')
     return (
       <SideNavigationContainer>
+        <Sidebar>
           <Menu>
               <SubMenu label="Enrolled Courses">
               {Object.entries(coursesMap)?.map(([key, course]) => {
@@ -27,8 +32,6 @@ console.log('side nav rendered')
                   return <MenuItem to='' key={key}>{courseCode}</MenuItem>;
                 })}
               </SubMenu>
-             
-          
         {
                 Object.entries(sideNavMenuMap)?.map(([key, sideNavSubMenu]) => {
                   const { menuIcon, menuTitle, subMenuOptions } = sideNavSubMenu;
@@ -42,6 +45,21 @@ console.log('side nav rendered')
                 })
               }
               </Menu>
+            </Sidebar>
+      <BottomSideBarContainer>
+        <a href="">
+          <DynamicIcon iconName='SettingsOutlined'/>
+          <p>Settings</p>
+        </a>
+        <UserContainer>
+          <img src={require('../../assets/studentprofilepic.jpeg')} alt="" />
+          <div>
+            <h3>Nikita Van</h3>
+            <p>nikitaszvan@mitmail.com</p>
+          </div>
+          <DynamicIcon iconName='NotificationsNoneOutlined'/>
+        </UserContainer>
+      </BottomSideBarContainer>
       </SideNavigationContainer>
     );
   };

@@ -10,6 +10,7 @@ export const NavigationContainer = styled.div`
   align-items: center;
   color: var(--color-primary);
   border-bottom: 0.12px solid rgba(0, 0, 0, 0.1);
+  padding: 0 2%;
 `;
 
 export const LogoContainer = styled(Link)`

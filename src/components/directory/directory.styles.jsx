@@ -5,12 +5,13 @@ export const DirectoryContainer = styled.div`
   padding: 2%;
   padding-top: 1%;
   border-radius: 10px;
-  max-width: 1050px;
+  width: 54.5%;
 `
 
 export const DirectoryHeaderContainer = styled.div`
   display: flex;
   flex-direction: row-reverse;
+  gap: 3%;
 `
 
 export const CourseCardsContainer = styled.div`

@@ -7,7 +7,7 @@ export const DirectoryItemContainer = styled.div`
   flex-direction: column;
   background-color: var(--color-primary);
   display: flex;
-  border-radius: 20px;
+  border-radius: 15px;
   align-items: flex-start;
   justify-content: space-between;
   padding: 12px 14px;

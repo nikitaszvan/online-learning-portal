@@ -1,13 +1,11 @@
 import styled from 'styled-components';
-import { Sidebar } from 'react-pro-sidebar';
 
-export const SideNavigationContainer = styled(Sidebar)`
+
+export const SideNavigationContainer = styled.div`
   display: flex;
   flex-direction: column;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   z-index: 5;
-  width: 15%;
-  min-width: 150px;
   
   .css-dip3t8 {
     background-color: var(--color-primary);
@@ -24,7 +22,6 @@ export const SideNavigationContainer = styled(Sidebar)`
   a.ps-menu-button {
     border-radius: 8px;
     height: 35px;
-    padding-right: 5px;
 
     > .ps-menu-icon {
       margin: 0;
@@ -44,3 +41,59 @@ export const SideNavigationContainer = styled(Sidebar)`
     }
   }
 `;
+
+export const BottomSideBarContainer = styled.div`
+  margin-top: auto;
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 0;
+
+  a {
+    display: flex;
+    margin-left: 20px;
+    align-items: center;
+
+    p {
+      margin: 0;
+    }
+
+    svg {
+      margin: 0 8.5px;
+    }
+  }
+`
+export const UserContainer = styled.div`
+  border-top: 0.12px solid rgba(0, 0, 0, 0.1);
+  padding: 10px 15px 0 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+  }
+
+  svg {
+    font-size: 22px;
+  }
+
+  > div {
+  
+    > * {
+      margin: 0;
+    }
+
+    > h3 {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    > p {
+      font-size: 10px;
+    }
+  }
+`
