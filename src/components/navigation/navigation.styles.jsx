@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 
 export const NavigationContainer = styled.div`
-  height: 110px;
+  height: 90px;
   width: 100%;
   display: flex;
   justify-content: space-between;

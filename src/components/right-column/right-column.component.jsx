@@ -1,56 +1,62 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import Carousel from 'react-bootstrap/Carousel';
+import DynamicIcon from '../dynamic-icon.component';
 import {
-    RightColumnContainer
+  AddTaskButton,
+  CarouselStyled,
+  LectureEventCard,
+  RightColumnContainer,
+  SortByButton,
+  TaskList,
+  TaskListHeader,
+  UpcomingLectures,
 } from './right-column.styles';
-import Chart from 'react-apexcharts';
+import TaskItem from '../task-item/task-item.component';
+import { selectTasksMap } from '../../store/tasks/tasks.selector';
+import { selectCoursesMap } from '../../store/courses/courses.selector';
+import * as Color from '@mui/material/colors';
 
 const RightColumn = () => {
-
-    const series = [70];
-    const options = {
-    colors: ['var(--color-on-primary)'],
-      chart: {
-        type: 'radialBar',
-        strokeWidth: '9%',
-        offsetY: -20,
-        sparkline: {
-          enabled: true
-        }
-      },
-      plotOptions: {
-        radialBar: {
-          startAngle: -90,
-          endAngle: 90,
-          track: {
-            background: "#e7e7e7",
-            strokeWidth: '90%',
-            margin: 5, // margin is in pixels
-            dropShadow: {
-              enabled: false
-            },
-          },
-          dataLabels: {
-            name: {
-              show: false
-            },
-            value: {
-              offsetY: -2,
-              fontSize: '22px'
-            }
-          }
-        }
-      },
-      stroke: {
-        lineCap: 'round',
-      },
-      fill: {
-        type: 'solid',
-      }
-    };
+const tasksMap = useSelector(selectTasksMap);
+const coursesMap = useSelector(selectCoursesMap);
 
     return (
         <RightColumnContainer>
-            <Chart options={options} series={series} type="radialBar" />
+          <CarouselStyled interval={null} data-bs-theme="dark">
+          {Object.entries(coursesMap)?.map(([key, course]) => {
+                  return (
+                    <Carousel.Item>
+                      <LectureEventCard key={key} course={course} style={{backgroundColor: `${Color[course.courseColour][50]}`}}/>
+                    </Carousel.Item>
+                  )
+                })
+              }
+{/*           
+          <Carousel.Item>
+          </Carousel.Item>  
+          <Carousel.Item>
+          </Carousel.Item>     */}
+          </CarouselStyled>
+          <TaskList>
+            <TaskListHeader>
+              <h3>UPCOMING</h3>
+              <SortByButton>
+                <DynamicIcon iconName='Checklist'/>
+                <p>Sort by</p>
+              </SortByButton>
+              <AddTaskButton>
+                <DynamicIcon iconName='ControlPoint'/>
+              </AddTaskButton>
+            </TaskListHeader>
+            {Object.entries(tasksMap)?.map(([key, task]) => {
+                  return (
+                    <TaskItem key={key} task={task}/>
+                  )
+                })
+              }
+              <DynamicIcon iconName='KeyboardArrowDown' />
+          </TaskList>
         </RightColumnContainer>
     )
 }

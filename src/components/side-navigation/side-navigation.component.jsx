@@ -8,7 +8,6 @@ import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { useSelector } from 'react-redux';
 import {
   selectCoursesMap,
-  selectCoursesIsLoading,
 } from '../../store/courses/courses.selector';
 
 import {
@@ -29,7 +28,7 @@ console.log('side nav rendered')
               <SubMenu label="Enrolled Courses">
               {Object.entries(coursesMap)?.map(([key, course]) => {
                   const { courseCode } = course;
-                  return <MenuItem to='' key={key}>{courseCode}</MenuItem>;
+                  return <MenuItem to='/' key={key}>{courseCode}</MenuItem>;
                 })}
               </SubMenu>
         {
@@ -38,7 +37,7 @@ console.log('side nav rendered')
                   return (
                     <SubMenu icon={<DynamicIcon key={key} iconName={menuIcon}/>} label={menuTitle}>
                       {Object.entries(subMenuOptions).map(([key, subMenuOption]) => {
-                    return <MenuItem to='' key={key}>{subMenuOption}</MenuItem>;
+                    return <MenuItem to='/' key={key}>{subMenuOption}</MenuItem>;
                   })}
                     </SubMenu>
                   )
@@ -47,12 +46,12 @@ console.log('side nav rendered')
               </Menu>
             </Sidebar>
       <BottomSideBarContainer>
-        <a href="">
+        <a href="/">
           <DynamicIcon iconName='SettingsOutlined'/>
           <p>Settings</p>
         </a>
         <UserContainer>
-          <img src={require('../../assets/studentprofilepic.jpeg')} alt="" />
+          <img src={require('../../assets/studentprofilepic.jpeg')} alt="student profile" />
           <div>
             <h3>Nikita Van</h3>
             <p>nikitaszvan@mitmail.com</p>

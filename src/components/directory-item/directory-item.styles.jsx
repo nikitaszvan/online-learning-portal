@@ -13,9 +13,13 @@ export const DirectoryItemContainer = styled.div`
   padding: 12px 14px;
   // box-shadow: 3px 3px 3px 0px rgba(180,180,180,0.85);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
 
   &:hover {
     cursor: pointer;
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
 `;
 
@@ -31,8 +35,8 @@ export const CardImage = styled.div`
 
 export const CardTag = styled.div`
   border-radius: 50px;
-  background-color: var(--color-secondary-var);
-  color: var(--color-on-primary);
+  background-color: #FFEBEE;
+  color: #E57373;
   font-size: 10px;
   font-weight: 600;
   padding: 4px 15px 1.5px 15px;

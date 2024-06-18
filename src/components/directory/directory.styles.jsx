@@ -5,7 +5,7 @@ export const DirectoryContainer = styled.div`
   padding: 2%;
   padding-top: 1%;
   border-radius: 10px;
-  width: 54.5%;
+  max-width: 1050px;
 `
 
 export const DirectoryHeaderContainer = styled.div`

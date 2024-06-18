@@ -8,17 +8,18 @@ import {
   DirectoryItemContainer
 } from './directory-item.styles';
 
+import * as Color from '@mui/material/colors';
+
 
 const DirectoryItem = ({ course, courseId }) => {
   const id = courseId;
-  const { courseName, courseTerm, imageUrl, currentGrade, showGrade, courseDepartment, lecturerName, totalTasks, completedTasks, courseTag } = course;
-
+  const { courseName, courseCode,  imageUrl, courseDepartment, lecturerName, totalTasks, completedTasks, courseColour } = course;
 
   console.log(Math.trunc((completedTasks / totalTasks) * 100));
   return (
     <DirectoryItemContainer /*onClick={onNavigateHandler}*/>
       <CardImage imageUrl={imageUrl} />
-      <CardTag>{ courseTag }</CardTag>
+      <CardTag style={{backgroundColor: `${Color[courseColour][50]}`, color: `${Color[courseColour][300]}`}}>{ courseCode }</CardTag>
       <CardCourseTitle style={{fontSize: courseName.length >= 28 ? '18px' : '22px'}}>{ courseName }</CardCourseTitle>
       <CardCourseProgressBar now={ Math.trunc((completedTasks / totalTasks) * 100) } />
       <CardCourseInfoContainer>

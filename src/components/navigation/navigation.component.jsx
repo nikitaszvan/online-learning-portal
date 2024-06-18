@@ -1,9 +1,5 @@
-import { Fragment, useState, useRef } from 'react';
+import { Fragment } from 'react';
 import { Outlet } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectIsCartOpen } from '../../store/cart/cart.selector';
-import { selectCurrentUser } from '../../store/user/user.selector';
-import { signOutStart } from '../../store/user/user.action';
 import SchoolLogo from '../../assets/school-logo.png';
 import CompanyLogo from '../../assets/company-logo.png'
 
@@ -18,28 +14,14 @@ import {
 
 const Navigation = ({ sectionTitle }) => {
 
-  const dispatch = useDispatch();
-  const currentUser = useSelector(selectCurrentUser);
-  const isCartOpen = useSelector(selectIsCartOpen);
-
-  const signOutUser = () => dispatch(signOutStart());
-
- 
-
-String.prototype.toTitleCase = function () {
-  return this.replace(/\w\S*/g, function(txt) {
-    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-  });
-}
-/* https://react-bootstrap.github.io/docs/components/dropdowns */
 
   return (
     <Fragment>
       <NavigationContainer>
         <LogoContainer to='/'>
-          <img src={ SchoolLogo }/>
+          <img src={ SchoolLogo } alt='school logo'/>
           <VerticalLine />
-          <img src={ CompanyLogo }/>
+          <img src={ CompanyLogo } alt='dev company logo'/>
         </LogoContainer>
         {sectionTitle && 
           <>

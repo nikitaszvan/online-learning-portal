@@ -3,22 +3,23 @@ import { useDispatch } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
-import Home from './routes/home/home.component';
 import { Layout } from './components/layout/layout.component';
 import Directory from './components/directory/directory.component';
-import Navigation from './components/navigation/navigation.component';
-import Authentication from './routes/authentication/authentication.component';
-import Shop from './routes/shop/shop.component';
+// import Home from './routes/home/home.component';
+// import Navigation from './components/navigation/navigation.component';
+// import Authentication from './routes/authentication/authentication.component';
+// import Shop from './routes/shop/shop.component';
+// import SideNavigationBar from './components/side-navigation/side-navigation.component';
 // import Checkout from './routes/checkout/checkout.component';
 import { CoursePage } from './routes/course-page/course-page.component';
 import { checkUserSession } from './store/user/user.action';
 import { fetchCoursesStart } from './store/courses/courses.action';
 import { fetchSideNavMenuStart } from './store/side-nav/side-nav.action';
+import { fetchTasksStart } from './store/tasks/tasks.action';
 import {
-  selectCoursesMap,
-  selectCoursesIsLoading,
+  selectCoursesMap
 } from './store/courses/courses.selector';
-import SideNavigationBar from './components/side-navigation/side-navigation.component';
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const coursesMap = useSelector(selectCoursesMap);
     dispatch(checkUserSession());
     dispatch(fetchCoursesStart());
     dispatch(fetchSideNavMenuStart());
+    dispatch(fetchTasksStart());
   }, []);
 
 

@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faFilter } from '@fortawesome/free-solid-svg-icons';
+// import { Form } from 'react-bootstrap';
+// import { Dropdown } from 'react-bootstrap';
 import DirectoryItem from '../directory-item/directory-item.component';
 import { useSelector } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
-import { Form } from 'react-bootstrap';
-import { Dropdown } from 'react-bootstrap';
+
 import DynamicIcon from '../dynamic-icon.component';
 // import { useParams } from 'react-router-dom';
-
 
 import { 
   DirectoryContainer,
@@ -17,7 +17,6 @@ import {
 
 import {
   selectCoursesMap,
-  selectCoursesIsLoading,
 } from '../../store/courses/courses.selector';
 
 import { Link } from 'react-router-dom';

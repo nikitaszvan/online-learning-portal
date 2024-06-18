@@ -4,10 +4,12 @@ import { userReducer } from './user/user.reducer';
 import { coursesReducer } from './courses/courses.reducer';
 import { cartReducer } from './cart/cart.reducer';
 import { sideNavMenuReducer } from './side-nav/side-nav.reducer';
+import { tasksReducer } from './tasks/tasks.reducer';
 
 export const rootReducer = combineReducers({
   user: userReducer,
   courses: coursesReducer,
   sideNavMenu: sideNavMenuReducer,
+  tasks: tasksReducer,
   cart: cartReducer,
 });

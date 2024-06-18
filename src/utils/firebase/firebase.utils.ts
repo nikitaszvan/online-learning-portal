@@ -23,7 +23,6 @@ import {
   query,
   getDocs,
   QueryDocumentSnapshot,
-  FieldValue
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -123,6 +122,19 @@ type sideNavMenuData = {
   subMenuOptions: sideNavMenuSubItem[];
 };
 
+type taskItem = {
+  courseCode: string;
+  dueDate: string;
+  dueTime: string;
+  taskDue: string;
+  taskType: string;
+};
+
+type taskData = {
+  id: number;
+  taskDescription: taskItem[];
+};
+
 /* items: This property is an array of CourseItem objects.
 It represents the collection of items belonging to the course.
 Each item in this array conforms to the CourseItem type.*/
@@ -142,6 +154,16 @@ export const getSideNavMenuOptions = async (): Promise<sideNavMenuData[]> => {
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs.map(
     (docSnapshot) => docSnapshot.data() as sideNavMenuData
+  );
+};
+
+
+export const getTasks = async (): Promise<taskData[]> => {
+  const collectionRef = collection(db, 'student-task-list');
+  const q = query(collectionRef);
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.map(
+    (docSnapshot) => docSnapshot.data() as taskData
   );
 };
 

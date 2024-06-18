@@ -8,7 +8,6 @@ import {
 import {
   fetchCoursesSuccess,
   fetchCoursesFailed,
-  toggleGradeVisibility
 } from './courses.action';
 
 import { COURSES_ACTION_TYPES } from './courses.types';
