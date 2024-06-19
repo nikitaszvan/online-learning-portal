@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import Carousel from 'react-bootstrap/Carousel';
 import DynamicIcon from '../dynamic-icon.component';
+import LectureEventCard from '../lecture-event/lecture-event.component';
 import {
   AddTaskButton,
   CarouselStyled,
-  LectureEventCard,
   RightColumnContainer,
+  LectureEventHeader,
   SortByButton,
   TaskList,
   TaskListHeader,
@@ -18,29 +19,36 @@ import { selectCoursesMap } from '../../store/courses/courses.selector';
 import * as Color from '@mui/material/colors';
 
 const RightColumn = () => {
-const tasksMap = useSelector(selectTasksMap);
-const coursesMap = useSelector(selectCoursesMap);
+
+  const [taskListExpanded, expandTaskList] = useState(false);
+  const tasksMap = useSelector(selectTasksMap);
+  const coursesMap = useSelector(selectCoursesMap);
+
+  const handleExpandClick = () => {
+    expandTaskList(!taskListExpanded);
+    console.log(taskListExpanded);
+  }
+  
 
     return (
         <RightColumnContainer>
+          <LectureEventHeader>
+            <h2>Lectures</h2>
+            <p>UP NEXT</p>
+          </LectureEventHeader>
           <CarouselStyled interval={null} data-bs-theme="dark">
           {Object.entries(coursesMap)?.map(([key, course]) => {
                   return (
-                    <Carousel.Item>
-                      <LectureEventCard key={key} course={course} style={{backgroundColor: `${Color[course.courseColour][50]}`}}/>
+                    <Carousel.Item key={key}>
+                      <LectureEventCard key={key} course={course} backgroundColour={Color[course.courseColour][50]} accentColour={Color[course.courseColour][500]}/>
                     </Carousel.Item>
                   )
                 })
               }
-{/*           
-          <Carousel.Item>
-          </Carousel.Item>  
-          <Carousel.Item>
-          </Carousel.Item>     */}
           </CarouselStyled>
           <TaskList>
             <TaskListHeader>
-              <h3>UPCOMING</h3>
+              <h2>Tasks</h2>
               <SortByButton>
                 <DynamicIcon iconName='Checklist'/>
                 <p>Sort by</p>
@@ -55,8 +63,8 @@ const coursesMap = useSelector(selectCoursesMap);
                   )
                 })
               }
-              <DynamicIcon iconName='KeyboardArrowDown' />
           </TaskList>
+          <DynamicIcon iconName='KeyboardArrowDown' onClick={handleExpandClick}/>
         </RightColumnContainer>
     )
 }

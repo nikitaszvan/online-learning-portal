@@ -6,6 +6,16 @@ export const SideNavigationContainer = styled.div`
   flex-direction: column;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   z-index: 5;
+  padding-top: 10px;
+  width: 28%;
+  max-width: 265px;
+  background-color: white;
+  height: 90vh;
+  
+
+  li.ps-menuitem-root {
+    width: 100%;
+  }
   
   .css-dip3t8 {
     background-color: var(--color-primary);
@@ -13,6 +23,8 @@ export const SideNavigationContainer = styled.div`
 
   .css-1wvake5 {
     border: none;
+    width: 100%;
+    min-width: none;
   }
 
   a.ps-open {
@@ -22,6 +34,10 @@ export const SideNavigationContainer = styled.div`
   a.ps-menu-button {
     border-radius: 8px;
     height: 35px;
+    margin: 5px 10px;
+    padding: 0;
+    padding-right: 10px;
+    display: flex;
 
     > .ps-menu-icon {
       margin: 0;
@@ -32,14 +48,27 @@ export const SideNavigationContainer = styled.div`
     }
   }
 
+  span.ps-menu-label {
+    flex-grow: 0;
+    font-weight: 500;
+  }
+
+  span.ps-submenu-expand-icon {
+    margin-left: auto;
+  }
+
   .css-1tqrhto > a {
 
     &:hover {
       background-color: var(--color-secondary);
       color: var(--color-on-primary);
-      font-weight: 600;
+
     }
+    padding-left: 20px;
   }
+
+  }
+
 `;
 
 export const BottomSideBarContainer = styled.div`

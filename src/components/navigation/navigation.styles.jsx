@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 
 export const NavigationContainer = styled.div`
-  height: 90px;
+  height: 10vh;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -11,6 +11,7 @@ export const NavigationContainer = styled.div`
   color: var(--color-primary);
   border-bottom: 0.12px solid rgba(0, 0, 0, 0.1);
   padding: 0 2%;
+  background-color: white;
 `;
 
 export const LogoContainer = styled(Link)`
@@ -67,7 +68,7 @@ export const NavSearchIcon = styled(SearchIcon)`
 export const NavSearchBar = styled.input`
   border: none;
   color: rgb(0, 0, 0, 0.5);
-  font-size: 13px;
+  font-size: 12.5px;
   user-select: none;
 
   &::placeholder {

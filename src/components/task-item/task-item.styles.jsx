@@ -29,10 +29,10 @@ export const CourseCodeAndTimeContainer = styled.div`
 `
 
 export const TaskDescAndDateContainer = styled.div`
-    width: 170px;
+    width: 200px;
     gap: 10px;
-    border-left: 3px solid var(--color-on-primary);
-    padding-left: 10%;
+    padding-left: 10px;
+    font-weight: 600;
 
         p {
             margin: 0;

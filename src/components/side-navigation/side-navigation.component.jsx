@@ -1,4 +1,4 @@
-
+import { useState } from 'react';
 import { 
   BottomSideBarContainer,
   SideNavigationContainer,
@@ -16,28 +16,27 @@ import {
 import DynamicIcon from '../dynamic-icon.component';
 
 const SideNavigationBar = () => {
-      
-const coursesMap = useSelector(selectCoursesMap);
-const sideNavMenuMap = useSelector(selectSideNavMenuMap);
+  const [ isSideNavCollapsed, setIsSideNavCollapsed ] = useState(false);
+  const coursesMap = useSelector(selectCoursesMap);
+  const sideNavMenuMap = useSelector(selectSideNavMenuMap);
 
-console.log('side nav rendered')
     return (
       <SideNavigationContainer>
-        <Sidebar>
+        <Sidebar style={{overflowY: 'hidden'}}>
           <Menu>
-              <SubMenu label="Enrolled Courses">
-              {Object.entries(coursesMap)?.map(([key, course]) => {
-                  const { courseCode } = course;
-                  return <MenuItem to='/' key={key}>{courseCode}</MenuItem>;
-                })}
-              </SubMenu>
         {
                 Object.entries(sideNavMenuMap)?.map(([key, sideNavSubMenu]) => {
                   const { menuIcon, menuTitle, subMenuOptions } = sideNavSubMenu;
                   return (
                     <SubMenu icon={<DynamicIcon key={key} iconName={menuIcon}/>} label={menuTitle}>
-                      {Object.entries(subMenuOptions).map(([key, subMenuOption]) => {
+                      
+                      {subMenuOptions !== 'mapCourses' ?
+                      
+                      Object.entries(subMenuOptions).map(([key, subMenuOption]) => {
                     return <MenuItem to='/' key={key}>{subMenuOption}</MenuItem>;
+                  }) : Object.entries(coursesMap)?.map(([key, course]) => {
+                    const { courseCode } = course;
+                    return <MenuItem to='/' key={key}>{courseCode}</MenuItem>;
                   })}
                     </SubMenu>
                   )
@@ -56,7 +55,7 @@ console.log('side nav rendered')
             <h3>Nikita Van</h3>
             <p>nikitaszvan@mitmail.com</p>
           </div>
-          <DynamicIcon iconName='NotificationsNoneOutlined'/>
+          <DynamicIcon iconName='ExitToAppOutlined'/>
         </UserContainer>
       </BottomSideBarContainer>
       </SideNavigationContainer>

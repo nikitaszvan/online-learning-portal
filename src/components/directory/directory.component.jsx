@@ -5,6 +5,7 @@
 // import { Dropdown } from 'react-bootstrap';
 import DirectoryItem from '../directory-item/directory-item.component';
 import { useSelector } from 'react-redux';
+import * as Color from '@mui/material/colors';
 
 import DynamicIcon from '../dynamic-icon.component';
 // import { useParams } from 'react-router-dom';
@@ -31,8 +32,8 @@ const Directory = () => {
       </DirectoryHeaderContainer>
       <CourseCardsContainer>
         {Object.entries(coursesMap).map(([key, course]) => (
-          <Link to={`/course/${course.courseSlug}`}>
-            <DirectoryItem key={key} course={course} courseId={key}/>
+          <Link to={`/course/${course.courseSlug}`} key={key}>
+            <DirectoryItem key={key} course={course} courseId={key} primaryColour= {Color[course.courseColour][50]} accentColour={Color[course.courseColour][400]}/>
           </Link>
         ))}
       </CourseCardsContainer>

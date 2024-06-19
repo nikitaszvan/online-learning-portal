@@ -56,7 +56,7 @@ export const CardCourseProgressBar = styled(ProgressBar)`
   background-color: #D9D9D9;
   
   .progress-bar {
-    background-color: #702DFF;
+    background-color: ${props => props.progressbarcolour};
   }
 
 `
