@@ -1,9 +1,9 @@
 import * as Icons from '@mui/icons-material';
 
-const DynamicIcon = ({ iconName, onClick }) => {
+const DynamicIcon = ({ iconName, onclick }) => {
   const IconComponent = Icons[iconName];
 
-  return <IconComponent onClick={ onClick } style={{ transform: iconName=='ExitToAppOutlined'? 'rotate(180deg)' : null}}/>;
+  return <IconComponent onClick={ onclick }/>;
 };
 
 export default DynamicIcon;

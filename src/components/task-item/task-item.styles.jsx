@@ -4,11 +4,11 @@ export const TaskItemContainer = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 15px 0;
+    min-width: 315px
 
 `
 
 export const CourseCodeAndTimeContainer = styled.div`
-
 
     > p {
         text-align: right;

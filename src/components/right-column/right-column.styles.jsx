@@ -4,20 +4,41 @@ import Carousel from 'react-bootstrap/Carousel';
 export const RightColumnContainer = styled.div`
     background-color: var(--color-primary);
     display: flex;
+    position: relative;
     flex-direction: column;
-    width: 30%;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     z-index: 5;
     align-items: center;
-    min-width: 442px;
-    height: 90vh;
+    overflow: hidden;
+    // ${(props => props.collapsecolumn ? 'min-width: unset' : 'min-width: 405px;')};
+
+    > *:not(svg:nth-child(1), svg:nth-child(5)) {
+
+        ${(props => props.collapsecolumn ? 'left: 50%;' : 'left: 0;')};
+        transition: left 1s ease;
+    }
+
+    width: ${(props => props.collapsecolumn ? '1.5%' : '40%')};
+    transition: width 1s ease;
+    max-width: 415px;
+
+
+    > svg:nth-child(1) {
+        align-self: flex-start;
+        font-size: 24px;
+        display: block;
+        transition: transform 1s ease;
+         ${(props => props.collapsecolumn ? 'transform: rotate(180deg)' : '')};
+    }
 `;
+
 
 export const LectureEventHeader = styled.div`
 
     align-self: flex-start;
     color: black;
     margin: 25px 0 0 45px;
+    position: relative;
 
     > * {
         margin: 0;
@@ -36,7 +57,13 @@ export const LectureEventHeader = styled.div`
     }
 `
 
+export const CarouselStyledContainer = styled.div`
+    position: relative;
+    margin: 0 auto;
+`
+
 export const CarouselStyled = styled(Carousel)`
+   
     &.carousel {
         padding: 0 40px 40px 40px;
     }
@@ -45,49 +72,4 @@ export const CarouselStyled = styled(Carousel)`
         position: relative;
         bottom: 10%;
     }
-`
-export const TaskList = styled.div`
-    padding: 0 45px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 220px;
-`
-
-export const TaskListHeader = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    > h2 {
-        font-weight: 600;
-        font-size: 18px;
-    }
-
-    div:nth-child(2) {
-        display: flex;
-
-        > p {
-            margin: 0;
-        }
-
-    }
-`
-
-export const SortByButton = styled.div`
-    display: flex;
-    background-color: rgba(231, 231, 231, 0.85);
-    border-radius: 15px;
-    padding: 3px 10px;
-    gap: 5px;
-
-    > * {
-        color: black;
-    }
-`
-
-export const AddTaskButton = styled.div`
-    background-color: rgba(231, 231, 231, 0.85);
-    border-radius: 15px;
-    padding: 3px;
 `

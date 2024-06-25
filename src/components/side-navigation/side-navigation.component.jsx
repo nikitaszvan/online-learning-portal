@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {  useState } from 'react';
 import { 
   BottomSideBarContainer,
   SideNavigationContainer,
@@ -20,16 +20,27 @@ const SideNavigationBar = () => {
   const coursesMap = useSelector(selectCoursesMap);
   const sideNavMenuMap = useSelector(selectSideNavMenuMap);
 
+  const handleOnClick = () => {
+    {!isSideNavCollapsed && (() => {
+      const elements = document.querySelectorAll('a.ps-menu-button.ps-open');
+  
+      elements.forEach(element => {
+        element.click();
+      });
+    })()}
+    setIsSideNavCollapsed(!isSideNavCollapsed);
+    
+  }
+
     return (
-      <SideNavigationContainer>
-        <Sidebar style={{overflowY: 'hidden'}}>
+      <SideNavigationContainer isonlyicons={isSideNavCollapsed}>
+        <Sidebar style={{overflowY: 'hidden'}} >
           <Menu>
         {
                 Object.entries(sideNavMenuMap)?.map(([key, sideNavSubMenu]) => {
                   const { menuIcon, menuTitle, subMenuOptions } = sideNavSubMenu;
                   return (
-                    <SubMenu icon={<DynamicIcon key={key} iconName={menuIcon}/>} label={menuTitle}>
-                      
+                    <SubMenu icon={<DynamicIcon key={key} iconName={menuIcon} />} label={menuTitle} onClick={ isSideNavCollapsed ?  handleOnClick : null}>
                       {subMenuOptions !== 'mapCourses' ?
                       
                       Object.entries(subMenuOptions).map(([key, subMenuOption]) => {
@@ -44,20 +55,20 @@ const SideNavigationBar = () => {
               }
               </Menu>
             </Sidebar>
-      <BottomSideBarContainer>
+      <BottomSideBarContainer isonlyicons={isSideNavCollapsed}>
         <a href="/">
           <DynamicIcon iconName='SettingsOutlined'/>
           <p>Settings</p>
         </a>
-        <UserContainer>
+        <UserContainer isonlyicons={isSideNavCollapsed}>
           <img src={require('../../assets/studentprofilepic.jpeg')} alt="student profile" />
           <div>
             <h3>Nikita Van</h3>
             <p>nikitaszvan@mitmail.com</p>
           </div>
-          <DynamicIcon iconName='ExitToAppOutlined'/>
+          <DynamicIcon iconName='ExitToAppOutlined' onclick={handleOnClick}/>
         </UserContainer>
-      </BottomSideBarContainer>
+      </BottomSideBarContainer >
       </SideNavigationContainer>
     );
   };

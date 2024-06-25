@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const LectureEventContainer = styled.div`
     height: fit-content;
-    width: 338px;
+    width: 300px;
     position: relative;
     border-radius: 10px;
     background-color:  ${props => props.backgroundColour};
