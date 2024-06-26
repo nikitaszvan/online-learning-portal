@@ -2,16 +2,18 @@ import styled from 'styled-components';
 import { ProgressBar } from 'react-bootstrap';
 
 export const DirectoryItemContainer = styled.div`
-  width: 298px;
-  height: 293px;
+  // width: 298px; //w/h = 1.02
+  // height: 293px;
+   width: 22rem; //w/h = 1.02 h/w = 0.98
+  height: calc(22rem*0.98);
   flex-direction: column;
   background-color: var(--color-primary);
   display: flex;
   border-radius: 15px;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 12px 14px;
-  // box-shadow: 3px 3px 3px 0px rgba(180,180,180,0.85);
+  padding: 0.9em 1.1em;
+  // box-shadow: 0.5rem 0.5rem 0.5rem 0px rgba(180,180,180,0.85);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
@@ -36,21 +38,20 @@ export const CardImage = styled.div`
 export const CardTag = styled.div`
   border-radius: 50px;
   color: #E57373;
-  font-size: 10px;
+  font-size: 0.8rem;
   font-weight: 600;
 `
 
 export const CardCourseTitle = styled.h2`
-  font-size: 16px;
   margin: 0;
-  width: 274px;
-  height: 38.4px;
+  width: 100%;
+  max-height: 3rem;
   display: flex;
   align-items: center;
 `
 export const CardCourseProgressBar = styled(ProgressBar)`
   width: 100%;
-  height: 6px;
+  max-height: 0.5rem;
   background-color: #D9D9D9;
   
   .progress-bar {
@@ -62,28 +63,27 @@ export const CardCourseProgressBar = styled(ProgressBar)`
 export const CardCourseInfoContainer = styled.div`
 
   display: flex;
+  gap: 0.4rem;
+  width: 100%;
 
   img {
-    width: 30px;
-    height: 30px;
+    width: 15%;
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
-    margin-right: 5px;
   }  
 
   > div {
-  display: flex;
-  flex-direction: column;
-    justify-content: space-between;
     > p {
       margin: 0;
     }
 
     > p:first-of-type {
-      font-size: 11px;
+      font-size: 1rem;
+      margin-top: 0.3rem;
     }
 
     > p:nth-child(2) {
-      font-size: 8px;
+      font-size: 0.8rem;
     }
 }
 

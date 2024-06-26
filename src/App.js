@@ -33,16 +33,18 @@ const coursesMap = useSelector(selectCoursesMap);
 
 
   return (
-    <Routes>
-        <Route path="/" element={<Layout children={<Directory />}/>} />
-        {/* <Route index element={<Home />} /> */}
-      {/* <Route path='/' element={<Navigation />}>
-        
-        <Route path='auth' element={<Authentication />} /> */}
-        {Object.entries(coursesMap).map(([key, course]) => (
-          <Route key={key} path={`course/${course.courseSlug}`} element={<Layout children={<CoursePage courseId={key} />} pageTitle={course.courseName}/>} />        
-        ))}
-    </Routes>
+    <div className='app-wrapper'>
+      <Routes>
+          <Route path="/" element={<Layout children={<Directory />}/>} />
+          {/* <Route index element={<Home />} /> */}
+        {/* <Route path='/' element={<Navigation />}>
+          
+          <Route path='auth' element={<Authentication />} /> */}
+          {Object.entries(coursesMap).map(([key, course]) => (
+            <Route key={key} path={`course/${course.courseSlug}`} element={<Layout children={<CoursePage courseId={key} />} pageTitle={course.courseName}/>} />        
+          ))}
+      </Routes>
+    </div>
   );
 };
 

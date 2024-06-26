@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 export const DirectoryContainer = styled.div`
-  padding: 2%;
-  padding-bottom: 0;
-  padding-top: 1%;
+  padding-inline: 2rem;
+  padding-top: 1rem;
   overflow-y: scroll;
-  flex-grow: 1;
+  max-height: calc(100vh - 48px);
+  box-sizing: border-box;
+  flex: 1;
 `
 
 export const DirectoryHeaderContainer = styled.div`
@@ -15,10 +16,6 @@ export const DirectoryHeaderContainer = styled.div`
 
 export const CourseCardsContainer = styled.div`
   display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  
-  > * {
-    margin-bottom: 5%;
-  }
+  gap: 2rem 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
 `;

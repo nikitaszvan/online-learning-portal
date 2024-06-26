@@ -22,7 +22,6 @@ import {
 
 import { Link } from 'react-router-dom';
 const Directory = () => {
-  // const { course } = useParams();
   const [loading, setLoading] = useState(true);
   const coursesMap = useSelector(selectCoursesMap);
 

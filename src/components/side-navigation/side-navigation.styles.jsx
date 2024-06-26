@@ -6,10 +6,12 @@ export const SideNavigationContainer = styled.div`
   display: flex;
   flex-direction: column;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  width: ${(props => props.isonlyicons ? '5%' : '32%')};
+    min-width: 205px;
+  ${(props => props.isonlyicons ? 'width: 5%; min-width:unset' : 'width: 14%')};
   transition: width 0.3s ease;
-  padding-top: 10px;
+  padding-top: 1rem;
   max-width: 265px;
+
   background-color: white;
 
 
@@ -25,7 +27,6 @@ export const SideNavigationContainer = styled.div`
     border: none;
     width: 100%;
     min-width: unset;
-    
   }
 
   a.ps-open {
@@ -34,10 +35,10 @@ export const SideNavigationContainer = styled.div`
 
   a.ps-menu-button {
     border-radius: 8px;
-    height: 35px;
-    margin: 5px 10px;
+    height: 2.5rem;
+    margin: 0.5rem 1rem;
     padding: 0;
-    padding-right: 10px;
+    padding-right: 1rem;
     display: flex;
     ${(props => props.isonlyicons ? 'justify-content: center; padding-right: 0;' : '')};
 
@@ -45,7 +46,7 @@ export const SideNavigationContainer = styled.div`
       margin: 0;
 
       > svg {
-        font-size: ${(props => props.isonlyicons ? '24px' : '18px')};
+        font-size: ${(props => props.isonlyicons ? '1.8rem' : '1.4rem')};
         transition: font-size 0.3s ease;
       }
     }
@@ -67,7 +68,7 @@ export const SideNavigationContainer = styled.div`
 
   span.ps-submenu-expand-icon {
     margin-left: auto;
-    ${(props => props.isonlyicons ? 'display: none; width: 0;' : 'display: inline-block;')};
+    ${(props => props.isonlyicons ? 'display: none; width: 0;' : 'display: inline-flex;')};
   }
 
   .css-1tqrhto > a {
@@ -77,7 +78,7 @@ export const SideNavigationContainer = styled.div`
       color: var(--color-on-primary);
 
     }
-    padding-left: 20px;
+    padding-left: 2.2rem;
     }
   }
 
@@ -85,16 +86,16 @@ export const SideNavigationContainer = styled.div`
 
 export const BottomSideBarContainer = styled.div`
   margin-top: auto;
-  height: 110px;
+  min-height: 110px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   ${(props => props.isonlyicons && 'align-items: center' )};
-  padding: 10px 0;
+  padding-block: 0.7rem;
 
   a {
     display: flex;
-    margin-left: ${(props => props.isonlyicons ? '0' : '20px')};
+    margin-left: ${(props => props.isonlyicons ? '0' : '0.7rem')};
     align-items: center;
 
     p {
@@ -104,20 +105,20 @@ export const BottomSideBarContainer = styled.div`
 
     svg {
       margin: 0 8.5px;
-      font-size: ${(props => props.isonlyicons ? '24px' : '18px')};
+      font-size: ${(props => props.isonlyicons ? '1.8rem' : '1.4rem')};
     }
   }
 `
 export const UserContainer = styled.div`
-  border-top: 0.12px solid rgba(0, 0, 0, 0.1);
-  padding: ${(props => props.isonlyicons ? '10px 0 0 0' : '10px 15px 0 15px')};
+  border-top: 0.1rem solid rgba(0, 0, 0, 0.1);
+  padding: ${(props => props.isonlyicons ? '0.5rem 0 0 0' : '0.5rem 1rem 0 1rem')};
   display: flex;
   justify-content: ${(props => props.isonlyicons ? 'center' : 'space-between')};
   align-items: center;
 
   img {
-    width: 45px;
-    height: 45px;
+      ${(props => props.isonlyicons ? 'width: 70%' : 'width: 20%')};
+    aspect-ratio: 1/1;
     border-radius: 50%;
   }
 
@@ -134,12 +135,12 @@ export const UserContainer = styled.div`
     }
 
     > h3 {
-      font-size: 14px;
+      font-size: 1rem;
       font-weight: 600;
     }
 
     > p {
-      font-size: 10px;
+      font-size: 0.8rem;
     }
   }
 `

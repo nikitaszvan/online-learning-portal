@@ -8,7 +8,7 @@ export const Layout = ({ children, pageTitle }) => {
     return (
         <LayoutContainer>
             <Navigation sectionTitle={ pageTitle }/>
-            <div className="main-page" style={{display: 'flex'}}>
+            <div className="main-body">
                 <SideNavigationBar />
                 { children }
                 <RightColumn />

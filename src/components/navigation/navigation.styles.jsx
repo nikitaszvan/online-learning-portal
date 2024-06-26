@@ -2,72 +2,60 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 
-export const NavigationContainer = styled.div`
-  height: 8vh;
-  width: 100%;
+export const NavigationContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: var(--color-primary);
-  border-bottom: 0.12px solid rgba(0, 0, 0, 0.1);
-  padding: 0 2%;
+  border-bottom: 0.15rem solid rgba(0, 0, 0, 0.1);
+  padding-inline: 2rem;
   background-color: white;
+  height: 5rem;
 `;
 
 export const LogoContainer = styled(Link)`
   display: flex;
-  height: 60%;
-  width: 180px;
+  width: 15%;
   align-items: center;
+  box-sizing: border-box;
+  height: 100%;
 
   img {
-    height: 80%;
-    margin: 5%;
+    height: 70%;
+    width: auto;
   }
 
   img:nth-of-type(2) {
-    height: 60%;
+    padding-block: 0.3rem;
   }
 `;
 
-export const NavLinks = styled.div`
-  width: 50%;
-  height: 100%;
-  display: flex;
-  justify-content: flex-end;
-`;
-
-export const NavLink = styled(Link)`
-  padding: 10px 15px;
-  cursor: pointer;
-`;
 
 export const VerticalLine = styled.div`
-  border-right: 1px solid black;
-  height: 80%;
-  width: 100px;
-  margin: 0 10% 0 5%;
+  border-right: 0.1rem solid black;
+  height: 65%;
+  margin-inline: 1rem 2.1rem;
 `
 
 export const NavHeaderRight = styled.div`
-  width: 250px;
-  height: 30%;
-  border: 2px solid #D9D9D9;
+  min-width: 18%;
+  height: 2rem;
+  border: 0.15rem solid #D9D9D9;
   border-radius: 8px;
   align-items: center;
   display: flex;
 `
 
 export const NavSearchIcon = styled(SearchIcon)`
-  margin: 0 10px;
+  margin-inline: 0.4rem;
   color: rgb(0, 0, 0, 0.5);
-  font-size: 20px;
+  font-size: 1.3rem;
 `
 
 export const NavSearchBar = styled.input`
   border: none;
   color: rgb(0, 0, 0, 0.5);
-  font-size: 12.5px;
+  font-size: 1.1rem;
   user-select: none;
   height: 100%;
 

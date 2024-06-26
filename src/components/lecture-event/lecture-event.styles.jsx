@@ -1,24 +1,22 @@
 import styled from 'styled-components';
 
 export const LectureEventContainer = styled.div`
-    height: fit-content;
-    width: 300px;
+    width: 95%;
+    margin: 2px auto 10px auto;
     position: relative;
     border-radius: 10px;
     background-color:  ${props => props.backgroundColour};
-    // color: ${props => props.accentColour};
     color: black;
-    padding: 20px;
-    margin: 2px 10px 10px 10px;
+    padding: 1.6rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-shadow: rgba(149, 157, 165, 0.3) 0px 4px 8px;
     z-index: 5;
+    min-width: 240px;
 
 
     h3 {
-        font-size: 22px;
         font-weight: 600;
         color: ${props => props.accentColour};
     }
@@ -30,19 +28,21 @@ export const CourseNameAndCodeContainer = styled.div`
     justify-content: space-between;
 
     h3 {
-        width: 70%;
+        // width: 70%;
     }
 
     > div {
         background-color: white;
-        height: fit-content;
         padding: 6px 8px;
+        margin-left: 1rem;
         border-radius: 8px;
+        height: fit-content;
 
         > p {
             margin: 0;
             color: black;
             font-weight: 600;
+            white-space: nowrap;
         }
     }
 `

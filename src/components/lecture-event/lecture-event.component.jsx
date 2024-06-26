@@ -13,7 +13,7 @@ const LectureEventCard = ({ course, backgroundColour, accentColour }) => {
   return (
     <LectureEventContainer backgroundColour={ backgroundColour } accentColour={ accentColour }>
       <CourseNameAndCodeContainer>
-          <h3 style={{fontSize: courseName.length >= 28 ? '18px' : '22px'}}>{ courseName }</h3>
+          <h3 style={{fontSize: courseName.length >= 28 ? '1.2rem' : '1.4rem', whiteSpace: courseName.length >= 28 ? 'wrap' : 'nowrap'}}>{ courseName }</h3>
           <div><p>{ courseCode }</p></div>
       </CourseNameAndCodeContainer>
       <CourseTimeAndLecturerContainer>
