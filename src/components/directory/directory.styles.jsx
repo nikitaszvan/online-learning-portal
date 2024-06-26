@@ -5,7 +5,7 @@ export const DirectoryContainer = styled.div`
   padding-bottom: 0;
   padding-top: 1%;
   overflow-y: scroll;
-  max-height: 97vh;
+  flex-grow: 1;
 `
 
 export const DirectoryHeaderContainer = styled.div`
@@ -14,11 +14,9 @@ export const DirectoryHeaderContainer = styled.div`
 `
 
 export const CourseCardsContainer = styled.div`
-  width: 100%;
-  display: flex;
-  gap: 3%;
-  flex-wrap: wrap;
-  height: fit-content;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   
   > * {
     margin-bottom: 5%;

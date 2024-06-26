@@ -1,4 +1,4 @@
-// import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faFilter } from '@fortawesome/free-solid-svg-icons';
 // import { Form } from 'react-bootstrap';
@@ -23,7 +23,34 @@ import {
 import { Link } from 'react-router-dom';
 const Directory = () => {
   // const { course } = useParams();
+  const [loading, setLoading] = useState(true);
   const coursesMap = useSelector(selectCoursesMap);
+
+  useEffect(() => {
+    if (Object.keys(coursesMap).length > 0) {
+      setLoading(false);
+    }
+  }, [coursesMap]);
+
+  const renderPlaceholders = () => {
+    return Array.from({ length: 6 }).map((_, index) => (
+      <DirectoryItem key={index} />
+    ));
+  };
+
+  const renderCourses = () => {
+    return Object.entries(coursesMap).map(([key, course]) => (
+      <Link to={`/course/${course.courseSlug}`} key={key}>
+        <DirectoryItem 
+          key = {key}
+          course={course} 
+          courseId={key} 
+          primaryColour={Color[course.courseColour][50]} 
+          accentColour={Color[course.courseColour][400]}
+        />
+      </Link>
+    ));
+  };
 
   return (
     <DirectoryContainer>
@@ -31,11 +58,7 @@ const Directory = () => {
         <DynamicIcon iconName='MenuOutlined' />
       </DirectoryHeaderContainer>
       <CourseCardsContainer>
-        {Object.entries(coursesMap).map(([key, course]) => (
-          <Link to={`/course/${course.courseSlug}`} key={key}>
-            <DirectoryItem key={key} course={course} courseId={key} primaryColour= {Color[course.courseColour][50]} accentColour={Color[course.courseColour][400]}/>
-          </Link>
-        ))}
+        {loading ? renderPlaceholders() : renderCourses()}
       </CourseCardsContainer>
     </DirectoryContainer>
   );

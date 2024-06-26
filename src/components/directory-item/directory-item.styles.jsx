@@ -35,11 +35,9 @@ export const CardImage = styled.div`
 
 export const CardTag = styled.div`
   border-radius: 50px;
-  background-color: #FFEBEE;
   color: #E57373;
   font-size: 10px;
   font-weight: 600;
-  padding: 4px 15px 1.5px 15px;
 `
 
 export const CardCourseTitle = styled.h2`

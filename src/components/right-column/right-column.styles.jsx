@@ -4,7 +4,7 @@ import Carousel from 'react-bootstrap/Carousel';
 export const RightColumnContainer = styled.div`
     background-color: var(--color-primary);
     display: flex;
-    position: relative;
+    margin-left: auto;
     flex-direction: column;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     z-index: 5;

@@ -7,7 +7,7 @@ export const SideNavigationContainer = styled.div`
   flex-direction: column;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   width: ${(props => props.isonlyicons ? '5%' : '32%')};
-  transition: width 0.6s ease;
+  transition: width 0.3s ease;
   padding-top: 10px;
   max-width: 265px;
   background-color: white;
@@ -58,9 +58,7 @@ export const SideNavigationContainer = styled.div`
   span.ps-menu-label {
     flex-grow: 0;
     font-weight: 500;
-    ${(props => props.isonlyicons ? 'width: 0;' : 'width: 100px')};
-    text-overflow: clip;
-    transition: width 0.8s ease;
+    display ${(props => props.isonlyicons ? 'none' : 'inline-flex')};
   }
 
   span.ps-menu-icon {
