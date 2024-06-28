@@ -1,4 +1,4 @@
-import {  Fragment, useState } from 'react';
+import {  Fragment, useState, useEffect } from 'react';
 import { 
   BottomSideBarContainer,
   SideNavigationContainer,
@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import {
   selectCoursesMap,
 } from '../../store/courses/courses.selector';
-
+import { Skeleton } from '../skeleton-loader/skeleton-loader.styles';
 import {
   selectSideNavMenuMap
 } from '../../store/side-nav/side-nav.selector';
@@ -23,6 +23,24 @@ const SideNavigationBar = () => {
   const sideNavMenuMap = useSelector(selectSideNavMenuMap);
   const [anchorEl, setAnchorEl] = useState(null);
   const [popoverKey, setPopoverKey] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   if (Object.keys(coursesMap).length > 0) {
+  //     setLoading(false);
+  //   }
+  // }, [coursesMap]);
+
+  const renderPlaceholders = () => {
+    return Array.from({ length: 6 }).map((_, index) => (
+      <div className="skeleton-side-nav-container">
+        <Skeleton style={{height: '1.4rem', width: '1.4rem'}}/>
+        <Skeleton style={{height: '1.4rem', width: '8rem'}}/>
+      </div>
+    ));
+  };
+
+
 
   const handleOnClick = () => {
     if (!isSideNavCollapsed) {
@@ -49,7 +67,8 @@ const SideNavigationBar = () => {
     <SideNavigationContainer isonlyicons={isSideNavCollapsed}>
       <Sidebar style={{ overflowY: 'hidden' }}>
         <Menu>
-          {
+          {loading ? renderPlaceholders() :
+
             Object.entries(sideNavMenuMap)?.map(([key, sideNavSubMenu]) => {
               const { menuIcon, menuTitle, subMenuOptions } = sideNavSubMenu;
               return (

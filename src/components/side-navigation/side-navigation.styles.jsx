@@ -82,6 +82,18 @@ export const SideNavigationContainer = styled.div`
     }
   }
 
+  .skeleton-side-nav-container {
+    display: flex;
+    gap: 2rem;
+
+    > * {
+      margin-block: 2rem;
+    }
+    
+    > div:nth-child(1) {
+      border-radius: 50%;
+    } 
+  }
 `;
 
 export const BottomSideBarContainer = styled.div`
@@ -117,7 +129,7 @@ export const UserContainer = styled.div`
   align-items: center;
 
   img {
-      ${(props => props.isonlyicons ? 'width: 70%' : 'width: 20%')};
+    height: 40px;
     aspect-ratio: 1/1;
     border-radius: 50%;
   }

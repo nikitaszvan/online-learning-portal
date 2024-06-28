@@ -57,7 +57,7 @@ const Directory = () => {
         <DynamicIcon iconName='MenuOutlined' />
       </DirectoryHeaderContainer>
       <CourseCardsContainer>
-        {loading ? renderPlaceholders() : renderCourses()}
+        {loading? renderPlaceholders() : renderCourses()}
       </CourseCardsContainer>
     </DirectoryContainer>
   );
