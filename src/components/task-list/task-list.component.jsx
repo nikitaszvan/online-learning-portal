@@ -22,6 +22,20 @@ const TaskList = () => {
     const tasksMap = useSelector(selectTasksMap);
     const contentRef = useRef(null);
     const [initialHeight, setInitialHeight] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+      if (Object.keys(tasksMap).length > 0) {
+        setLoading(true);
+      }
+
+    }, [tasksMap]);
+
+    const renderPlaceholders = () => {
+      return Array.from({ length: 3 }).map((_, index) => (
+            <TaskItem key={_} />) 
+      );
+    };
 
     useEffect(() => {
         if (Object.entries(tasksMap).length > 0) {
@@ -60,7 +74,8 @@ const TaskList = () => {
         </TaskListHeader>
     <TaskListContent ref={contentRef}>
       <TaskListGradient showgradient={ taskListExpanded }/>
-      {Object.entries(tasksMap)?.map(([key, task]) => 
+      {loading ? renderPlaceholders(): 
+      Object.entries(tasksMap)?.map(([key, task]) => 
       <TaskItem key={key} task={task} />) 
       }
     </TaskListContent>

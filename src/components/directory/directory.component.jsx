@@ -27,7 +27,7 @@ const Directory = () => {
 
   useEffect(() => {
     if (Object.keys(coursesMap).length > 0) {
-      setLoading(false);
+      setLoading(true);
     }
   }, [coursesMap]);
 

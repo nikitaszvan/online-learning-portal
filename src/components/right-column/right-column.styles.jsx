@@ -72,4 +72,69 @@ export const CarouselStyled = styled(Carousel)`
         position: relative;
         bottom: 10%;
     }
+
+    .lecture-card-skeleton {
+        width: 95%;
+        height: 15.5rem;
+        margin: 2px auto 10px auto;
+        padding: 2rem;
+        position: relative;
+        border-radius: 10px;
+        background-color:  white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: rgba(149, 157, 165, 0.3) 0px 4px 8px;
+        z-index: 5;
+        min-width: 240px;
+
+        > * {
+
+        }
+
+        > div {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+
+            div:nth-child(1) {
+                width: 60%;
+                height: 1.5rem;
+            }
+            
+            div:nth-child(2) {
+                width: 25%;
+                height: 2.6rem;
+                border-radius: 8px;
+            }
+        }
+            div:nth-child(2) {
+                width: 30%;
+                height: 1.5rem;
+            }
+            
+            div:nth-child(3) {
+                width: 40%;
+                height: 1.3rem;
+                position: relative;
+                margin-bottom: 4%;
+            }
+            
+            div:nth-child(4) {
+                width: 65%;
+                height: 1.3rem;
+            }
+
+            div:nth-child(5) {
+                width: 100%;
+                height: 2.4rem;
+                border-radius: 5px;
+                margin-top: 0.3rem;
+            }
+                 
+        }
+
+        
+        
+    }
 `

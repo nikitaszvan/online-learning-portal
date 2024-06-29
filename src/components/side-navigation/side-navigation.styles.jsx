@@ -85,13 +85,29 @@ export const SideNavigationContainer = styled.div`
   .skeleton-side-nav-container {
     display: flex;
     gap: 2rem;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 
     > * {
-      margin-block: 2rem;
+      margin-block: 0.68rem;
     }
     
     > div:nth-child(1) {
-      border-radius: 50%;
+      width: 10%;
+      aspect-ratio: 1/1;
+    } 
+
+    > div:nth-child(2) {
+      width: 45%;
+      height: 1.5rem;
+      position: relative;
+      right: 4%;
+    } 
+
+    > div:nth-child(3) {
+      width: 10%;
+      height: 1.5rem;
     } 
   }
 `;

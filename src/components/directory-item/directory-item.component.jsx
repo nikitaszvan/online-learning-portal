@@ -8,9 +8,7 @@ import {
   DirectoryItemContainer,
 } from './directory-item.styles';
 
-import { Skeleton } from '../skeleton-loader/skeleton-loader.styles';
-
-import 'react-loading-skeleton/dist/skeleton.css';
+import Skeleton from '../skeleton-loader/skeleton-loader.component';
 import { images } from '../../utils/load-images/load-images.utils';
 
 const DirectoryItem = ({
@@ -53,15 +51,15 @@ const DirectoryItem = ({
         </CardCourseInfoContainer>
       </> :
       <>
-        <Skeleton className='card-image-skeleton' />
-        <Skeleton className='card-tag-skeleton' />
-        <Skeleton className='course-name-skeleton' />
-        <Skeleton className='card-progress-skeleton'/>
-        <CardCourseInfoContainer style={{width: '100%'}}>
-          <Skeleton className='lecturer-image-skeleton'/>
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <CardCourseInfoContainer>
+          <Skeleton />
           <div>
-            <Skeleton className='lecturer-name-p-skeleton'/>
-            <Skeleton className='course-department-p-skeleton'/>      
+            <Skeleton />
+            <Skeleton />      
           </div> 
         </CardCourseInfoContainer>
       </> }
