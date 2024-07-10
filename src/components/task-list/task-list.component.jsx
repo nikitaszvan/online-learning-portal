@@ -26,7 +26,7 @@ const TaskList = () => {
 
     useEffect(() => {
       if (Object.keys(tasksMap).length > 0) {
-        setLoading(true);
+        setLoading(false);
       }
 
     }, [tasksMap]);

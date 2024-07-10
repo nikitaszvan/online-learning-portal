@@ -8,6 +8,7 @@ export const TaskListContainer = styled.div`
     width: 100%;
 
     > svg {
+        cursor: pointer;
         position: relative;
         align-self: center;
         ${(props => props.collapsecolumn ? 'left: 65%;' : 'left: 0;')};

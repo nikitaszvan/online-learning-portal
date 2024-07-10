@@ -12,10 +12,24 @@ export const DirectoryContainer = styled.div`
 export const DirectoryHeaderContainer = styled.div`
   display: flex;
   flex-direction: row-reverse;
+
+  > svg {
+    cursor: pointer;
+  }
 `
 
 export const CourseCardsContainer = styled.div`
-  display: grid;
-  gap: 2rem 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+    &.block-layout {
+      display: block;
+    }
+
+    &.grid-layout {
+      display: grid;
+      gap: 2rem 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+    }
+
+    > a {
+      width: fit-content;
+    }
 `;

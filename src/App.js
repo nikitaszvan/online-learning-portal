@@ -33,7 +33,7 @@ const coursesMap = useSelector(selectCoursesMap);
 
 
   return (
-    <div className='app-wrapper'>
+    <>
       <Routes>
           <Route path="/" element={<Layout children={<Directory />}/>} />
           {/* <Route index element={<Home />} /> */}
@@ -44,7 +44,7 @@ const coursesMap = useSelector(selectCoursesMap);
             <Route key={key} path={`course/${course.courseSlug}`} element={<Layout children={<CoursePage courseId={key} />} pageTitle={course.courseName}/>} />        
           ))}
       </Routes>
-    </div>
+    </>
   );
 };
 

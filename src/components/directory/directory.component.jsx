@@ -23,12 +23,14 @@ import {
 import { Link } from 'react-router-dom';
 const Directory = () => {
   const [loading, setLoading] = useState(true);
+  const [coursesCardForm, setCoursesCardForm] = useState(true);
   const coursesMap = useSelector(selectCoursesMap);
 
   useEffect(() => {
     if (Object.keys(coursesMap).length > 0) {
-      setLoading(true);
+      setLoading(false);
     }
+
   }, [coursesMap]);
 
   const renderPlaceholders = () => {
@@ -39,8 +41,9 @@ const Directory = () => {
 
   const renderCourses = () => {
     return Object.entries(coursesMap).map(([key, course]) => (
-      <Link to={`/course/${course.courseSlug}`} key={key}>
+      <Link to={`/course/${course.courseSlug}`} key={key} >
         <DirectoryItem 
+          cardForm = {coursesCardForm}
           key = {key}
           course={course} 
           courseId={key} 
@@ -54,10 +57,18 @@ const Directory = () => {
   return (
     <DirectoryContainer>
       <DirectoryHeaderContainer>
-        <DynamicIcon iconName='MenuOutlined' />
+        {coursesCardForm ? <DynamicIcon iconName='MenuOutlined' onclick={ () => setCoursesCardForm(!coursesCardForm) }/> :
+        <DynamicIcon iconName='Apps' onclick={ () => setCoursesCardForm(!coursesCardForm) }/>}
       </DirectoryHeaderContainer>
-      <CourseCardsContainer>
-        {loading? renderPlaceholders() : renderCourses()}
+      <CourseCardsContainer className={coursesCardForm ? 'grid-layout' : 'block-layout'}>
+        {!coursesCardForm && 
+          <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between'}}>
+            <p>Instructor Name and Faculty</p>
+            <p>Course Code</p>
+            <p>Course Name</p>
+            <p>Term</p>
+          </div>}
+        {loading ? renderPlaceholders() : renderCourses()}
       </CourseCardsContainer>
     </DirectoryContainer>
   );

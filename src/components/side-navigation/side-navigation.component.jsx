@@ -26,10 +26,10 @@ const SideNavigationBar = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (Object.keys(sideNavMenuMap).length > 0 && Object.keys(coursesMap).length > 0) {
-      setLoading(true);
+    if (Object.keys(sideNavMenuMap).length > 0) {
+      setLoading(false);
     }
-  }, [coursesMap]);
+  }, [sideNavMenuMap]);
 
   const renderPlaceholders = () => {
     return Array.from({ length: 6 }).map((_, index) => (

@@ -21,7 +21,7 @@ const RightColumn = () => {
 
   useEffect(() => {
     if (Object.keys(coursesMap).length > 0) {
-      setLoading(true);
+      setLoading(false);
     }
   }, [coursesMap]);
 

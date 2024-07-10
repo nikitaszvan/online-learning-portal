@@ -4,14 +4,14 @@ export const TaskItemContainer = styled.div`
     display: flex;
     justify-content: center;
     margin: 15px 0;
-    min-width: 315px
     width: 100%;
-    gap: 10%;
+    gap: 4rem;
 
 `
 
 export const CourseCodeAndTimeContainer = styled.div`
-    width: 28%;
+    min-width: 28%;
+   
     display: flex;
     flex-direction: column;
 
@@ -35,7 +35,9 @@ export const CourseCodeAndTimeContainer = styled.div`
 
     .skeleton-loader:nth-child(1) {
         height: 1.5rem;
+        margin-bottom: 0.5rem;
         width: 50%;
+        align-self: center;
     }
 
     .skeleton-loader:nth-child(2) {
@@ -58,6 +60,11 @@ export const TaskDescAndDateContainer = styled.div`
 
         > p {
             color: black;
+        }
+
+        p:nth-child(1) {
+            // height: 4rem;
+            font-size: 12px;
         }
 
         p:nth-child(2) {

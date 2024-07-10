@@ -1,19 +1,15 @@
 import styled from 'styled-components';
 
-console.log('side-navigation.styles.js has been loaded');
-
 export const SideNavigationContainer = styled.div`
   display: flex;
   flex-direction: column;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    min-width: 205px;
+  min-width: 205px;
   ${(props => props.isonlyicons ? 'width: 5%; min-width:unset' : 'width: 14%')};
+  ${(props => props.isonlyicons ? 'min-width: 70px' : 'min-width: 180px; max-width: 265px')};
   transition: width 0.3s ease;
   padding-top: 1rem;
-  max-width: 265px;
-
   background-color: white;
-
 
   li.ps-menuitem-root {
     width: 100%;
