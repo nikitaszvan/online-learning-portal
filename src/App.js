@@ -35,7 +35,7 @@ const coursesMap = useSelector(selectCoursesMap);
   return (
     <>
       <Routes>
-          <Route path="/" element={<Layout children={<Directory />}/>} />
+          <Route path="/" element={<Layout children={<Directory />} pageTitle='homepage'/>} />
           {/* <Route index element={<Home />} /> */}
         {/* <Route path='/' element={<Navigation />}>
           

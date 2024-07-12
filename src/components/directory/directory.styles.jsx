@@ -3,10 +3,13 @@ import styled from 'styled-components';
 export const DirectoryContainer = styled.div`
   padding-inline: 2rem;
   padding-top: 1rem;
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: calc(100vh - 48px);
   box-sizing: border-box;
   flex: 1;
+  // height: fit-content;
+  min-width: fit-content;
+  position: relative;
 `
 
 export const DirectoryHeaderContainer = styled.div`
@@ -15,6 +18,7 @@ export const DirectoryHeaderContainer = styled.div`
 
   > svg {
     cursor: pointer;
+    font-size: 2.5rem;
   }
 `
 

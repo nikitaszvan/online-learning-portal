@@ -33,16 +33,16 @@ export const SideNavigationContainer = styled.div`
     border-radius: 8px;
     height: 2.5rem;
     margin: 0.5rem 1rem;
-    padding: 0;
-    padding-right: 1rem;
+    padding: 2rem 1rem;
+    padding-right: 2rem;
     display: flex;
-    ${(props => props.isonlyicons ? 'justify-content: center; padding-right: 0;' : '')};
+    ${(props => props.isonlyicons ? 'justify-content: center; padding-inline: 0;' : '')};
 
     > .ps-menu-icon {
       margin: 0;
 
       > svg {
-        font-size: ${(props => props.isonlyicons ? '1.8rem' : '1.4rem')};
+        font-size: ${(props => props.isonlyicons ? '2.5rem' : '2.2rem')};
         transition: font-size 0.3s ease;
       }
     }
@@ -55,6 +55,7 @@ export const SideNavigationContainer = styled.div`
   span.ps-menu-label {
     flex-grow: 0;
     font-weight: 500;
+    font-size: 1.2rem;
     display ${(props => props.isonlyicons ? 'none' : 'inline-flex')};
   }
 
@@ -149,6 +150,7 @@ export const UserContainer = styled.div`
   svg {
     display: ${(props => props.isonlyicons ? 'none' : 'inline-flex')};
     transform: rotate(180deg);
+    cursor: pointer;
   }
 
   > div {

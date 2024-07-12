@@ -13,6 +13,8 @@ import TaskList from '../task-list/task-list.component';
 import { selectCoursesMap } from '../../store/courses/courses.selector';
 import * as Color from '@mui/material/colors';
 import Skeleton from '../skeleton-loader/skeleton-loader.component'; 
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 const RightColumn = () => {
   const coursesMap = useSelector(selectCoursesMap);
@@ -46,7 +48,10 @@ const RightColumn = () => {
 
     return (
         <RightColumnContainer collapsecolumn={ rightColumnCollapsed } >
-          <DynamicIcon iconName='ChevronRight' onclick={ handleCollapseClick }/>
+          <div>
+            <DynamicIcon iconName='ChevronRight' onclick={ handleCollapseClick }/>
+          </div>
+          <div>
           <LectureEventHeader>
             <h2>Lectures</h2>
             <p>UP NEXT</p>
@@ -65,6 +70,8 @@ const RightColumn = () => {
             </CarouselStyled>
           </CarouselStyledContainer>
           <TaskList collapsecolumn={ rightColumnCollapsed } />
+          <Calendar />
+          </div>
         </RightColumnContainer>
     )
 }

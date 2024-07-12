@@ -24,9 +24,8 @@ const Navigation = ({ sectionTitle }) => {
           <img src={ CompanyLogo } alt='dev company logo'/>
         </LogoContainer>
         {sectionTitle && 
-          <>
-            <h3>{sectionTitle}</h3>
-          </>}
+            <h3>{sectionTitle.toUpperCase()}</h3>
+          }
         <NavHeaderRight>
           <NavSearchIcon />
           <NavSearchBar placeholder='Search...'/>

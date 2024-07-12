@@ -6,11 +6,16 @@ export const NavigationContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: var(--color-primary);
   border-bottom: 0.15rem solid rgba(0, 0, 0, 0.1);
   padding-inline: 2rem;
   background-color: white;
   height: 5rem;
+
+  > h3 {
+    color: black;
+    margin: 0;
+    font-weight: 400;
+  }
 `;
 
 export const LogoContainer = styled(Link)`

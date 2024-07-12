@@ -65,9 +65,8 @@ const DirectoryItem = ({
               aria-haspopup="true"
               onMouseEnter={(event) => handlePopoverOpen(event, courseId)}
               onMouseLeave={handlePopoverClose}
-              style={{width: '100%'}}
             >
-            <CardCourseProgressBar now={Math.trunc((completedTasks / totalTasks) * 100)} progressbarcolour={accentColour} />
+            <CardCourseProgressBar now={Math.trunc((completedTasks / totalTasks) * 100)} progressbarcolour={accentColour} cardForm = {cardForm}/>
             </Typography>
             <Popover
               id="mouse-over-popover"
@@ -87,14 +86,14 @@ const DirectoryItem = ({
             >
               <Typography sx={{ p: 1 }}>{completedTasks}/{totalTasks} tasks completed</Typography>
             </Popover> 
-        <CardCourseInfoContainer style={{width: '100%'}} cardForm = {cardForm}>
+        <CardCourseInfoContainer cardForm = {cardForm}>
           <img src={imageSrc} alt={`lecturer-${courseId}`} />
           <div>
             <p>{ lecturerName }</p>
             <p>{ courseDepartment }</p>
           </div> 
         </CardCourseInfoContainer>
-        {!cardForm && <p style={{order: !cardForm ? '999' : '0'}}>{ courseTerm }</p>}
+        {!cardForm && <p style={{order: !cardForm ? '999' : '0', width: 'fit-content', margin: '0'}}>{ courseTerm }</p>}
       </> :
       <>
         <Skeleton />

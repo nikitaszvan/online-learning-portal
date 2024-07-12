@@ -2,12 +2,23 @@ import styled from 'styled-components';
 import { ProgressBar } from 'react-bootstrap';
 
 export const DirectoryItemContainer = styled.div`
+
+  display: flex;
+  background-color: var(--color-primary);
+  // align-items: flex-start;
+  justify-content: space-between;
+  padding: 0.9em 1.3em;
+  // box-shadow: 0.5rem 0.5rem 0.5rem 0px rgba(180,180,180,0.85);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
   ${( props => props.cardForm ? 
     `
     width: 23rem;
     height: calc(23rem*0.98);
     flex-direction: column;
     border-radius: 15px;
+    justify-content: space-between;
 
     &:hover {
       cursor: pointer;
@@ -17,23 +28,19 @@ export const DirectoryItemContainer = styled.div`
 
     ` : 
     `
+    border-radius: 5px;
     width: 100%;
-    height: 5rem;
+    height: 7rem;
     flex-direction: row;
-    border-radius: 0;
+    align-items: center;
+    min-width: 600px;
+    margin-block: 1rem;
+    padding-inline: 2rem;
     `)}
-
-  display: flex;
-  background-color: var(--color-primary);
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 0.9em 1.3em;
-  // box-shadow: 0.5rem 0.5rem 0.5rem 0px rgba(180,180,180,0.85);
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   > .css-ahj2mt-MuiTypography-root {
     order: ${( props => !props.cardForm ? '3' : '3')}; 
+    ${( props => !props.cardForm ? 'width: 12%' : 'width: 100%')}; 
   }
   
 
@@ -108,7 +115,10 @@ export const CardTag = styled.div`
   font-size: 0.8rem;
   font-weight: 600;
   padding: 0.4rem 1.5rem;
-  order: 1; 
+  order: 1;
+  width: fit-content;
+  white-space: nowrap;
+  ${( props => !props.cardForm && ' height: fit-content')};
 
     &::before {
     content: '${(props => props.cardtagtitle && props.cardtagtitle)}';
@@ -119,11 +129,11 @@ export const CardTag = styled.div`
 
 export const CardCourseTitle = styled.h2`
   margin: 0;
-  width: 100%;
   max-height: 3rem;
   display: flex;
   align-items: center;
   order: ${( props => !props.cardForm ? '2' : '2')}; 
+  ${( props => !props.cardForm && 'width : 35%')};
 
       &::before {
     content: '${(props => props.coursenametitle && props.coursenametitle)}';
@@ -131,10 +141,11 @@ export const CardCourseTitle = styled.h2`
 `
 export const CardCourseProgressBar = styled(ProgressBar)`
   width: 100%;
-  height: 0.7rem;
+  height: ${( props => !props.cardForm ? '1rem' : '0.7rem')}; 
   background-color: #D9D9D9;
-  transition: height 0.2s ease;
+  // transition: height 0.2s ease;
   margin-block: 0.3rem;
+  
   
   .progress-bar {
     background-color: ${props => props.progressbarcolour};
@@ -150,27 +161,31 @@ export const CardCourseInfoContainer = styled.div`
 
   display: flex;
   gap: 0.4rem;
-  width: 100%;
+  ${( props => !props.cardForm && 'height: 100%')};
+  ${( props => !props.cardForm && 'width: 18%; min-width: 110px')};
   order: ${( props => !props.cardForm ? '0' : '4')}; 
 
   img {
-    width: 15%;
+    ${( props => !props.cardForm ? '0' : '4')};
+    ${( props => !props.cardForm ? 'height: 100%' : 'width: 15%')};
+    ${( props => !props.cardForm && 'margin-right: 1rem')};
     aspect-ratio: 1 / 1;
-    border-radius: 50%;
+    border-radius: ${( props => !props.cardForm ? '20%' : '50%')};
   }
 
   > div {
+    align-self: center;
     > p {
       margin: 0;
     }
 
     > p:first-of-type {
-      font-size: 1rem;
-      margin-top: 0.3rem;
+      font-size: ${( props => !props.cardForm ? '1.3rem' : '1rem')};
+      font-weight: 500;
     }
 
     > p:nth-child(2) {
-      font-size: 0.8rem;
+      font-size: ${( props => !props.cardForm ? '1rem' : '0.8rem')};
     }
 }
 

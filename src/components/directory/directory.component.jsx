@@ -62,11 +62,12 @@ const Directory = () => {
       </DirectoryHeaderContainer>
       <CourseCardsContainer className={coursesCardForm ? 'grid-layout' : 'block-layout'}>
         {!coursesCardForm && 
-          <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between'}}>
-            <p>Instructor Name and Faculty</p>
-            <p>Course Code</p>
-            <p>Course Name</p>
-            <p>Term</p>
+          <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', paddingInline: '2rem'}}>
+            <p style={{width: '18%', textAlign: 'center'}}>Instructor Name and Faculty</p>
+            <p style={{width: '8.5%', textAlign: 'center'}}>Course Code</p>
+            <p style={{width: '35%', textAlign: 'center'}}>Course Name</p>
+            <p style={{width: '16%', textAlign: 'center'}}>Course Progress</p>
+            <p style={{width: '6%', textAlign: 'center'}}>Term</p>
           </div>}
         {loading ? renderPlaceholders() : renderCourses()}
       </CourseCardsContainer>
