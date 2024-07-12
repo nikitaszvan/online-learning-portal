@@ -59,7 +59,7 @@ const DirectoryItem = ({
         <CardImage imageUrl={imageUrl} cardForm = {cardForm}/>
         <CardTag style={{ backgroundColor: primaryColour, color: accentColour }} cardtagtitle={courseCode} cardForm = {cardForm}/>
         
-        <CardCourseTitle style={{ fontSize: courseName?.length >= 28 ? '1.5em' : '1.7rem' }} coursenametitle= {courseName} cardForm = {cardForm}/>
+        <CardCourseTitle style={{ fontSize: courseName?.length >= 28 ? '1.5em' : '1.7rem', marginBlock: courseName?.length >= 28 && '0.8rem' }} coursenametitle= {courseName} cardForm = {cardForm}/>
         <Typography
               aria-owns={popoverKey === courseId ? 'mouse-over-popover' : undefined}
               aria-haspopup="true"

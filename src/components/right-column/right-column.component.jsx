@@ -7,7 +7,9 @@ import {
   CarouselStyled,
   CarouselStyledContainer,
   RightColumnContainer,
-  LectureEventHeader
+  LectureEventHeader,
+  Test1Container,
+  Test2Container
 } from './right-column.styles';
 import TaskList from '../task-list/task-list.component';
 import { selectCoursesMap } from '../../store/courses/courses.selector';
@@ -47,11 +49,12 @@ const RightColumn = () => {
   }
 
     return (
-        <RightColumnContainer collapsecolumn={ rightColumnCollapsed } >
-          <div>
+        // <RightColumnContainer collapsecolumn={ rightColumnCollapsed } >
+        <>
+          <Test1Container collapsecolumn={ rightColumnCollapsed }>
             <DynamicIcon iconName='ChevronRight' onclick={ handleCollapseClick }/>
-          </div>
-          <div>
+          </Test1Container >
+          <Test2Container collapsecolumn={ rightColumnCollapsed } className='text-2'>
           <LectureEventHeader>
             <h2>Lectures</h2>
             <p>UP NEXT</p>
@@ -71,8 +74,13 @@ const RightColumn = () => {
           </CarouselStyledContainer>
           <TaskList collapsecolumn={ rightColumnCollapsed } />
           <Calendar />
-          </div>
-        </RightColumnContainer>
+          {/* 
+          
+          
+           */}
+          </Test2Container>
+     
+        </>
     )
 }
 

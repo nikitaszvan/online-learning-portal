@@ -7,9 +7,6 @@ export const DirectoryContainer = styled.div`
   max-height: calc(100vh - 48px);
   box-sizing: border-box;
   flex: 1;
-  // height: fit-content;
-  min-width: fit-content;
-  position: relative;
 `
 
 export const DirectoryHeaderContainer = styled.div`
@@ -30,10 +27,10 @@ export const CourseCardsContainer = styled.div`
     &.grid-layout {
       display: grid;
       gap: 2rem 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
     }
 
     > a {
-      width: fit-content;
+      // width: fit-content;
     }
 `;

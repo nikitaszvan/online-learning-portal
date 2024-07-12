@@ -11,10 +11,12 @@ export const DirectoryItemContainer = styled.div`
   // box-shadow: 0.5rem 0.5rem 0.5rem 0px rgba(180,180,180,0.85);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
 
   ${( props => props.cardForm ? 
     `
-    width: 23rem;
+    // width: calc(23rem+40%);
+    max-width: 315px;
     height: calc(23rem*0.98);
     flex-direction: column;
     border-radius: 15px;
@@ -115,6 +117,7 @@ export const CardTag = styled.div`
   font-size: 0.8rem;
   font-weight: 600;
   padding: 0.4rem 1.5rem;
+  margin-top: 0.5rem;
   order: 1;
   width: fit-content;
   white-space: nowrap;
@@ -161,6 +164,7 @@ export const CardCourseInfoContainer = styled.div`
 
   display: flex;
   gap: 0.4rem;
+  margin-top: 0.3rem;
   ${( props => !props.cardForm && 'height: 100%')};
   ${( props => !props.cardForm && 'width: 18%; min-width: 110px')};
   order: ${( props => !props.cardForm ? '0' : '4')}; 

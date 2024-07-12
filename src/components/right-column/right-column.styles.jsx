@@ -1,46 +1,43 @@
 import styled from 'styled-components';
 import Carousel from 'react-bootstrap/Carousel';
 
-export const RightColumnContainer = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    width: fit-content;
 
-    > div > svg:nth-child(1) {
+export const Test1Container = styled.div`
+    cursor: pointer;
+    color: black;
+    background-color: white;
+    position: relative;
+    height: fit-content;
+    padding: 1.5rem 1rem;
+    margin-top: 2rem;
+    z-index: 6;
+    box-shadow: rgba(149, 157, 165, 0.2) -5px 8px 8px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+    > svg:nth-child(1) {
         font-size: 2rem;
         transition: transform 1s ease;
-         ${(props => props.collapsecolumn ? 'transform: rotate(180deg)' : '')};
-         
+        ${(props => props.collapsecolumn ? 'transform: rotate(180deg)' : '')};
     }
+`
 
-    > div:nth-child(1) {
-        color: black;
-        background-color: white;
-        position: relative;
-        height: fit-content;
-        padding: 3rem 1rem;
-        z-index: 10;
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    }
-
-    > div:nth-child(2) {
-        position: relative;
-        background-color: var(--color-primary);
-        display: flex;
-        flex-direction: column;
-        z-index: 5;
-        align-items: center;
-        overflow-y: auto;
-        overflow-x: hidden;
-        // ${(props => props.collapsecolumn ? 'min-width: unset' : 'min-width: 205px;')};
-        // ${(props => props.collapsecolumn ? 'left: 100%;' : 'left: 0;')};
-        width: ${(props => props.collapsecolumn ? '0%' : '100%')};
-        max-width: 465px;
-        transition: width 1s ease;
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    }
-`;
-
+export const Test2Container = styled.div`
+    padding-top: 1.6rem;
+    position: relative;
+    background-color: var(--color-primary);
+    display: flex;
+    flex-direction: column;
+    z-index: 5;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    // ${(props => props.collapsecolumn ? 'min-width: unset' : 'min-width: 205px;')};
+    width: ${(props => props.collapsecolumn ? '0' : '40%')};
+    max-width: 465px;
+    transition: ${(props => props.collapsecolumn ? 'width 1s ease-out' : 'width 1s ease-in')};
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+`
 
 export const LectureEventHeader = styled.div`
 
