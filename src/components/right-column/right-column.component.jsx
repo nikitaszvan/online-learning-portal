@@ -15,7 +15,7 @@ import TaskList from '../task-list/task-list.component';
 import { selectCoursesMap } from '../../store/courses/courses.selector';
 import * as Color from '@mui/material/colors';
 import Skeleton from '../skeleton-loader/skeleton-loader.component'; 
-import Calendar from 'react-calendar';
+import { ReactCalendar } from './right-column.styles';
 import 'react-calendar/dist/Calendar.css';
 
 const RightColumn = () => {
@@ -73,7 +73,7 @@ const RightColumn = () => {
             </CarouselStyled>
           </CarouselStyledContainer>
           <TaskList collapsecolumn={ rightColumnCollapsed } />
-          <Calendar />
+          <ReactCalendar />
           {/* 
           
           

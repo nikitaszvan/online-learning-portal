@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Carousel from 'react-bootstrap/Carousel';
+import Calendar from 'react-calendar';
 
 
 export const Test1Container = styled.div`
@@ -28,6 +29,7 @@ export const Test2Container = styled.div`
     background-color: var(--color-primary);
     display: flex;
     flex-direction: column;
+    gap: 2rem;
     z-index: 5;
     align-items: center;
     overflow-y: auto;
@@ -143,5 +145,23 @@ export const CarouselStyled = styled(Carousel)`
 
         
         
+    }
+`
+
+export const ReactCalendar = styled(Calendar) `
+    font-family: var(--font-family-theme);
+    border: none;
+    font-size: 1.5rem;
+
+    abbr[title] {
+        text-decoration: none;
+    }
+
+    .react-calendar__tile--now {
+        background: var(--bs-gray-400);
+    }
+
+    .react-calendar__tile {
+        font-size: 1.3rem;
     }
 `

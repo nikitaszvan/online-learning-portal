@@ -11,7 +11,6 @@ export const DirectoryItemContainer = styled.div`
   // box-shadow: 0.5rem 0.5rem 0.5rem 0px rgba(180,180,180,0.85);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
 
   ${( props => props.cardForm ? 
     `
@@ -26,6 +25,11 @@ export const DirectoryItemContainer = styled.div`
       cursor: pointer;
       transform: translateY(-10px);
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+      ${CardImage} {
+        background-size: 120%;
+        transition: background-size 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+      }
     }
 
     ` : 
@@ -103,12 +107,12 @@ export const CardImage = styled.div`
     width: 100%;
     height: 48%;
     border-radius: 15px;
-    background-size: cover;
+    background-size: 100%;
     background-position: center;
     align-self: center;
     background-image: ${({ imageUrl }) => `url(${imageUrl})`};
     display: ${( props => !props.cardForm ? 'none' : 'block')};
-
+    overflow: hidden;
 `;
 
 export const CardTag = styled.div`

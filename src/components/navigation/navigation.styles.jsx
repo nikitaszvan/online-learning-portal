@@ -14,7 +14,7 @@ export const NavigationContainer = styled.nav`
   > h3 {
     color: black;
     margin: 0;
-    font-weight: 400;
+    font-weight: 500;
   }
 `;
 

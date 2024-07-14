@@ -11,7 +11,6 @@ export const TaskItemContainer = styled.div`
 
 export const CourseCodeAndTimeContainer = styled.div`
     min-width: 28%;
-   
     display: flex;
     flex-direction: column;
 

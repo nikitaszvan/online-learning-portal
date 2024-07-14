@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const LectureEventContainer = styled.div`
-    width: 95%;
     margin: 2px auto 10px auto;
     position: relative;
     border-radius: 10px;
@@ -13,7 +12,7 @@ export const LectureEventContainer = styled.div`
     justify-content: space-between;
     box-shadow: rgba(149, 157, 165, 0.3) 0px 4px 8px;
     z-index: 5;
-    min-width: 240px;
+    width: 300px;
 
 
     h3 {
