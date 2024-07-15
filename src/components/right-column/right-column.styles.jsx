@@ -36,7 +36,7 @@ export const Test2Container = styled.div`
     overflow-x: hidden;
     // ${(props => props.collapsecolumn ? 'min-width: unset' : 'min-width: 205px;')};
     width: ${(props => props.collapsecolumn ? '0' : '40%')};
-    max-width: 465px;
+    max-width: 425px;
     transition: ${(props => props.collapsecolumn ? 'width 1s ease-out' : 'width 1s ease-in')};
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `
@@ -46,7 +46,7 @@ export const LectureEventHeader = styled.div`
     align-self: flex-start;
     color: black;
     margin-top: 0.7rem;
-    margin-left: 1.7rem;
+    margin-left: 3rem;
     position: relative;
 
     > * {
@@ -152,6 +152,7 @@ export const ReactCalendar = styled(Calendar) `
     font-family: var(--font-family-theme);
     border: none;
     font-size: 1.5rem;
+    width: 80%;
 
     abbr[title] {
         text-decoration: none;

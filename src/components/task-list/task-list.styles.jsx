@@ -21,6 +21,7 @@ export const TaskListHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-inline: 0.8rem;
 
     > h2 {
         font-weight: 600;

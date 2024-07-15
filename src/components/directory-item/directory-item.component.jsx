@@ -100,7 +100,7 @@ const DirectoryItem = ({
         <Skeleton />
         <Skeleton />
         <Skeleton />
-        <CardCourseInfoContainer>
+        <CardCourseInfoContainer cardForm = {cardForm}>
           <Skeleton />
           <div>
             <Skeleton />

@@ -30,12 +30,16 @@ const Directory = () => {
     if (Object.keys(coursesMap).length > 0) {
       setLoading(false);
     }
+    
+    else {
+
+    }
 
   }, [coursesMap]);
 
   const renderPlaceholders = () => {
     return Array.from({ length: 6 }).map((_, index) => (
-      <DirectoryItem key={index} />
+      <DirectoryItem key={index} cardForm = {coursesCardForm}/>
     ));
   };
 

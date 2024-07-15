@@ -45,14 +45,14 @@ export const DirectoryItemContainer = styled.div`
     `)}
 
   > .css-ahj2mt-MuiTypography-root {
-    order: ${( props => !props.cardForm ? '3' : '3')}; 
+    order: 3;
     ${( props => !props.cardForm ? 'width: 12%' : 'width: 100%')}; 
   }
   
 
   > .skeleton-loader:nth-child(1) {
     width: 100%;
-    height: 50%;
+    height: 45%;
     border-radius: 15px;
     align-self: center;
   }
@@ -82,21 +82,29 @@ export const DirectoryItemContainer = styled.div`
   }
 
   > div > .skeleton-loader:nth-child(1) {
-    width: 20%;
+    width: 15%;
     aspect-ratio: 1/1;
     border-radius: 50%;
   }
 
   > div > div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     .skeleton-loader:nth-child(1) {
-    height: 1rem;
-    margin-top: 0.3rem;
-    width: 8rem;
+      height: 1rem;
+      margin-top: 0.3rem;
+      width: 8rem;
+      margin-block: 0.3rem;
+      
     }
 
     .skeleton-loader:nth-child(2) {
-    height: 0.8rem;
-    width: 10rem;
+      height: 0.8rem;
+      width: 10rem;
+      margin-block: 0.3rem;
     }
   }
 }
@@ -139,7 +147,7 @@ export const CardCourseTitle = styled.h2`
   max-height: 3rem;
   display: flex;
   align-items: center;
-  order: ${( props => !props.cardForm ? '2' : '2')}; 
+  order: 2;
   ${( props => !props.cardForm && 'width : 35%')};
 
       &::before {
@@ -169,8 +177,8 @@ export const CardCourseInfoContainer = styled.div`
   display: flex;
   gap: 0.4rem;
   margin-top: 0.3rem;
-  ${( props => !props.cardForm && 'height: 100%')};
-  ${( props => !props.cardForm && 'width: 18%; min-width: 110px')};
+  ${( props => props.cardForm && 'width: 100%')};
+  ${( props => !props.cardForm && 'width: 18%; min-width: 110px; height: 100%')};
   order: ${( props => !props.cardForm ? '0' : '4')}; 
 
   img {
