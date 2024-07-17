@@ -2,11 +2,12 @@ import { useState, Fragment } from 'react'
 import {
   CardImage,
   CardCourseInfoContainer,
-  CardCourseProgressBar,
   CardCourseTitle,
   CardTag,
   DirectoryItemContainer,
 } from './directory-item.styles';
+
+import ReactStyledProgressBar from '../course-progress-bar/course-progress-bar.component';
 
 import Skeleton from '../skeleton-loader/skeleton-loader.component';
 import { images } from '../../utils/load-images/load-images.utils';
@@ -66,7 +67,7 @@ const DirectoryItem = ({
               onMouseEnter={(event) => handlePopoverOpen(event, courseId)}
               onMouseLeave={handlePopoverClose}
             >
-            <CardCourseProgressBar now={Math.trunc((completedTasks / totalTasks) * 100)} progressbarcolour={accentColour} cardForm = {cardForm}/>
+            <ReactStyledProgressBar now={Math.trunc((completedTasks / totalTasks) * 100)} progressbarcolour={accentColour} cardForm = {cardForm}/>
             </Typography>
             <Popover
               id="mouse-over-popover"
