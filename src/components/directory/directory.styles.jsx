@@ -4,7 +4,7 @@ export const DirectoryContainer = styled.div`
   padding-inline: 2rem;
   padding-top: 1rem;
   overflow-y: auto;
-  max-height: calc(100vh - 48px);
+  max-height: calc(100vh - 5rem);
   box-sizing: border-box;
   flex: 1;
 `

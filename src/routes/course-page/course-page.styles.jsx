@@ -1,30 +1,15 @@
 import styled from 'styled-components';
 
 export const CoursePageContainer = styled.div`
-    width: 100%;
-    border-top: 1px solid grey;
-    background-color: #F9F9F9;
-    height: 100%;
-`
-
-export const MainCourseContentContainer = styled.div`
     display: flex;
-    height: 550px;
-    background-color: #F9F9F9;
-    gap: 20px;
-
-    >* {
-        border-radius: 15px;
-    }
+    max-height: calc(100vh - 5rem);
+    overflow-y: auto;
+    width: 100%;
 `
 
-export const CourseAnnouncementContainer = styled.div`
-    background-color: white;
-    height: 100%;
-    flex: 2;
-`
-
-export const UpcomingEventsContainer = styled.div`
-    background-color: white;
+export const FirstColumnContainer = styled.div`
     flex: 1;
+`
+export const SyllabusContainer = styled.div`
+
 `
