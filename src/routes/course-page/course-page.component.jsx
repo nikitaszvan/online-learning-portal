@@ -11,7 +11,7 @@ import {
   SyllabusContainer
  } from './course-page.styles';
 
- import AssignmentQuizBox from '../../components/assignment-quiz-box/assignment-quiz-box.component'
+ import AssignmentQuizComponent from '../../components/assignment-quiz-component/assignment-quiz-component.component'
 
  import ReactStyledProgressBar from '../../components/course-progress-bar/course-progress-bar.component';
 
@@ -67,7 +67,6 @@ export const CoursePage = ({course}) => {
             <p onClick={(e) => handleDownload('Discrete Mathematics I', e)}>Download</p>
           </div>
         </SyllabusContainer>
-        <AssignmentsAndQuizzesContainer>
           <div>
             <CoursePageSectionHeader>Assignments And Quizzes</CoursePageSectionHeader>
             <div>
@@ -75,7 +74,12 @@ export const CoursePage = ({course}) => {
               <p>5/10 Completed</p>
             </div>
           </div>
-          <AssignmentQuizBox status='missed' type='quiz'/>
+        <AssignmentsAndQuizzesContainer>
+          <AssignmentQuizComponent status='upcoming' type='assignment' eventKey='0' taskName='Assignment #3'/>
+          <AssignmentQuizComponent status='missed' type='quiz' eventKey='1' taskName='Quiz #2'/>
+          <AssignmentQuizComponent status='upcoming' type='quiz' eventKey='2' taskName='Quiz #1'/>
+          <AssignmentQuizComponent status='submitted' type='assignment' eventKey='3' taskName='Assignment #2'/>
+          <AssignmentQuizComponent status='missed' type='assignment' eventKey='4' taskName='Assignment #1'/>
         </AssignmentsAndQuizzesContainer>
       </FirstColumnContainer>
       <SecondColumnContainer>

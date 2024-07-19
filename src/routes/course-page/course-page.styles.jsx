@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Accordion from 'react-bootstrap/Accordion';
 
 export const CoursePageContainer = styled.div`
     display: flex;
@@ -49,11 +50,11 @@ export const SyllabusContainer = styled.div`
     
 `
 
-export const AssignmentsAndQuizzesContainer = styled.div`
-
-    > div {
-        display: flex;
-    }
+export const AssignmentsAndQuizzesContainer = styled(Accordion)`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     
     > div > div {
         display: flex;
