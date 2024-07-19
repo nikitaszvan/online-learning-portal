@@ -41,7 +41,7 @@ const AssignmentQuizComponent = ({ status, type, eventKey, taskName }) => {
                             {type === 'quiz' && 'Topic: '}{type === 'assignment' && 'Task: '}
                             {taskDesc}
                         </TaskDescription>
-                        <TaskButtonContainer>
+                        <TaskButtonContainer status = {status}>
                             {status === 'missed' && 
                             <>
                                 <p style={{color: 'red'}}>Missed: July 14, 2024</p>

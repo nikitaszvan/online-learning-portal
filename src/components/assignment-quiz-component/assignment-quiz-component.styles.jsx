@@ -103,6 +103,13 @@ export const TaskButtonContainer = styled.div`
         margin: 0;
     }
 
+    > p:nth-of-type(2) {
+        cursor: pointer;
+        &:hover {
+            ${(props => props.status === 'submitted' && 'text-decoration: underline')};
+        }
+    }
+
     > div {
         display: flex;
         align-items: center;

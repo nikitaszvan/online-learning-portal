@@ -3,18 +3,22 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 import {
-  AssignmentsAndQuizzesContainer,
+  AssignmentsAndQuizzesListContainer,
+  AssignmentsContainer,
+  AssignmentsHeaderContainer,
   CoursePageContainer,
   CoursePageSectionHeader,
   FirstColumnContainer,
+  GradesContainer,
+  GradeColumnHeading,
+  GradesHeader,
+  ProgressBar,
   SecondColumnContainer,
   SyllabusContainer
  } from './course-page.styles';
 
- import AssignmentQuizComponent from '../../components/assignment-quiz-component/assignment-quiz-component.component'
-
- import ReactStyledProgressBar from '../../components/course-progress-bar/course-progress-bar.component';
-
+ import GradeEntry from '../../components/grade-entry/grade-entry.component';
+ import AssignmentQuizComponent from '../../components/assignment-quiz-component/assignment-quiz-component.component';
  import DynamicIcon from '../../components/dynamic-icon.component';
 
  pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -67,20 +71,39 @@ export const CoursePage = ({course}) => {
             <p onClick={(e) => handleDownload('Discrete Mathematics I', e)}>Download</p>
           </div>
         </SyllabusContainer>
-          <div>
+        <AssignmentsContainer>
+          <AssignmentsHeaderContainer>
             <CoursePageSectionHeader>Assignments And Quizzes</CoursePageSectionHeader>
             <div>
-              <ReactStyledProgressBar now={50}/>
+              <ProgressBar now={50}/>
               <p>5/10 Completed</p>
             </div>
-          </div>
-        <AssignmentsAndQuizzesContainer>
-          <AssignmentQuizComponent status='upcoming' type='assignment' eventKey='0' taskName='Assignment #3'/>
-          <AssignmentQuizComponent status='missed' type='quiz' eventKey='1' taskName='Quiz #2'/>
-          <AssignmentQuizComponent status='upcoming' type='quiz' eventKey='2' taskName='Quiz #1'/>
-          <AssignmentQuizComponent status='submitted' type='assignment' eventKey='3' taskName='Assignment #2'/>
-          <AssignmentQuizComponent status='missed' type='assignment' eventKey='4' taskName='Assignment #1'/>
-        </AssignmentsAndQuizzesContainer>
+          </AssignmentsHeaderContainer>
+          <AssignmentsAndQuizzesListContainer defaultActiveKey="0">
+            <AssignmentQuizComponent status='upcoming' type='assignment' eventKey='0' taskName='Assignment #3'/>
+            <AssignmentQuizComponent status='missed' type='quiz' eventKey='1' taskName='Quiz #2'/>
+            <AssignmentQuizComponent status='upcoming' type='quiz' eventKey='2' taskName='Quiz #1'/>
+            <AssignmentQuizComponent status='submitted' type='assignment' eventKey='3' taskName='Assignment #2'/>
+            <AssignmentQuizComponent status='missed' type='assignment' eventKey='4' taskName='Assignment #1'/>
+          </AssignmentsAndQuizzesListContainer>
+        </AssignmentsContainer>
+        <GradesContainer>
+          <GradesHeader>
+            <CoursePageSectionHeader>Grades</CoursePageSectionHeader>
+            <DynamicIcon iconName='AutoGraph'/>
+          </GradesHeader>
+          <p>Current Grade: 90%</p>
+          <GradeColumnHeading>
+            <p>Name</p>
+            <p>Grade</p>
+            <p>Weight</p>
+          </GradeColumnHeading>
+          <GradeEntry taskName='Assignment #1' awardedGrade='85%' taskWeight='10%'/>
+          <GradeEntry taskName='Assignment #2' awardedGrade='85%' taskWeight='10%'/>
+          <GradeEntry taskName='Assignment #3' awardedGrade='85%' taskWeight='10%'/>
+          <GradeEntry taskName='Quiz #1' awardedGrade='85%' taskWeight='10%'/>
+          <GradeEntry taskName='Quiz #2' awardedGrade='85%' taskWeight='10%'/>
+        </GradesContainer>
       </FirstColumnContainer>
       <SecondColumnContainer>
 
