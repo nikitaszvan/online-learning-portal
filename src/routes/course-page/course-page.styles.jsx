@@ -8,19 +8,24 @@ export const CoursePageContainer = styled.div`
     max-height: calc(100vh - 5rem);
     overflow-y: auto;
     width: 100%;
-    padding: 3rem;
+    padding: 3rem 6rem;
+    justify-content: space-between;
+    gap: 6rem;
 
 `
 
 export const FirstColumnContainer = styled.div`
-    flex: 1;
+    flex: 1 1 30%;
     display: flex;
     flex-direction: column;
     gap: 2rem;
 `
 
 export const SecondColumnContainer = styled.div`
-    flex: 1;
+    flex: 1 1 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 `
 
 
@@ -113,7 +118,12 @@ export const GradesHeader = styled.div`
     display: flex;
     justify-content: space-between;
 
-    > svg {
+    > button {
+        border: none;
+        background-color: transparent;
+    }
+
+    > button > svg {
         font-size: 25px;
     }
 `
@@ -141,4 +151,29 @@ export const GradeColumnHeading = styled.div`
     > p:nth-of-type(2), > p:nth-of-type(3) {
         text-align: right;
     }
+`
+
+export const LineChartContainer = styled.div`
+
+`
+
+export const AnnouncementContainer = styled.div`
+
+`
+export const AnnouncementHeader = styled(CoursePageSectionHeader)`
+    color: blue;
+`
+
+export const AnnouncementImage = styled.div`
+    position: relative;
+    background-image: ${({ imageUrl }) => `url(${imageUrl})`};
+    width: 50%;
+    aspect-ratio: 1.3 / 1;
+    float: left;
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+`
+
+export const AnnouncementParagraph = styled.p`
+    font-size: 1.3rem;
 `
