@@ -4,9 +4,11 @@ import AnnouncementPicture from '../../assets/th.jpeg';
 import { 
   LineChart,
   XAxis,
+  YAxis,
   Tooltip,
   CartesianGrid,
-  Line 
+  ReferenceLine,
+  Line,
 } from 'recharts';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
@@ -20,6 +22,7 @@ import {
   AssignmentsHeaderContainer,
   CoursePageContainer,
   CoursePageSectionHeader,
+  CustomTooltipStyled,
   FirstColumnContainer,
   GradesContainer,
   GradeColumnHeading,
@@ -27,6 +30,7 @@ import {
   LineChartContainer,
   ProgressBar,
   SecondColumnContainer,
+  SyllabusButtonContainer,
   SyllabusContainer
  } from './course-page.styles';
 
@@ -49,7 +53,9 @@ export const CoursePage = ({course}) => {
   const [ gradeList, toggleGradeFormat ] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const divRef = useRef(null);
-  const [divWidth, setDivWidth] = useState(null); 
+  const fullDivRef = useRef(null);
+  
+  const [divWidth, setDivWidth] = useState(null);
 
   useEffect(() => {
       const calculateDivWidth = () => {
@@ -57,6 +63,17 @@ export const CoursePage = ({course}) => {
             setDivWidth(divRef.current.clientWidth);
           }
       };
+      const observer = new ResizeObserver(entries => {
+
+        for (let entry of entries) {
+          const { width, height } = entry.contentRect;
+          handleResize();
+        }
+      });
+
+      if (fullDivRef.current) {
+        observer.observe(fullDivRef.current);
+      }
 
       calculateDivWidth();
 
@@ -64,10 +81,11 @@ export const CoursePage = ({course}) => {
           calculateDivWidth();
       };
 
-      window.addEventListener('resize', handleResize);
+      // window.addEventListener('resize', handleResize);
 
       return () => {
-          window.removeEventListener('resize', handleResize);
+          // window.removeEventListener('resize', handleResize);
+          observer.disconnect();
       };
 
   }, []); 
@@ -91,56 +109,66 @@ export const CoursePage = ({course}) => {
     link.click();
   };
 
-  const sampleParagraph = `We are excited to embark on a journey through the fascinating realm of Discrete Mathematics this semester. This course will delve into foundational concepts essential for computer science and mathematics, offering a rigorous exploration of topics such as set theory, logic, graph theory, and combinatorics. Throughout the semester, you will sharpen your problem-solving skills through challenging assignments and interactive discussions. Our goal is to equip you with the theoretical knowledge and practical skills necessary to tackle complex computational problems and analyze real-world scenarios.
-As you navigate this course, we encourage you to actively engage with the material, collaborate with your peers, and seek support from our dedicated faculty. We look forward to witnessing your growth and success in mastering Discrete Mathematics. Together, let's make this semester an enriching and rewarding academic experience. Welcome aboard, and let's embark on this mathematical journey together. Warm regards, Ainsley (Mathematics Faculty)`;
+  const sampleParagraph1 = `We are excited to embark on a journey through the fascinating realm of Discrete Mathematics this semester. This course will delve into foundational concepts essential for computer science and mathematics, offering a rigorous exploration of topics such as set theory, logic, graph theory, and combinatorics. Throughout the semester, you will sharpen your problem-solving skills through challenging assignments and interactive discussions. Our goal is to equip you with the theoretical knowledge and practical skills necessary to tackle complex computational problems and analyze real-world scenarios.`;
+
+  const sampleParagraph2 = `As you navigate this course, we encourage you to actively engage with the material, collaborate with your peers, and seek support from our dedicated faculty. We look forward to witnessing your growth and success in mastering Discrete Mathematics. Together, let's make this semester an enriching and rewarding academic experience. Welcome aboard, and let's embark on this mathematical journey together. Warm regards, Ainsley (Mathematics Faculty)`;
 
   const data = [
     {
-      name: 'Page A',
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
+      name: 'Assignment 1',
+      grade: 85,
+      weight: 15,
     },
     {
-      name: 'Page B',
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
+      name: 'Quiz 1',
+      grade: 92,
+      weight: 10,
     },
     {
-      name: 'Page C',
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
+      name: 'Assignment 2',
+      grade: 88,
+      weight: 20,
     },
     {
-      name: 'Page D',
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
+      name: 'Quiz 2',
+      grade: 88,
+      weight: 12,
     },
     {
-      name: 'Page E',
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
+      name: 'Assignment 3',
+      grade: 90,
+      weight: 18,
     },
     {
-      name: 'Page F',
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: 'Page G',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
+      name: 'Quiz 3',
+      grade: 95,
+      weight: 25
     },
   ];
 
+  const calculatedAverageGrade = () => {
+    const weightedScore = data.map(item => (item.grade/100 * item.weight/100));
+    const weights = data.map(item => item.weight/100);
+    const sumWeights = weights.reduce((acc, weights) => acc + weights, 0);
+    const sumWeightedScore = weightedScore.reduce((acc, weightedScore) => acc + weightedScore, 0);
+    return Math.round((sumWeightedScore / sumWeights) * 100);
+  }
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <CustomTooltipStyled>
+          <p className="label">{`${label}`}</p>
+          <p className="grade">{`Grade: ${payload[0].value}%`}</p>
+          <p className="weight">{`Weight: ${payload[1].value}%`}</p>
+        </CustomTooltipStyled>
+      );
+    }
+  
+    return null;
+  };
+
   return (
-    <CoursePageContainer>
+    <CoursePageContainer ref={ fullDivRef }>
       <FirstColumnContainer >
         <SyllabusContainer>
           <CoursePageSectionHeader>Course Syllabus</CoursePageSectionHeader>
@@ -148,12 +176,12 @@ As you navigate this course, we encourage you to actively engage with the materi
             <DynamicIcon iconName='PictureAsPdf'/>
             <h3>Discrete Mathematics I Course Syllabus- Fall 2024</h3>
           </div>
-          <div>
+          <SyllabusButtonContainer>
             <p /* onClick={() => toggleShowPreview(!showPreview)}*/ onClick={handlePreview}>Preview</p>
             {showPreview &&
             <Document file={pdfPath}><Page pageNumber={1}/><Page pageNumber={2}/></Document> }
             <p onClick={(e) => handleDownload('Discrete Mathematics I', e)}>Download</p>
-          </div>
+          </SyllabusButtonContainer>
         </SyllabusContainer>
         <AssignmentsContainer>
           <AssignmentsHeaderContainer>
@@ -166,17 +194,18 @@ As you navigate this course, we encourage you to actively engage with the materi
           <AssignmentsAndQuizzesListContainer defaultActiveKey="0">
             <AssignmentQuizComponent status='upcoming' type='assignment' eventKey='0' taskName='Assignment #3'/>
             <AssignmentQuizComponent status='missed' type='quiz' eventKey='1' taskName='Quiz #2'/>
-            <AssignmentQuizComponent status='upcoming' type='quiz' eventKey='2' taskName='Quiz #1'/>
-            <AssignmentQuizComponent status='submitted' type='assignment' eventKey='3' taskName='Assignment #2'/>
-            <AssignmentQuizComponent status='missed' type='assignment' eventKey='4' taskName='Assignment #1'/>
+            <AssignmentQuizComponent status='missed' type='quiz' eventKey='2' taskName='Quiz #2'/>
+            <AssignmentQuizComponent status='upcoming' type='quiz' eventKey='3' taskName='Quiz #1'/>
+            <AssignmentQuizComponent status='submitted' type='assignment' eventKey='4' taskName='Assignment #2'/>
+            <AssignmentQuizComponent status='missed' type='assignment' eventKey='5' taskName='Assignment #1'/>
           </AssignmentsAndQuizzesListContainer>
         </AssignmentsContainer>
         <GradesContainer>
           <GradesHeader>
             <CoursePageSectionHeader>Grades</CoursePageSectionHeader>
-            <button onClick={() => toggleGradeFormat(!gradeList)}><DynamicIcon iconName='AutoGraph'/></button>
+            <button onClick={() => toggleGradeFormat(!gradeList)}>{ gradeList ? <DynamicIcon iconName='AutoGraph'/> : <DynamicIcon iconName='MenuOutlined'/> }</button>
           </GradesHeader>
-          <p>Current Grade: 90%</p>
+          <p>Current Grade: {calculatedAverageGrade()}%</p>
           {gradeList ?
           <>     
             <GradeColumnHeading>
@@ -184,18 +213,19 @@ As you navigate this course, we encourage you to actively engage with the materi
               <p>Grade</p>
               <p>Weight</p>
             </GradeColumnHeading>
-            <GradeEntry taskName='Assignment #1' awardedGrade='85%' taskWeight='10%'/>
-            <GradeEntry taskName='Assignment #2' awardedGrade='85%' taskWeight='10%'/>
-            <GradeEntry taskName='Assignment #3' awardedGrade='85%' taskWeight='10%'/>
-            <GradeEntry taskName='Quiz #1' awardedGrade='85%' taskWeight='10%'/>
-            <GradeEntry taskName='Quiz #2' awardedGrade='85%' taskWeight='10%'/>
+            {data.map((task, index) => {
+              const { name, grade, weight } = task;
+              return <GradeEntry key={ index } taskName={ name } awardedGrade={ `${grade}%` } taskWeight={ `${weight}%` } />;
+            })}
           </>
 : 
-            <LineChart width={divWidth} height={400} data={data} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
+            <LineChart width={divWidth} height={350} data={data} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
               <XAxis dataKey="name" />
-              <Tooltip />
+              <YAxis tickFormatter={(tick) => {return `${tick}%`;}}/>
+              <Tooltip content={<CustomTooltip />} />
               <CartesianGrid stroke="#f5f5f5" />
-              <Line type="monotone" dataKey="uv" stroke="#ff7300" yAxisId={0} />
+              <Line type="monotone" dataKey="grade" stroke="#ff7300" yAxisId={0} />
+              <Line type="monotone" dataKey="weight" stroke="#ff7300" strokeWidth={0} yAxisId={0} activeDot={{ r: 0 }}/>
             </LineChart>
 }
 
@@ -207,7 +237,9 @@ As you navigate this course, we encourage you to actively engage with the materi
         <AnnouncementContainer>
           <AnnouncementHeader>Welcome to Discrete Mathematics I for the Fall Term!</AnnouncementHeader>
           <AnnouncementImage imageUrl={ AnnouncementPicture } alt='annoucement'/>
-          <AnnouncementParagraph>{ sampleParagraph }</AnnouncementParagraph>
+          <AnnouncementParagraph>{ sampleParagraph1 }</AnnouncementParagraph>
+          <AnnouncementParagraph>{ sampleParagraph2 }</AnnouncementParagraph>
+          <p>End of Announcements</p>
         </AnnouncementContainer>
       </SecondColumnContainer>
     </CoursePageContainer>

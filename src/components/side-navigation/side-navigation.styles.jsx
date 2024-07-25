@@ -6,7 +6,7 @@ export const SideNavigationContainer = styled.div`
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   min-width: 205px;
   ${(props => props.isonlyicons ? 'width: 5%; min-width:unset' : 'width: 14%')};
-  ${(props => props.isonlyicons ? 'min-width: 70px' : 'min-width: 180px; max-width: 265px')};
+  ${(props => props.isonlyicons ? 'min-width: 70px' : 'min-width: 200px; max-width: 265px')};
   transition: width 0.3s ease;
   padding-top: 1rem;
   background-color: white;

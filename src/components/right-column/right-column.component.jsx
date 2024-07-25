@@ -6,10 +6,10 @@ import LectureEventCard from '../lecture-event/lecture-event.component';
 import {
   CarouselStyled,
   CarouselStyledContainer,
-  RightColumnContainer,
+  DateTaskList,
   LectureEventHeader,
-  Test1Container,
-  Test2Container
+  ContainerTab,
+  RightColumnContainer,
 } from './right-column.styles';
 import TaskList from '../task-list/task-list.component';
 import { selectCoursesMap } from '../../store/courses/courses.selector';
@@ -22,6 +22,7 @@ const RightColumn = () => {
   const coursesMap = useSelector(selectCoursesMap);
   const [ rightColumnCollapsed, collapseRightColumn ] = useState(false);
   const [loading, setLoading] = useState(true);
+ const [date, setDate] = useState(new Date());
 
   useEffect(() => {
     if (Object.keys(coursesMap).length > 0) {
@@ -51,10 +52,10 @@ const RightColumn = () => {
     return (
         // <RightColumnContainer collapsecolumn={ rightColumnCollapsed } >
         <>
-          <Test1Container collapsecolumn={ rightColumnCollapsed }>
+          <ContainerTab collapsecolumn={ rightColumnCollapsed }>
             <DynamicIcon iconName='ChevronRight' onclick={ handleCollapseClick }/>
-          </Test1Container >
-          <Test2Container collapsecolumn={ rightColumnCollapsed } className='text-2'>
+          </ContainerTab>
+          <RightColumnContainer collapsecolumn={ rightColumnCollapsed } className='text-2'>
           <LectureEventHeader>
             <h2>Lectures</h2>
             <p>UP NEXT</p>
@@ -73,13 +74,17 @@ const RightColumn = () => {
             </CarouselStyled>
           </CarouselStyledContainer>
           <TaskList collapsecolumn={ rightColumnCollapsed } />
-          <ReactCalendar />
-          {/* 
-          
-          
-           */}
-          </Test2Container>
-     
+          <ReactCalendar 
+            onChange={setDate} value={date}
+          />
+          <DateTaskList>
+            <p>{date.toLocaleDateString('en-US', { weekday: 'short' })} {date.toLocaleDateString('en-US', { month: 'short' })} {date.getDate()} {date.getFullYear()}</p>
+            <p>CPS 213 - 12:00PM - Quiz 3</p> 
+            <p>CPS 569 - 2:00PM - Assignment 1</p> 
+            <p>CPS 369 - 6:00PM - Quiz 2</p> 
+          </DateTaskList>
+          </RightColumnContainer>
+
         </>
     )
 }

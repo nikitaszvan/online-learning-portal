@@ -3,14 +3,13 @@ import Carousel from 'react-bootstrap/Carousel';
 import Calendar from 'react-calendar';
 
 
-export const Test1Container = styled.div`
+export const ContainerTab = styled.div`
     cursor: pointer;
     color: black;
     background-color: white;
     position: relative;
     height: fit-content;
     padding: 1.5rem 1rem;
-    margin-top: 2rem;
     z-index: 6;
     box-shadow: rgba(149, 157, 165, 0.2) -5px 8px 8px;
     border-top-left-radius: 10px;
@@ -23,7 +22,7 @@ export const Test1Container = styled.div`
     }
 `
 
-export const Test2Container = styled.div`
+export const RightColumnContainer = styled.div`
     padding-top: 1.6rem;
     position: relative;
     background-color: var(--color-primary);
@@ -35,7 +34,7 @@ export const Test2Container = styled.div`
     overflow-y: auto;
     overflow-x: hidden;
     // ${(props => props.collapsecolumn ? 'min-width: unset' : 'min-width: 205px;')};
-    width: ${(props => props.collapsecolumn ? '0' : '40%')};
+    width: ${(props => props.collapsecolumn ? '0' : '48%')};
     max-width: 425px;
     transition: ${(props => props.collapsecolumn ? 'width 1s ease-out' : 'width 1s ease-in')};
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -45,7 +44,6 @@ export const LectureEventHeader = styled.div`
 
     align-self: flex-start;
     color: black;
-    margin-top: 0.7rem;
     margin-left: 3rem;
     position: relative;
 
@@ -68,6 +66,7 @@ export const LectureEventHeader = styled.div`
 
 export const CarouselStyledContainer = styled.div`
     position: relative;
+    width: 100%;
     margin-inline: auto;
 `
 
@@ -164,5 +163,23 @@ export const ReactCalendar = styled(Calendar) `
 
     .react-calendar__tile {
         font-size: 1.3rem;
+    }
+`
+
+export const DateTaskList = styled.div`
+    width: 100%;
+    padding: 1rem;
+    > p {
+        font-size: 1.4rem;
+    }
+
+    > p:nth-of-type(1) {
+        font-size: 1.6rem;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    > p:nth-of-type(2), > p:nth-of-type(4) {
+        background-color: #f0f0f2;
     }
 `

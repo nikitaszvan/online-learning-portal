@@ -23,7 +23,7 @@ const LectureEventCard = ({ course, backgroundColour, accentColour }) => {
       <CourseVenueContainer>
         <p>Venue: { courseVenue }</p>
       </CourseVenueContainer>
-      <AddReminderButton>
+      <AddReminderButton href='https://calendar.app.google/gqRariTk1bKp5zLr6' target="_blank">
         <DynamicIcon iconName='Alarm'/>
         <p>ADD REMINDER</p>
       </AddReminderButton>

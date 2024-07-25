@@ -11,7 +11,6 @@ export const CoursePageContainer = styled.div`
     padding: 3rem 6rem;
     justify-content: space-between;
     gap: 6rem;
-
 `
 
 export const FirstColumnContainer = styled.div`
@@ -34,6 +33,8 @@ export const CoursePageSectionHeader = styled.h3`
     font-weight: 500;
 `
 export const SyllabusContainer = styled.div`
+    display: flex;
+    flex-direction: column;
 
     > div:nth-of-type(1) {
         display: flex;
@@ -49,20 +50,23 @@ export const SyllabusContainer = styled.div`
         }
     }
 
-    > div:nth-of-type(2) {
-
-        display: flex;
-        justify-content: center;
-
-        p {
-            color: blue;
-            font-size: 1.4rem;
-            font-weight: 500;
-            cursor: pointer;
-            margin-inline: 2rem;
-        }   
-    }
     
+`
+
+export const SyllabusButtonContainer = styled.div`
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    justify-self: start;
+    margin-left: 25%;
+
+    > p {
+        color: blue;
+        font-size: 1.4rem;
+        font-weight: 500;
+        cursor: pointer;
+        margin-inline: 2rem;
+    }   
 `
 
 export const AssignmentsContainer = styled.div`
@@ -157,7 +161,21 @@ export const LineChartContainer = styled.div`
 
 `
 
+export const CustomTooltipStyled = styled.div`
+    > p:nth-of-type(1) {
+        font-weight: 600;
+    }
+`
+
 export const AnnouncementContainer = styled.div`
+
+    > p:nth-of-type(1) {
+        margin-bottom: 1.5rem;
+    }
+
+    > p {
+        text-indent: 5rem;
+    }
 
 `
 export const AnnouncementHeader = styled(CoursePageSectionHeader)`
@@ -168,6 +186,7 @@ export const AnnouncementImage = styled.div`
     position: relative;
     background-image: ${({ imageUrl }) => `url(${imageUrl})`};
     width: 50%;
+    min-width: 250px;
     aspect-ratio: 1.3 / 1;
     float: left;
     margin-right: 1rem;
@@ -176,4 +195,5 @@ export const AnnouncementImage = styled.div`
 
 export const AnnouncementParagraph = styled.p`
     font-size: 1.3rem;
+    line-height: 2rem;
 `

@@ -12,7 +12,8 @@ export const LectureEventContainer = styled.div`
     justify-content: space-between;
     box-shadow: rgba(149, 157, 165, 0.3) 0px 4px 8px;
     z-index: 5;
-    width: 300px;
+    min-width: 260px;
+    flex: 1;
 
 
     h3 {
@@ -72,7 +73,7 @@ export const CourseVenueContainer = styled.div`
     }
 `
 
-export const AddReminderButton = styled.div`
+export const AddReminderButton = styled.a`
     margin-top: 8px;
     border: none;
     background-color: white;

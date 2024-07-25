@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Card from 'react-bootstrap/Card';
 
 export const TaskBoxContainer = styled(Card)`
-    
+    width: 100%;
     background-color: ${props => (
     props.status === 'missed' ? '#FFF0F0' :
     props.status === 'submitted' ? '#EEF6EB' :
@@ -89,11 +89,10 @@ export const TaskDescription = styled.p`
 
 export const TaskButtonContainer = styled.div`
     display: flex;
+    width: 100%;
     justify-content: space-between;
-    justify-self: center;
-    gap: 7rem;
+    justify-self: start;
     font-size: 12px;
-    align-items: center;
 
     p {
         white-space: nowrap;
