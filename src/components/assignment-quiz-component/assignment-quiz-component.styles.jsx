@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import Card from 'react-bootstrap/Card';
+// background-color: ${props => (
+//     props.status === 'missed' ? '#FFF0F0' :
+//     props.status === 'submitted' ? '#EEF6EB' :
+//     props.status === 'upcoming' ? '#F7F9FF' :
+//     'inherit'
+//         )};
 
 export const TaskBoxContainer = styled(Card)`
     width: 100%;
-    background-color: ${props => (
-    props.status === 'missed' ? '#FFF0F0' :
-    props.status === 'submitted' ? '#EEF6EB' :
-    props.status === 'upcoming' ? '#F7F9FF' :
-    'inherit'
-        )};
 
     border: 1px solid ${props => (props.status === 'missed' ? '#D39999' :
             props.status === 'submitted' ? '#B3C5AD' : 
@@ -29,8 +29,8 @@ export const TaskBoxContainer = styled(Card)`
             'inherit'
         )};
         
-        margin-left: 1rem;
-        margin-top: 1rem;
+        margin-left: 2rem;
+        margin-top: 1.3rem;
     }
 
     border-radius: 5px;
@@ -72,7 +72,7 @@ export const TaskBoxHeader = styled.div`
     padding-inline: 2rem;
         
     p {
-        margin: 0;
+        margin-block: 0.5rem;
     }
 
     > p:nth-of-type(1) {

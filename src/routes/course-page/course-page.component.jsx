@@ -236,7 +236,7 @@ export const CoursePage = ({course}) => {
         <CoursePageSectionHeader>Recent Announcements</CoursePageSectionHeader>
         <AnnouncementContainer>
           <AnnouncementHeader>Welcome to Discrete Mathematics I for the Fall Term!</AnnouncementHeader>
-          <AnnouncementImage imageUrl={ AnnouncementPicture } alt='annoucement'/>
+          <AnnouncementImage imageUrl='https://images.pexels.com/photos/7974/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' alt='annoucement'/>
           <AnnouncementParagraph>{ sampleParagraph1 }</AnnouncementParagraph>
           <AnnouncementParagraph>{ sampleParagraph2 }</AnnouncementParagraph>
           <p>End of Announcements</p>

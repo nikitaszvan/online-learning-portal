@@ -11,6 +11,7 @@ export const CoursePageContainer = styled.div`
     padding: 3rem 6rem;
     justify-content: space-between;
     gap: 6rem;
+    flex: 1;
 `
 
 export const FirstColumnContainer = styled.div`
@@ -179,12 +180,14 @@ export const AnnouncementContainer = styled.div`
 
 `
 export const AnnouncementHeader = styled(CoursePageSectionHeader)`
-    color: blue;
+    color: #3535b4;
 `
 
 export const AnnouncementImage = styled.div`
     position: relative;
     background-image: ${({ imageUrl }) => `url(${imageUrl})`};
+    background-position: center;
+    background-size: cover;
     width: 50%;
     min-width: 250px;
     aspect-ratio: 1.3 / 1;

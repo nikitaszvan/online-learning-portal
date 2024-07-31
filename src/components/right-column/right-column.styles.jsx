@@ -3,7 +3,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import Calendar from 'react-calendar';
 
 
-export const ContainerTab = styled.div`
+export const ContainerTab = styled.button`
     cursor: pointer;
     color: black;
     background-color: white;
@@ -14,12 +14,19 @@ export const ContainerTab = styled.div`
     box-shadow: rgba(149, 157, 165, 0.2) -5px 8px 8px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+    border: none;
 
-    > svg:nth-child(1) {
-        font-size: 2rem;
-        transition: transform 1s ease;
-        ${(props => props.collapsecolumn ? 'transform: rotate(180deg)' : '')};
-    }
+    > button {
+
+        border: none;
+        background-color: transparent;
+
+        > svg:nth-child(1) {
+            font-size: 2rem;
+            transition: transform 1s ease;
+            ${(props => props.collapsecolumn ? 'transform: rotate(180deg)' : '')};
+        }
+    }   
 `
 
 export const RightColumnContainer = styled.div`

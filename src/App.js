@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from './components/layout/layout.component';
 import Directory from './components/directory/directory.component';
+import QuizSummary from './routes/quiz-summary/quiz-summary.component';
+import QuizPage from './components/quiz-page/quiz-page.component';
 // import Home from './routes/home/home.component';
 // import Navigation from './components/navigation/navigation.component';
 // import Authentication from './routes/authentication/authentication.component';
@@ -43,6 +45,8 @@ const coursesMap = useSelector(selectCoursesMap);
           {Object.entries(coursesMap).map(([key, course]) => (
             <Route key={key} path={`course/${course.courseSlug}`} element={<Layout children={<CoursePage courseId={key} />} pageTitle={course.courseName}/>} />        
           ))}
+          <Route path='quiz-summary' element={<Layout children={<QuizSummary />} pageTitle='Quiz Summary'/>} />
+          <Route path='quiz' element={<Layout children={<QuizPage />} pageTitle='Quiz Page'/>} />  
       </Routes>
     </>
   );

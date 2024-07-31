@@ -18,12 +18,13 @@ export const NavigationContainer = styled.nav`
   }
 `;
 
-export const LogoContainer = styled(Link)`
+export const LogoContainer = styled.div`
   display: flex;
   width: 15%;
   align-items: center;
   box-sizing: border-box;
   height: 100%;
+  cursor: pointer;
 
   img {
     height: 70%;

@@ -147,10 +147,16 @@ export const UserContainer = styled.div`
     border-radius: 50%;
   }
 
-  svg {
+  > button {
+
+    background-color: transparent;
+    border: none;
+  
+    > svg {
     display: ${(props => props.isonlyicons ? 'none' : 'inline-flex')};
     transform: rotate(180deg);
     cursor: pointer;
+    }
   }
 
   > div {

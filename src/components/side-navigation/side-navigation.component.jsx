@@ -1,10 +1,11 @@
-import {  Fragment, useState, useEffect } from 'react';
+import {  Fragment, useState, useEffect, useRef } from 'react';
 import { 
   BottomSideBarContainer,
   SideNavigationContainer,
   UserContainer
  } from './side-navigation.styles';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
   selectCoursesMap,
@@ -24,12 +25,14 @@ const SideNavigationBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [popoverKey, setPopoverKey] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [classToAdd, setClass] = useState('expanded');
 
   useEffect(() => {
     if (Object.keys(sideNavMenuMap).length > 0) {
       setLoading(false);
     }
   }, [sideNavMenuMap]);
+
 
   const renderPlaceholders = () => {
     return Array.from({ length: 6 }).map((_, index) => (
@@ -49,6 +52,10 @@ const SideNavigationBar = () => {
       elements.forEach(element => {
         element.click();
       });
+      setClass('collapsed');
+    }
+    else {
+      setClass('expanded');
     }
     setIsSideNavCollapsed(!isSideNavCollapsed);
     setPopoverKey(null);
@@ -65,84 +72,86 @@ const SideNavigationBar = () => {
   };
 
   return (
-    <SideNavigationContainer isonlyicons={isSideNavCollapsed}>
+    <SideNavigationContainer isonlyicons={isSideNavCollapsed} className={ classToAdd }>
       <Sidebar style={{ overflowY: 'hidden' }}>
       <Menu>
 
-{loading ? renderPlaceholders() :
+  {loading ? renderPlaceholders() :
 
-  Object.entries(sideNavMenuMap)?.map(([key, sideNavSubMenu]) => {
+    Object.entries(sideNavMenuMap)?.map(([key, sideNavSubMenu]) => {
 
-    const { menuIcon, menuTitle, subMenuOptions } = sideNavSubMenu;
+      const { menuIcon, menuTitle, subMenuOptions } = sideNavSubMenu;
 
-    return (
+      return (
 
-      <Fragment key={key}>
-        {isSideNavCollapsed ? 
-          <Fragment>
-            <Typography
-              aria-owns={popoverKey === key ? 'mouse-over-popover' : undefined}
-              aria-haspopup="true"
-              onMouseEnter={(event) => handlePopoverOpen(event, key)}
-              onMouseLeave={handlePopoverClose}
-            >
+        <Fragment key={key}>
+          {isSideNavCollapsed ? 
+            <Fragment>
+              <Typography
+                aria-owns={popoverKey === key ? 'mouse-over-popover' : undefined}
+                aria-haspopup="true"
+                onMouseEnter={(event) => handlePopoverOpen(event, key)}
+                onMouseLeave={handlePopoverClose}
+              >
+                <SubMenu 
+                  icon={<DynamicIcon iconName={menuIcon} />} 
+                  label={menuTitle} 
+                  onClick={isSideNavCollapsed ? handleOnClick : null}
+                >
+                  {subMenuOptions !== 'mapCourses' ?
+                    Object.entries(subMenuOptions).map(([subKey, subMenuOption]) => {
+                      const { label, redirect_path } = subMenuOption;
+                      return (<MenuItem key={subKey} component={<Link to={'/' + redirect_path} />}>{label}</MenuItem>)
+                    }) : Object.entries(coursesMap)?.map(([courseKey, course]) => {
+                      const { courseCode, courseSlug } = course;
+                      return <MenuItem key={courseKey} to={ courseSlug }>{courseCode}</MenuItem>;
+                    })
+                  }
+                </SubMenu>
+              </Typography>
+              <Popover
+                id="mouse-over-popover"
+                sx={{ pointerEvents: 'none' }}
+                open={popoverKey === key}
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                onClose={handlePopoverClose}
+                disableRestoreFocus
+              >
+                <Typography sx={{ p: 1 }}>{menuTitle}</Typography>
+              </Popover> 
+            </Fragment> : 
+            <Fragment>
               <SubMenu 
                 icon={<DynamicIcon iconName={menuIcon} />} 
                 label={menuTitle} 
                 onClick={isSideNavCollapsed ? handleOnClick : null}
               >
                 {subMenuOptions !== 'mapCourses' ?
-                  Object.entries(subMenuOptions).map(([subKey, subMenuOption]) => (
-                    <MenuItem key={subKey} to='/'>{subMenuOption}</MenuItem>
-                  )) : Object.entries(coursesMap)?.map(([courseKey, course]) => {
+                  Object.entries(subMenuOptions).map(([subKey, subMenuOption]) => {
+                    const { label, redirect_path } = subMenuOption;
+                    return (<MenuItem key={subKey} component={<Link to={'/' + redirect_path} />}>{label}</MenuItem>)
+                  }) : Object.entries(coursesMap)?.map(([courseKey, course]) => {
                     const { courseCode } = course;
                     return <MenuItem key={courseKey} to='/'>{courseCode}</MenuItem>;
                   })
                 }
               </SubMenu>
-            </Typography>
-            <Popover
-              id="mouse-over-popover"
-              sx={{ pointerEvents: 'none' }}
-              open={popoverKey === key}
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              onClose={handlePopoverClose}
-              disableRestoreFocus
-            >
-              <Typography sx={{ p: 1 }}>{menuTitle}</Typography>
-            </Popover> 
-          </Fragment> : 
-          <Fragment>
-            <SubMenu 
-              icon={<DynamicIcon iconName={menuIcon} />} 
-              label={menuTitle} 
-              onClick={isSideNavCollapsed ? handleOnClick : null}
-            >
-              {subMenuOptions !== 'mapCourses' ?
-                Object.entries(subMenuOptions).map(([subKey, subMenuOption]) => (
-                  <MenuItem key={subKey} to='/'>{subMenuOption}</MenuItem>
-                )) : Object.entries(coursesMap)?.map(([courseKey, course]) => {
-                  const { courseCode } = course;
-                  return <MenuItem key={courseKey} to='/'>{courseCode}</MenuItem>;
-                })
-              }
-            </SubMenu>
-          </Fragment>
-        }
-      </Fragment>
-    );
-  })
-}
+            </Fragment>
+          }
+        </Fragment>
+      );
+    })
+  }
 
-</Menu>
+  </Menu>
       </Sidebar>
       <BottomSideBarContainer isonlyicons={isSideNavCollapsed}>
         <a href="/">
@@ -155,7 +164,7 @@ const SideNavigationBar = () => {
             <h3>Nikita Van</h3>
             <p>nikitaszvan@mitmail.com</p>
           </div>
-          <DynamicIcon iconName='ExitToAppOutlined' onclick={handleOnClick}/>
+          <button onClick={handleOnClick} id='collapse-side-nav-button'><DynamicIcon iconName='ExitToAppOutlined' /></button>
         </UserContainer>
       </BottomSideBarContainer>
     </SideNavigationContainer>

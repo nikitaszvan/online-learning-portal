@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { 
     TaskBoxContainer,
     TaskBoxHeader,
@@ -8,6 +9,7 @@ import DynamicIcon from "../dynamic-icon.component";
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 import Card from 'react-bootstrap/Card';
 import Accordion from 'react-bootstrap/Accordion';
+import { Link } from "react-router-dom";
 
 const CustomToggle = ({ status, eventKey, header }) => {
     const decoratedOnClick = useAccordionButton(eventKey);
@@ -26,14 +28,15 @@ const CustomToggle = ({ status, eventKey, header }) => {
 const AssignmentQuizComponent = ({ status, type, eventKey, taskName }) => {
 
     const taskDesc = 'Set Theory and Functions. Assess understanding of cardinality and bijections through questions on countable vs. uncountable sets and properties of injective, surjective, and bijective functions.';
+
     return (
-        <TaskBoxContainer status = { status }>
+        <TaskBoxContainer status = { status } >
             { status === 'missed' && <DynamicIcon iconName='Cancel' /> }
             { status === 'submitted' && <DynamicIcon iconName='CheckCircle' /> }
             { status === 'upcoming' && <DynamicIcon iconName='Upcoming' /> }
             <div>
                 <Card.Header>
-                    <CustomToggle eventKey={ eventKey } status = {status} header={ taskName }/>
+                    <CustomToggle eventKey={ eventKey } status = { status } header={ taskName }/>
                 </Card.Header>
                 <Accordion.Collapse eventKey={ eventKey }>
                     <Card.Body>
@@ -73,7 +76,7 @@ const AssignmentQuizComponent = ({ status, type, eventKey, taskName }) => {
                             <>
                                 <div>
                                     <DynamicIcon iconName='PlayCircleFilledWhiteOutlined'/>
-                                    <p>START QUIZ</p>
+                                    <Link to='/quiz'><p>START QUIZ</p></Link>
                                 </div>
                                 <div>
                                     <DynamicIcon iconName='AccessTime'/>

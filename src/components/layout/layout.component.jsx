@@ -7,11 +7,14 @@ import { LayoutContainer } from './layout.styles';
 export const Layout = ({ children, pageTitle }) => {
     return (
         <LayoutContainer>
-            <Navigation sectionTitle={ pageTitle }/>
+            {!(children.type.name == 'QuizPage') &&
+            <Navigation sectionTitle={ pageTitle }/> }
             <div className="main-body">
-                <SideNavigationBar />
+            {!(children.type.name == 'QuizPage') &&
+                <SideNavigationBar />}
                 { children }
-                <RightColumn />
+                {!(children.type.name == 'QuizPage' || children.type.name == 'QuizSummary') &&
+                <RightColumn />}
             </div>
         </LayoutContainer>
     );

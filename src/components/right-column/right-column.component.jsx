@@ -52,8 +52,10 @@ const RightColumn = () => {
     return (
         // <RightColumnContainer collapsecolumn={ rightColumnCollapsed } >
         <>
-          <ContainerTab collapsecolumn={ rightColumnCollapsed }>
-            <DynamicIcon iconName='ChevronRight' onclick={ handleCollapseClick }/>
+          <ContainerTab collapsecolumn={ rightColumnCollapsed } >
+            <button onClick={ handleCollapseClick } id='right-column-tab'>
+              <DynamicIcon iconName='ChevronRight' />
+            </button>
           </ContainerTab>
           <RightColumnContainer collapsecolumn={ rightColumnCollapsed } className='text-2'>
           <LectureEventHeader>

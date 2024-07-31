@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectCartItems } from '../../store/cart/cart.selector';
+import { selectCartItems } from '../../store/quiz/quiz.selector';
 import {
   addItemToCart,
   clearItemFromCart,
   removeItemFromCart,
-} from '../../store/cart/cart.action';
+} from '../../store/quiz/quiz.action';
 
 import {
   CheckoutItemContainer,

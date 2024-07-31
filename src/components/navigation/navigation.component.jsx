@@ -14,11 +14,10 @@ import {
 
 const Navigation = ({ sectionTitle }) => {
 
-
   return (
     <Fragment>
       <NavigationContainer>
-        <LogoContainer to='/'>
+        <LogoContainer onClick={() => {window.location.href = '/';}}>
           <img src={ SchoolLogo } alt='school logo'/>
           <VerticalLine />
           <img src={ CompanyLogo } alt='dev company logo'/>
