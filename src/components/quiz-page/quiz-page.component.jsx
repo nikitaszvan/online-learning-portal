@@ -1,43 +1,60 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { QuizContainer } from './quiz-page.styles';
+import { useSelector, useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+import { 
+  ButtonContainer,
+  QuizContainer,
+  QuizResultContainer,
+  SubmitQuizButton,
+ } from './quiz-page.styles';
 import CountdownTimer from '../countdown-timer/countdown-timer.component';
 import { 
     firstTimeQuizStart,
     resetTimeQuizStart,
+    updateQuizSubmission,
     } from '../../store/quiz/quiz.action';
 import QuizQuestion from '../quiz-question/quiz-question.component';
+import ReactStyledProgressBar from '../course-progress-bar/course-progress-bar.component';
 
 import { getQuizStartTime,
         getAllAnswers
  } from '../../store/quiz/quiz.selector'; 
 
+ import { getQuizDataFromLocalStorage } from '../../routes/quiz-summary/quiz-summary.component'
+
 const QuizPage = () => {
-    const startTimeFromState = useSelector(getQuizStartTime);
-    const [ startTime, setStartTime ] = useState(new Date(startTimeFromState));
-    const [ quizSubmitted, submitQuiz ] = useState(false);
-    const isInvalidDate = (date) => {
-        return Object.prototype.toString.call(date) === '[object Date]' && isNaN(date.getTime());
-      };
+  const dispatch = useDispatch();
+  const startTimeFromState = useSelector(getQuizStartTime);
+  const [ startTime, setStartTime ] = useState(new Date(startTimeFromState));
+  const [ quizSubmitted, submitQuiz ] = useState(false);
+  const isInvalidDate = (date) => {
+      return Object.prototype.toString.call(date) === '[object Date]' && isNaN(date.getTime());
+    };
+
+  useEffect(() => {
+    if (document.querySelector('.expanded')) {
+      document.querySelector('#collapse-side-nav-button').click();
+  }
+  }, []);
   
-    useEffect(() => {
+  const handleSubmitQuiz = () => {
+    submitQuiz(true);
+    dispatch(updateQuizSubmission());
 
-      if (document.querySelector('.expanded')) {
-        document.querySelector('#collapse-side-nav-button').click();
+  }
+
+  const getLastKey = (obj) => {
+    if (obj && Object.keys(obj).length) {
+        const keys = Object.keys(obj);
+        const numericKeys = keys.map(key => Number(key)).filter(key => !isNaN(key));
+        return Math.max(...numericKeys);
     }
-    }, []);
+    return null;
+  }
 
 
-
-  const Completionist = () => <span>Time has been completed</span>;
-
-  const renderer = ({ hours, minutes, seconds, completed }) => {
-    if (completed) {
-      return <Completionist />;
-    } else {
-      return <span>{hours || '00'}:{minutes || '00'}:{String(seconds).length == 1 ? `0${seconds}` : seconds || '00'}</span>;
-    }
-  };
+  const getQuizData = getQuizDataFromLocalStorage();
+  const lastAnswered = getLastKey(getQuizData.answers);
 
   const questions = [
     {   questionId: '1',
@@ -134,7 +151,6 @@ const QuizPage = () => {
     ];
 
     const checkAnswers = (userAnswers) => {
-        // Initial value for the accumulator is an object
         const result = questions.reduce((accumulator, question) => {
           const userAnswer = userAnswers[question.questionId];
           const isCorrect = userAnswer === question.correctAnswer;
@@ -151,53 +167,52 @@ const QuizPage = () => {
 
     const userAnswers = useSelector(getAllAnswers); // Get answers from Redux store
     const results = checkAnswers(userAnswers);
-
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(lastAnswered ? lastAnswered -1 : 0);
 
     const handleNext = () => {
       if (currentIndex < questions.length - 1) {
         setCurrentIndex(currentIndex + 1);
       }
-      console.log('next fired');
     }
 
     const handlePrevious = () => {
       if (currentIndex > 0) {
         setCurrentIndex(currentIndex - 1);
       }
-
-      console.log('prev fired');
     };
 
   return (
-     !quizSubmitted ? (
+     !quizSubmitted ? 
         <QuizContainer>
-            {!isInvalidDate(startTime) &&
-             <CountdownTimer
-                 startTime={ startTime }
-                 minutes = {30}
-                 seconds = {1}
-                // onComplete = {() => {submitQuiz(true)}}
-             />}
-              <QuizQuestion
-                questionId={questions[currentIndex].questionId}
-                question={questions[currentIndex].question}
-                options={questions[currentIndex].options}
-              />
-              <button onClick={handlePrevious} disabled={currentIndex === 0}>
-                Previous
-              </button>
-              <button onClick={handleNext} disabled={currentIndex === questions.length - 1}>
-                Next
-              </button>
-                <button className="submit-button" onClick={() => {submitQuiz(true)}}>Submit Quiz</button>
-        </QuizContainer>
-            ) :
-            (
-                <div style={{flex: '1', overflow: 'auto'}}>
-                    <div>{ results.correctCount }/{results.totalQuestions}</div>
-                </div>
-            )
+          <ReactStyledProgressBar now={Math.trunc((Object.keys(userAnswers).length / questions.length) * 100)}/>
+          <QuizQuestion
+            questionId={questions[currentIndex].questionId}
+            question={questions[currentIndex].question}
+            options={questions[currentIndex].options}
+          />
+          <ButtonContainer>
+            <button onClick={handlePrevious} disabled={currentIndex === 0}>
+              Previous
+            </button>
+            <button onClick={handleNext} disabled={currentIndex === questions.length - 1}>
+              Next
+            </button>
+          </ButtonContainer>
+          <SubmitQuizButton onClick={() => {handleSubmitQuiz()}} disabled={Object.keys(userAnswers).length !== questions.length}>Submit Quiz</SubmitQuizButton>
+          {!isInvalidDate(startTime) &&
+          <CountdownTimer
+              startTime={ startTime }
+              minutes = {5}
+              seconds = {1}
+              onComplete = {() => {handleSubmitQuiz()}}
+          />}
+         </QuizContainer>
+         :
+          <QuizResultContainer>
+            <h1>Your score is {((results.correctCount / results.totalQuestions) * 100)}%</h1>
+            <h3>Submission Id: {uuidv4().replace(/-/g, '').slice(0, 20)}</h3>
+            <button onClick={() => window.close()}>Return to Student Portal</button>
+          </QuizResultContainer>
         
   )
 }

@@ -7,5 +7,5 @@ export const updateAnswer = (questionId, answer) =>
 export const firstTimeQuizStart = (time) => 
   createAction(QUIZ_ACTION_TYPES.START_QUIZ_COUNTDOWN, time);
 
-export const resetTimeQuizStart = (currentTime) => 
-  createAction(QUIZ_ACTION_TYPES.RESET_QUIZ_COUNTDOWN, currentTime);
+export const updateQuizSubmission = () => 
+  createAction(QUIZ_ACTION_TYPES.SUBMIT_QUIZ, true);

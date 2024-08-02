@@ -12,6 +12,11 @@ export const getQuizStartTime = createSelector(
   (quizState) => quizState.quizStartTime
 );
 
+export const getQuizSubmit = createSelector(
+  [getQuizState],
+  (quizState) => quizState.quizSubmit
+);
+
 export const getAnswerForQuestion = (questionId) =>
   createSelector(
     [getAllAnswers],

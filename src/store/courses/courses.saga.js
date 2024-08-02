@@ -31,7 +31,6 @@ export function* onFetchCourses() {
 export function* toggleGradeVisibilityAsync(action) {
   try {
     const { payload: {courseId, showGrade} } = action;
-    console.log(courseId);
     yield call(updateGradeVisibilityInDatabase, courseId, showGrade);
   } catch (error) {
     console.log(error);

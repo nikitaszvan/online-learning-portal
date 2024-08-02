@@ -5,13 +5,10 @@ import ReactStyledProgressBar from '../../components/course-progress-bar/course-
 
 export const CoursePageContainer = styled.div`
     display: flex;
-    max-height: calc(100vh - 5rem);
-    overflow-y: auto;
     width: 100%;
-    padding: 3rem 6rem;
     justify-content: space-between;
     gap: 6rem;
-    flex: 1;
+    margin-top: 2rem;
 `
 
 export const FirstColumnContainer = styled.div`
@@ -42,8 +39,13 @@ export const SyllabusContainer = styled.div`
         align-items: center;
         gap: 2rem;
 
-        svg {
+        svg:nth-of-type(1) {
             font-size: 3rem;
+        }
+
+        > button {
+            border: none;
+            background-color: transparent;
         }
 
         h3 {

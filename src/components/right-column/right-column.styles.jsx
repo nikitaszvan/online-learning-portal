@@ -23,7 +23,7 @@ export const ContainerTab = styled.button`
 
         > svg:nth-child(1) {
             font-size: 2rem;
-            transition: transform 1s ease;
+            transition: transform 0.5s ease;
             ${(props => props.collapsecolumn ? 'transform: rotate(180deg)' : '')};
         }
     }   
@@ -43,7 +43,7 @@ export const RightColumnContainer = styled.div`
     // ${(props => props.collapsecolumn ? 'min-width: unset' : 'min-width: 205px;')};
     width: ${(props => props.collapsecolumn ? '0' : '48%')};
     max-width: 425px;
-    transition: ${(props => props.collapsecolumn ? 'width 1s ease-out' : 'width 1s ease-in')};
+    transition: ${(props => props.collapsecolumn ? 'width 0.5s ease-out' : 'width 0.5s ease-in')};
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `
 

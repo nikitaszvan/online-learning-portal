@@ -18,8 +18,6 @@ function* fetchQuizData() {
 // Worker Saga: Will be fired on QUIZ_ACTION_TYPES.UPDATE_ANSWER actions
 function* handleUpdateAnswer(action) {
   try {
-    // Perform any side effects related to updating answers, if necessary
-    console.log('Updating answer for question:', action.payload.questionId, 'Answer:', action.payload.answer);
     // Example: You might want to save the updated answer to an API
   } catch (error) {
     console.error('Error updating answer:', error);

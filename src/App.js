@@ -7,12 +7,6 @@ import { Layout } from './components/layout/layout.component';
 import Directory from './components/directory/directory.component';
 import QuizSummary from './routes/quiz-summary/quiz-summary.component';
 import QuizPage from './components/quiz-page/quiz-page.component';
-// import Home from './routes/home/home.component';
-// import Navigation from './components/navigation/navigation.component';
-// import Authentication from './routes/authentication/authentication.component';
-// import Shop from './routes/shop/shop.component';
-// import SideNavigationBar from './components/side-navigation/side-navigation.component';
-// import Checkout from './routes/checkout/checkout.component';
 import { CoursePage } from './routes/course-page/course-page.component';
 import { checkUserSession } from './store/user/user.action';
 import { fetchCoursesStart } from './store/courses/courses.action';
@@ -21,7 +15,7 @@ import { fetchTasksStart } from './store/tasks/tasks.action';
 import {
   selectCoursesMap
 } from './store/courses/courses.selector';
-
+import StyledBreadcrumb from './components/bootstrap-breadcrumb/bootstrap-breadcrumb.component';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -33,19 +27,17 @@ const coursesMap = useSelector(selectCoursesMap);
     dispatch(fetchTasksStart());
   }, []);
 
-
   return (
     <>
       <Routes>
           <Route path="/" element={<Layout children={<Directory />} pageTitle='homepage'/>} />
-          {/* <Route index element={<Home />} /> */}
-        {/* <Route path='/' element={<Navigation />}>
-          
-          <Route path='auth' element={<Authentication />} /> */}
-          {Object.entries(coursesMap).map(([key, course]) => (
-            <Route key={key} path={`course/${course.courseSlug}`} element={<Layout children={<CoursePage courseId={key} />} pageTitle={course.courseName}/>} />        
-          ))}
-          <Route path='quiz-summary' element={<Layout children={<QuizSummary />} pageTitle='Quiz Summary'/>} />
+          {Object.entries(coursesMap).map(([key, course]) => {
+            const {courseSlug, courseName} = course;
+            
+            return <Route key={key} path={`course/${courseSlug}`} element={<Layout children={<><StyledBreadcrumb breadcrumbitems={[{label: 'Home', href:'/'}, {label: 'Courses', href:'/'}, {label: courseName, href:`${courseSlug}`}]}/><CoursePage courseId={key} /></>} pageTitle={courseName}/>} />
+            }        
+          )}
+          <Route path='quiz-summary' element={<Layout children={<><StyledBreadcrumb breadcrumbitems={[{label: 'Home', href:'/'},{label: 'Quiz Summary', href:'quiz-summary'}]}/><QuizSummary /></>} pageTitle='Quiz Summary'/>} />
           <Route path='quiz' element={<Layout children={<QuizPage />} pageTitle='Quiz Page'/>} />  
       </Routes>
     </>

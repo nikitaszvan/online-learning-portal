@@ -1,7 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { updateAnswer } from '../../store/quiz/quiz.action';
 import { getAnswerForQuestion } from '../../store/quiz/quiz.selector';
-import { QuestionContainer } from './quiz-question.styles'; // Ensure styles are imported
+import {
+  AnswerBox,
+  QuestionContainer,
+  QuestionGridContainer,
+  QuestionHeaderContainer,
+  QuestionRowContainer,
+        } from './quiz-question.styles';
 
 const QuizQuestion = ({ questionId, question, options }) => {
   const dispatch = useDispatch();
@@ -19,48 +25,34 @@ const QuizQuestion = ({ questionId, question, options }) => {
 
   return (
     <QuestionContainer>
-      <div style={{ display: 'flex' }}>
+      <QuestionHeaderContainer>
         <h1>Q{questionId}</h1>
         <p>{question}</p>
-      </div>
-      <div style={{ display: 'flex', width: '50%', height: 'fit-content' }}>
-        {options.slice(0, 2).map((option, index) => (
-          <div key={option.value} style={{ margin: '5px', width: '100%'}}>
-            <div
-              onClick={() => handleChange(questionId, option.choice)}
-              className='question-answer'
-              style={{
-                border: `2px solid ${getBorderColor(option.choice)}`,
-                padding: '10px',
-                cursor: 'pointer',
-                width: '100%',
-                height: '100%',
-              }}
-            >
-              {index == 0 ? 'A.' : 'B.'}{option.value}
-            </div>
-          </div>
-        ))}
-      </div>
-      <div style={{ display: 'flex', width: '50%', height: 'fit-content' }}>
-        {options.slice(2, 4).map((option, index) => (
-          <div key={option.value} style={{ margin: '5px', width: '100%' }}>
-            <div
-              onClick={() => handleChange(questionId, option.choice)}
-              className='question-answer'
-              style={{
-                border: `2px solid ${getBorderColor(option.choice)}`,
-                padding: '10px',
-                cursor: 'pointer',
-                width: '100%',
-                height: '100%',
-              }}
-            >
-              {index == 0 ? 'C.' : 'D.'}{option.value}
-            </div>
-          </div>
-        ))}
-      </div>
+      </QuestionHeaderContainer>
+      <QuestionGridContainer>
+        <QuestionRowContainer>
+          {options.slice(0, 2).map((option, index) => (
+              <AnswerBox
+                key={index}
+                bordercolour={getBorderColor(option.choice)}
+                onClick={() => handleChange(questionId, option.choice)}
+              >
+                {index == 0 ? 'A.' : 'B.'} {option.value}
+            </AnswerBox>
+          ))}
+        </QuestionRowContainer>
+        <QuestionRowContainer>
+          {options.slice(2, 4).map((option, index) => (
+              <AnswerBox
+                key={index + 2}
+                bordercolour={getBorderColor(option.choice)}
+                onClick={() => handleChange(questionId, option.choice)}
+              >
+                {index == 0 ? 'C.' : 'D.'} {option.value}
+            </AnswerBox>
+          ))}
+        </QuestionRowContainer>
+      </QuestionGridContainer>
     </QuestionContainer>
   );
 };

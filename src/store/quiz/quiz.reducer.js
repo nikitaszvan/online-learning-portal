@@ -3,6 +3,7 @@ import { QUIZ_ACTION_TYPES } from './quiz.types';
 const QUIZ_INITIAL_STATE = {
   answers: {},
   quizStartTime: '',
+  quizSubmit: false,
 };
 
 export const quizReducer = (state = QUIZ_INITIAL_STATE, action = {}) => {
@@ -21,6 +22,16 @@ export const quizReducer = (state = QUIZ_INITIAL_STATE, action = {}) => {
       return {
         ...state,
         quizStartTime: payload,
+      };
+    case QUIZ_ACTION_TYPES.RESET_QUIZ_COUNTDOWN:
+      return {
+        ...state,
+        quizStartTime: payload,
+      };
+    case QUIZ_ACTION_TYPES.SUBMIT_QUIZ:
+      return {
+        ...state,
+        quizSubmit: payload,
       };
     default:
       return state;

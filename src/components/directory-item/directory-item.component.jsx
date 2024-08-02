@@ -14,7 +14,8 @@ import { images } from '../../utils/load-images/load-images.utils';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 
-const DirectoryItem = ({
+const DirectoryItem = 
+  ({redirectpath,
   cardForm,
   course,
   course: {
@@ -29,8 +30,7 @@ const DirectoryItem = ({
   } = {},
   courseId,
   primaryColour,
-  accentColour
-}) => {
+  accentColour,}) => {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [popoverKey, setPopoverKey] = useState(null);
@@ -54,7 +54,7 @@ const DirectoryItem = ({
   const imageSrc = getImagePath(courseId);
 
   return (
-    <DirectoryItemContainer cardForm = {cardForm}>
+    <DirectoryItemContainer cardForm = {cardForm} to = {redirectpath ? redirectpath : '/'} >
       { course ? 
       <>
         <CardImage imageUrl={imageUrl} cardForm = {cardForm}/>

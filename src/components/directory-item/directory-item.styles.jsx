@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { Link }from 'react-router-dom';
 
-export const DirectoryItemContainer = styled.div`
+export const DirectoryItemContainer = styled(Link)`
 
   display: flex;
   background-color: var(--color-primary);
@@ -10,11 +11,12 @@ export const DirectoryItemContainer = styled.div`
   // box-shadow: 0.5rem 0.5rem 0.5rem 0px rgba(180,180,180,0.85);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
 
   ${( props => props.cardForm ? 
     `
     // width: calc(23rem+40%);
-    max-width: 315px;
+    max-width: 350px;
     height: calc(23rem*0.98);
     flex-direction: column;
     border-radius: 15px;

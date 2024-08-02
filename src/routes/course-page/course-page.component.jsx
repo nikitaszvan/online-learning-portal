@@ -175,14 +175,15 @@ export const CoursePage = ({course}) => {
           <div>
             <DynamicIcon iconName='PictureAsPdf'/>
             <h3>Discrete Mathematics I Course Syllabus- Fall 2024</h3>
+            <button onClick={handlePreview}><DynamicIcon iconName='FindInPage'/></button>
           </div>
-          <SyllabusButtonContainer>
-            <p /* onClick={() => toggleShowPreview(!showPreview)}*/ onClick={handlePreview}>Preview</p>
-            {showPreview &&
-            <Document file={pdfPath}><Page pageNumber={1}/><Page pageNumber={2}/></Document> }
-            <p onClick={(e) => handleDownload('Discrete Mathematics I', e)}>Download</p>
-          </SyllabusButtonContainer>
-        </SyllabusContainer>
+          {/*<SyllabusButtonContainer>
+            <p onClick={() => toggleShowPreview(!showPreview)}>Preview</p>
+            
+            showPreview &&<Document file={pdfPath}><Page pageNumber={1}/><Page pageNumber={2}/></Document> 
+           <p onClick={(e) => handleDownload('Discrete Mathematics I', e)}>Download</p>
+          </SyllabusButtonContainer>*/}
+        </SyllabusContainer> 
         <AssignmentsContainer>
           <AssignmentsHeaderContainer>
             <CoursePageSectionHeader>Assignments And Quizzes</CoursePageSectionHeader>

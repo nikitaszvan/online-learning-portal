@@ -10,7 +10,7 @@ import App from "./App";
 import { store, persistor } from "./store/store";
 
 
-import "./index.scss";
+import "./index.scss"; 
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);

@@ -9,3 +9,11 @@ export const LayoutContainer = styled.div`
         position: relative;
     }
 `
+
+export const CenterDiv = styled.div`
+    flex: 1;
+        max-height: calc(100vh - 5rem);
+    overflow-y: auto;
+    padding: 1rem 6rem 3rem 6rem;
+    flex: 1;
+`
