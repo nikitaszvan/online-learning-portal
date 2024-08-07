@@ -40,12 +40,19 @@ const QuizSummary = () => {
   const [ buttonLabel, setButtonLabel ] = useState(windowOpenTimestamp ? 'Continue Quiz' : 'Start Quiz');
 
   useEffect(() => {
-    if (document.querySelector('.expanded')) {
-        document.querySelector('#collapse-side-nav-button').click();
-    }
-  }, []);
+    const handleDelayedClick = () => {
+      if (document.querySelector('.expanded')) {
+        const collapseSideNavElement = document.querySelector('#collapse-side-nav-button');
+        console.log(collapseSideNavElement);
+        if (collapseSideNavElement) {
+          collapseSideNavElement.click();
+        }
+      }
+    };
 
-  
+    const timerId = setTimeout(handleDelayedClick, 50);
+    return () => clearTimeout(timerId);
+  }, []);
 
   const checkQuizSubmit = () => {
     const getQuizData = getQuizDataFromLocalStorage();
@@ -75,16 +82,13 @@ const QuizSummary = () => {
           setButtonLabel('Completed');
           setButtonActivity(false);
           clearInterval(checkWindowClosedInterval.current);
-          console.log('1');
         } else if (openedWindow.current.closed) {
           setIsWindowClosed(true);
           setButtonActivity(true);
           setButtonLabel('Continue Quiz');
           clearInterval(checkWindowClosedInterval.current);
-          console.log('2');
         } else {
           setButtonLabel('In Progress');
-          console.log('3');
         }
       }, 1000);
     };
@@ -117,7 +121,7 @@ const QuizSummary = () => {
               </p>
               <h2>Quiz Details</h2>
               <p><strong>Time Limit</strong><br/>
-                  30 minutes {windowOpenTimestamp && `(Started: ${windowOpenTimestamp})`}
+                  5 minutes {windowOpenTimestamp && `(Started: ${windowOpenTimestamp})`}
               </p>
               <p><strong>Attempts</strong><br/>
               Allowed - 1, Completed - 0

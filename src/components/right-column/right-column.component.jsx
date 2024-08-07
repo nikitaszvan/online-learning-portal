@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import Carousel from 'react-bootstrap/Carousel';
 import DynamicIcon from '../dynamic-icon.component';
@@ -19,16 +19,51 @@ import { ReactCalendar } from './right-column.styles';
 import 'react-calendar/dist/Calendar.css';
 
 const RightColumn = () => {
+  const divRef = useRef(null);
   const coursesMap = useSelector(selectCoursesMap);
-  const [ rightColumnCollapsed, collapseRightColumn ] = useState(false);
+  const [xPosition, setXPosition] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(0);
   const [loading, setLoading] = useState(true);
  const [date, setDate] = useState(new Date());
+ const widthRef = useRef(window.innerWidth);
+ const [ rightColumnCollapsed, collapseRightColumn ] = useState(() => window.innerWidth < 811);
 
   useEffect(() => {
     if (Object.keys(coursesMap).length > 0) {
       setLoading(false);
     }
   }, [coursesMap]);
+
+  const checkDivPosition = () => {
+    if (divRef.current) {
+      const position = divRef.current.offsetLeft;
+      setXPosition(position);
+    }
+  };
+
+  useEffect(() => {
+    // Initial position update
+    checkDivPosition();
+
+    // Handle window resize event
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth); // Update window width ref
+      checkDivPosition(); // Update xPosition on resize
+    };
+
+    // Set up resize event listener
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup function to remove event listener
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  console.log(xPosition, windowWidth, windowWidth-xPosition);
+
+
+
 
   const renderPlaceholders = () => {
     return (
@@ -52,12 +87,10 @@ const RightColumn = () => {
     return (
         // <RightColumnContainer collapsecolumn={ rightColumnCollapsed } >
         <>
-          <ContainerTab collapsecolumn={ rightColumnCollapsed } >
-            <button onClick={ handleCollapseClick } id='right-column-tab'>
+          <ContainerTab collapsecolumn={ rightColumnCollapsed } onClick={ handleCollapseClick } id='right-column-tab' xoffset={!rightColumnCollapsed && windowWidth - xPosition}>
               <DynamicIcon iconName='ChevronRight' />
-            </button>
           </ContainerTab>
-          <RightColumnContainer collapsecolumn={ rightColumnCollapsed } className='text-2'>
+          <RightColumnContainer collapsecolumn={ rightColumnCollapsed } className='text-2' ref={divRef}>
           <LectureEventHeader>
             <h2>Lectures</h2>
             <p>UP NEXT</p>
@@ -74,17 +107,11 @@ const RightColumn = () => {
                   })
                 }
             </CarouselStyled>
-          </CarouselStyledContainer>
-          <TaskList collapsecolumn={ rightColumnCollapsed } />
+          </CarouselStyledContainer>          
           <ReactCalendar 
             onChange={setDate} value={date}
           />
-          <DateTaskList>
-            <p>{date.toLocaleDateString('en-US', { weekday: 'short' })} {date.toLocaleDateString('en-US', { month: 'short' })} {date.getDate()} {date.getFullYear()}</p>
-            <p>CPS 213 - 12:00PM - Quiz 3</p> 
-            <p>CPS 569 - 2:00PM - Assignment 1</p> 
-            <p>CPS 369 - 6:00PM - Quiz 2</p> 
-          </DateTaskList>
+          <TaskList collapsecolumn={ rightColumnCollapsed } />
           </RightColumnContainer>
 
         </>

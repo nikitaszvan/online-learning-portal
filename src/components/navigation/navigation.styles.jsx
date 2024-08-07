@@ -11,6 +11,11 @@ export const NavigationContainer = styled.nav`
   background-color: white;
   height: 5rem;
 
+  @media (max-width: 414px) {
+    height: 10vw;
+  }
+
+
   > h3 {
     color: black;
     margin: 0;
@@ -36,6 +41,12 @@ export const LogoContainer = styled.div`
   }
 `;
 
+export const SectionTitle = styled.h2`
+  @media (max-width: 810px) {
+    display: none;
+  }
+`
+
 
 export const VerticalLine = styled.div`
   border-right: 0.1rem solid black;
@@ -44,12 +55,17 @@ export const VerticalLine = styled.div`
 `
 
 export const NavHeaderRight = styled.div`
-  min-width: 18%;
-  height: 2rem;
+  min-width: 10%;
+  height: 2.5rem;
   border: 0.15rem solid #D9D9D9;
   border-radius: 8px;
   align-items: center;
   display: flex;
+
+    @media (max-width: 667px) {
+      display: none;
+    }
+  
 `
 
 export const NavSearchIcon = styled(SearchIcon)`
@@ -65,11 +81,25 @@ export const NavSearchBar = styled.input`
   user-select: none;
   height: 100%;
 
+
   &::placeholder {
     color: rgb(0, 0, 0, 0.5);
   }
 
   &:focus {
     outline: none;
+  }
+`
+
+export const MobileMenuButton = styled.button`
+  @media (min-width: 667px) {
+    display: none;
+  }
+
+  border: none;
+  background-color: transparent;
+
+  > svg {
+    font-size: 2.8rem;
   }
 `

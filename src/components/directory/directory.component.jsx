@@ -48,8 +48,8 @@ const Directory = () => {
   return (
     <DirectoryContainer>
       <DirectoryHeaderContainer>
-        {coursesCardForm ? <DynamicIcon iconName='MenuOutlined' onclick={ () => setCoursesCardForm(!coursesCardForm) }/> :
-        <DynamicIcon iconName='Apps' onclick={ () => setCoursesCardForm(!coursesCardForm) }/>}
+        <h1>Welcome Back, Nikita</h1>
+        { <button onClick={() => setCoursesCardForm(!coursesCardForm)}>{coursesCardForm ? <DynamicIcon iconName='MenuOutlined' /> : <DynamicIcon iconName='Apps'/>}</button>}
       </DirectoryHeaderContainer>
       <CourseCardsContainer className={coursesCardForm ? 'grid-layout' : 'block-layout'}>
         {!coursesCardForm && 

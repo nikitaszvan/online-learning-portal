@@ -7,14 +7,19 @@ export const TaskListContainer = styled.div`
     flex-direction: column;
     width: 100%;
 
-    > svg {
-        cursor: pointer;
-        position: relative;
-        align-self: center;
-        ${(props => props.collapsecolumn ? 'left: 65%;' : 'left: 0;')};
-        transition: left 1s ease;
-        ${(props => props.showgradient ? '' : 'transform: rotate(180deg)')};
-        transition: transform 1s ease;
+    > button {
+        border: none;
+        background-color: transparent;
+         
+        > svg {
+            cursor: pointer;
+            position: relative;
+            align-self: center;
+            ${(props => props.collapsecolumn ? 'left: 65%;' : 'left: 0;')};
+            transition: left 1s ease;
+            ${(props => props.showgradient ? '' : 'transform: rotate(180deg)')};
+            transition: transform 1s ease;
+        }
     }
 `
 export const TaskListHeader = styled.div`

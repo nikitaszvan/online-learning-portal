@@ -1,22 +1,33 @@
 import styled from 'styled-components';
 
 export const DirectoryContainer = styled.div`
-  padding-inline: 2rem;
   padding-top: 1rem;
   overflow-y: auto;
+  height: 100%;
   max-height: calc(100vh - 5rem);
   box-sizing: border-box;
   flex: 1;
+  padding-inline: 2rem;
 `
 
 export const DirectoryHeaderContainer = styled.div`
   display: flex;
-  flex-direction: row-reverse;
-
-  > svg {
-    cursor: pointer;
-    font-size: 2.5rem;
+  justify-content: space-between;
+  @media (max-width: 1097px) {
+    > button {
+      display: none;
+    }
   }
+    > button {
+    border: none;
+    background-color: transparent;
+    
+      > svg {
+      cursor: pointer;
+      font-size: 2.5rem;
+      }
+    } 
+  
 `
 
 export const CourseCardsContainer = styled.div`

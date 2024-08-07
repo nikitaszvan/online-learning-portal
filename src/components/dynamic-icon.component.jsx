@@ -1,9 +1,9 @@
 import * as Icons from '@mui/icons-material';
 
-const DynamicIcon = ({ iconName, onclick }) => {
+const DynamicIcon = ({ iconName }) => {
   const IconComponent = Icons[iconName];
 
-  return <IconComponent onClick={ onclick }/>;
+  return <IconComponent />;
 };
 
 export default DynamicIcon;

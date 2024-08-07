@@ -58,6 +58,22 @@ export const CoursePage = ({course}) => {
   const [divWidth, setDivWidth] = useState(null);
 
   useEffect(() => {
+    const handleDelayedClick = () => {
+      if (document.querySelector('.expanded')) {
+        const collapseSideNavElement = document.querySelector('#collapse-side-nav-button');
+        console.log(collapseSideNavElement);
+        if (collapseSideNavElement) {
+          collapseSideNavElement.click();
+        }
+      }
+    };
+
+    const timerId = setTimeout(handleDelayedClick, 50);
+    return () => clearTimeout(timerId);
+  }, []);
+
+
+  useEffect(() => {
       const calculateDivWidth = () => {
           if (divRef.current) {
             setDivWidth(divRef.current.clientWidth);
@@ -168,7 +184,7 @@ export const CoursePage = ({course}) => {
   };
 
   return (
-    <CoursePageContainer ref={ fullDivRef }>
+    <CoursePageContainer ref={ fullDivRef } id="main">
       <FirstColumnContainer >
         <SyllabusContainer>
           <CoursePageSectionHeader>Course Syllabus</CoursePageSectionHeader>

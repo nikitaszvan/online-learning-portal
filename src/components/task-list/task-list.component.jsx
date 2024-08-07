@@ -62,27 +62,16 @@ const TaskList = () => {
 
     return (
     <TaskListContainer showgradient={ taskListExpanded }>
-        <TaskListHeader>
-        <h2>Tasks</h2>
-        <SortByButton>
-            <DynamicIcon iconName='Checklist'/>
-            <p>Sort by</p>
-        </SortByButton>
-        <AddTaskButton>
-            <DynamicIcon iconName='ControlPoint'/>
-        </AddTaskButton>
-        </TaskListHeader>
-    <TaskListContent ref={contentRef}>
-      <TaskListGradient showgradient={ taskListExpanded }/>
-      {loading ? renderPlaceholders(): 
-      Object.entries(tasksMap)?.map(([key, task]) => 
-      <TaskItem key={key} task={task} />) 
-      }
-    </TaskListContent>
-    <DynamicIcon iconName='KeyboardArrowDown' onclick={handleExpandClick}/>
+        <TaskListContent ref={contentRef}>
+        <TaskListGradient showgradient={ taskListExpanded }/>
+        {loading ? renderPlaceholders(): 
+        Object.entries(tasksMap)?.map(([key, task]) => 
+        <TaskItem key={key} task={task} />) 
+        }
+        </TaskListContent>
+        <button onClick={handleExpandClick}><DynamicIcon iconName='KeyboardArrowDown' /></button>
   </TaskListContainer>
-
-);
+    );
 }
 
 export default TaskList;

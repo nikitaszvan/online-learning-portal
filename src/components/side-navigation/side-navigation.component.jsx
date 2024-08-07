@@ -1,31 +1,32 @@
-import {  Fragment, useState, useEffect, useRef } from 'react';
+import { Fragment, useState, useEffect, useRef, useCallback, createRef } from 'react';
 import { 
   BottomSideBarContainer,
   SideNavigationContainer,
+  SettingsContainer,
   UserContainer
- } from './side-navigation.styles';
+} from './side-navigation.styles';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {
-  selectCoursesMap,
-} from '../../store/courses/courses.selector';
+import { selectCoursesMap } from '../../store/courses/courses.selector';
 import Skeleton from '../skeleton-loader/skeleton-loader.component';
-import {
-  selectSideNavMenuMap
-} from '../../store/side-nav/side-nav.selector';
+import { selectSideNavMenuMap } from '../../store/side-nav/side-nav.selector';
 import DynamicIcon from '../dynamic-icon.component';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 
 const SideNavigationBar = () => {
-  const [isSideNavCollapsed, setIsSideNavCollapsed] = useState(false);
+
   const coursesMap = useSelector(selectCoursesMap);
   const sideNavMenuMap = useSelector(selectSideNavMenuMap);
   const [anchorEl, setAnchorEl] = useState(null);
   const [popoverKey, setPopoverKey] = useState(null);
   const [loading, setLoading] = useState(true);
   const [classToAdd, setClass] = useState('expanded');
+  const sideMenuOptionRefs = useRef({});
+  const [openMenus, setOpenMenus] = useState({});
+  const widthRef = useRef(window.innerWidth);
+  const [isSideNavCollapsed, setIsSideNavCollapsed] = useState(() => window.innerWidth < 1281);
 
   useEffect(() => {
     if (Object.keys(sideNavMenuMap).length > 0) {
@@ -34,9 +35,23 @@ const SideNavigationBar = () => {
   }, [sideNavMenuMap]);
 
 
+    useEffect(() => {
+      const handleResize = () => {
+        widthRef.current = window.innerWidth;
+      };
+
+      window.addEventListener('resize', handleResize);
+  
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
+
+  
+
   const renderPlaceholders = () => {
     return Array.from({ length: 6 }).map((_, index) => (
-      <div className="skeleton-side-nav-container">
+      <div className="skeleton-side-nav-container" key={`skeleton-${index}`}>
         <Skeleton />
         <Skeleton />
         <Skeleton />
@@ -44,20 +59,18 @@ const SideNavigationBar = () => {
     ));
   };
 
-
-
-  const handleOnClick = () => {
+  const handleOnClick = (e) => {
     if (!isSideNavCollapsed) {
       const elements = document.querySelectorAll('a.ps-menu-button.ps-open');
       elements.forEach(element => {
         element.click();
       });
       setClass('collapsed');
-    }
-    else {
+    } else {
       setClass('expanded');
+      
     }
-    setIsSideNavCollapsed(!isSideNavCollapsed);
+    setIsSideNavCollapsed(prev => !prev);
     setPopoverKey(null);
   };
 
@@ -71,93 +84,99 @@ const SideNavigationBar = () => {
     setPopoverKey(null);
   };
 
+
   return (
-    <SideNavigationContainer isonlyicons={isSideNavCollapsed} className={ classToAdd }>
-      <Sidebar style={{ overflowY: 'hidden' }}>
-      <Menu>
+    <SideNavigationContainer isonlyicons={isSideNavCollapsed} className={classToAdd}>
+      <Sidebar style={{ overflowY: 'hidden'}}>
+        <Menu>
+          {loading ? renderPlaceholders() :
+            Object.entries(sideNavMenuMap)?.map(([key, sideNavSubMenu]) => {
+              if (!sideMenuOptionRefs.current[key]) {
+                sideMenuOptionRefs.current[key] = createRef();
+              }
 
-  {loading ? renderPlaceholders() :
+              const { menuIcon, menuTitle, subMenuOptions } = sideNavSubMenu;
 
-    Object.entries(sideNavMenuMap)?.map(([key, sideNavSubMenu]) => {
-
-      const { menuIcon, menuTitle, subMenuOptions } = sideNavSubMenu;
-
-      return (
-
-        <Fragment key={key}>
-          {isSideNavCollapsed ? 
-            <Fragment>
-              <Typography
-                aria-owns={popoverKey === key ? 'mouse-over-popover' : undefined}
-                aria-haspopup="true"
-                onMouseEnter={(event) => handlePopoverOpen(event, key)}
-                onMouseLeave={handlePopoverClose}
-              >
-                <SubMenu 
-                  icon={<DynamicIcon iconName={menuIcon} />} 
-                  label={menuTitle} 
-                  onClick={isSideNavCollapsed ? handleOnClick : null}
-                >
-                  {subMenuOptions !== 'mapCourses' ?
-                    Object.entries(subMenuOptions).map(([subKey, subMenuOption]) => {
-                      const { label, redirect_path } = subMenuOption;
-                      return (<MenuItem key={subKey} component={<Link to={'/' + redirect_path} />}>{label}</MenuItem>)
-                    }) : Object.entries(coursesMap)?.map(([courseKey, course]) => {
-                      const { courseCode, courseSlug } = course;
-                      return <MenuItem key={courseKey} to={ courseSlug }>{courseCode}</MenuItem>;
-                    })
+              return (
+                <Fragment key={`menu-${key}`}>
+                  {isSideNavCollapsed ?
+                    <Fragment>
+                      <Typography
+                        key={`typography-${key}`}
+                        aria-owns={popoverKey === key ? 'mouse-over-popover' : undefined}
+                        aria-haspopup="true"
+                        onMouseEnter={(event) => handlePopoverOpen(event, key)}
+                        onMouseLeave={handlePopoverClose}
+                      >
+                        <SubMenu
+                          key={`submenu-${key}`}
+                          ref={sideMenuOptionRefs.current[key]}
+                          icon={<DynamicIcon iconName={menuIcon} />}
+                          label={menuTitle}
+                          onClick={(e) => isSideNavCollapsed ? handleOnClick(e) : null}
+                        >
+                          {subMenuOptions !== 'mapCourses' ?
+                            Object.entries(subMenuOptions).map(([subKey, subMenuOption]) => {
+                              const { label, redirect_path } = subMenuOption;
+                              return (<MenuItem key={`submenu-item-${subKey}`} component={<Link to={'/' + redirect_path} />}>{label}</MenuItem>);
+                            }) : Object.entries(coursesMap)?.map(([courseKey, course]) => {
+                              const { courseCode, courseSlug } = course;
+                              return <MenuItem key={`course-item-${courseKey}`} to={courseSlug}>{courseCode}</MenuItem>;
+                            })
+                          }
+                        </SubMenu>
+                      </Typography>
+                      <Popover
+                        key={`popover-${key}`}
+                        id="mouse-over-popover"
+                        sx={{ pointerEvents: 'none' }}
+                        open={popoverKey === key}
+                        anchorEl={anchorEl}
+                        anchorOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        transformOrigin={{
+                          vertical: 'top',
+                          horizontal: 'left',
+                        }}
+                        onClose={handlePopoverClose}
+                        disableRestoreFocus
+                      >
+                        <Typography key={`popover-typography-${key}`} sx={{ p: 1 }}>{menuTitle}</Typography>
+                      </Popover>
+                    </Fragment> :
+                    <Fragment>
+                      <SubMenu
+                        key={`submenu-${key}`}
+                        ref={sideMenuOptionRefs.current[key]}
+                        icon={<DynamicIcon iconName={menuIcon} />}
+                        label={menuTitle}
+                        onClick={(e) => isSideNavCollapsed ? handleOnClick(e) : null}
+                      >
+                        {subMenuOptions !== 'mapCourses' ?
+                          Object.entries(subMenuOptions).map(([subKey, subMenuOption]) => {
+                            const { label, redirect_path } = subMenuOption;
+                            return (<MenuItem key={`submenu-item-${subKey}`} component={<Link to={'/' + redirect_path} />}>{label}</MenuItem>);
+                          }) : Object.entries(coursesMap)?.map(([courseKey, course]) => {
+                            const { courseCode, courseSlug } = course;
+                            return <MenuItem key={`course-item-${courseKey}`} to={courseSlug}>{courseCode}</MenuItem>;
+                          })
+                        }
+                      </SubMenu>
+                    </Fragment>
                   }
-                </SubMenu>
-              </Typography>
-              <Popover
-                id="mouse-over-popover"
-                sx={{ pointerEvents: 'none' }}
-                open={popoverKey === key}
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                onClose={handlePopoverClose}
-                disableRestoreFocus
-              >
-                <Typography sx={{ p: 1 }}>{menuTitle}</Typography>
-              </Popover> 
-            </Fragment> : 
-            <Fragment>
-              <SubMenu 
-                icon={<DynamicIcon iconName={menuIcon} />} 
-                label={menuTitle} 
-                onClick={isSideNavCollapsed ? handleOnClick : null}
-              >
-                {subMenuOptions !== 'mapCourses' ?
-                  Object.entries(subMenuOptions).map(([subKey, subMenuOption]) => {
-                    const { label, redirect_path } = subMenuOption;
-                    return (<MenuItem key={subKey} component={<Link to={'/' + redirect_path} />}>{label}</MenuItem>)
-                  }) : Object.entries(coursesMap)?.map(([courseKey, course]) => {
-                    const { courseCode } = course;
-                    return <MenuItem key={courseKey} to='/'>{courseCode}</MenuItem>;
-                  })
-                }
-              </SubMenu>
-            </Fragment>
+                </Fragment>
+              );
+            })
           }
-        </Fragment>
-      );
-    })
-  }
-
-  </Menu>
+        </Menu>
       </Sidebar>
       <BottomSideBarContainer isonlyicons={isSideNavCollapsed}>
-        <a href="/">
-          <DynamicIcon iconName='SettingsOutlined'/>
+        <SettingsContainer href="/" isonlyicons={isSideNavCollapsed}>
+          <DynamicIcon iconName='SettingsOutlined' />
           <p>Settings</p>
-        </a>
+        </SettingsContainer>
         <UserContainer isonlyicons={isSideNavCollapsed}>
           <img src={require('../../assets/studentprofilepic.jpeg')} alt="student profile" />
           <div>

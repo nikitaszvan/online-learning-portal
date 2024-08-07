@@ -28,7 +28,7 @@ export const CourseCodeAndTimeContainer = styled.div`
 
       > p:nth-child(2) {
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 500;
     } 
 
 
@@ -51,7 +51,7 @@ export const TaskDescAndDateContainer = styled.div`
     width: 200px;
     gap: 10px;
     padding-left: 10px;
-    font-weight: 600;
+    font-weight: 500;
 
         p {
             margin: 0;

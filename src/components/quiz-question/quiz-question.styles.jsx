@@ -35,7 +35,7 @@ export const QuestionRowContainer = styled.div`
     height: fit-content;
 `
 export const AnswerBox = styled.div`
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     padding: 10px;
     cursor: pointer;
     border-radius: 10px;

@@ -9,6 +9,17 @@ export const CoursePageContainer = styled.div`
     justify-content: space-between;
     gap: 6rem;
     margin-top: 2rem;
+    padding: 1rem 3rem;
+
+    @media (max-width: 390px) {
+        padding: 0.75rem 2rem;
+    }
+
+    @media (max-width: 810px) {
+        flex-direction: column; 
+        gap: 3rem;
+    }
+    
 `
 
 export const FirstColumnContainer = styled.div`

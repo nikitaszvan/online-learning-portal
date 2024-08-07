@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSelector } from 'react-redux';
@@ -20,12 +20,26 @@ import StyledBreadcrumb from './components/bootstrap-breadcrumb/bootstrap-breadc
 const App = () => {
   const dispatch = useDispatch();
 const coursesMap = useSelector(selectCoursesMap);
+const widthRef = useRef(window.innerWidth);
+
   useEffect(() => {
     dispatch(checkUserSession());
     dispatch(fetchCoursesStart());
     dispatch(fetchSideNavMenuStart());
     dispatch(fetchTasksStart());
   }, []);
+
+    useEffect(() => {
+      const handleResize = () => {
+        widthRef.current = window.innerWidth;
+      };
+
+      window.addEventListener('resize', handleResize);
+  
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
 
   return (
     <>
@@ -34,10 +48,10 @@ const coursesMap = useSelector(selectCoursesMap);
           {Object.entries(coursesMap).map(([key, course]) => {
             const {courseSlug, courseName} = course;
             
-            return <Route key={key} path={`course/${courseSlug}`} element={<Layout children={<><StyledBreadcrumb breadcrumbitems={[{label: 'Home', href:'/'}, {label: 'Courses', href:'/'}, {label: courseName, href:`${courseSlug}`}]}/><CoursePage courseId={key} /></>} pageTitle={courseName}/>} />
+            return <Route key={key} path={`course/${courseSlug}`} element={<Layout children={<>{window.innerWidth > 809 &&<StyledBreadcrumb breadcrumbitems={[{label: 'Home', href:'/'}, {label: 'Courses', href:'/'}, {label: courseName, href:`${courseSlug}`}]}/>}<CoursePage courseId={key} /></>} pageTitle={courseName}/>} />
             }        
           )}
-          <Route path='quiz-summary' element={<Layout children={<><StyledBreadcrumb breadcrumbitems={[{label: 'Home', href:'/'},{label: 'Quiz Summary', href:'quiz-summary'}]}/><QuizSummary /></>} pageTitle='Quiz Summary'/>} />
+          <Route path='quiz-summary' element={<Layout children={<>{window.innerWidth > 809 &&<StyledBreadcrumb breadcrumbitems={[{label: 'Home', href:'/'},{label: 'Quiz Summary', href:'quiz-summary'}]}/>}<QuizSummary /></>} pageTitle='Quiz Summary'/>} />
           <Route path='quiz' element={<Layout children={<QuizPage />} pageTitle='Quiz Page'/>} />  
       </Routes>
     </>

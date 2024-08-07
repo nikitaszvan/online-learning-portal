@@ -11,6 +11,19 @@ export const SideNavigationContainer = styled.div`
   padding-top: 1rem;
   background-color: white;
 
+  @media (max-width: 667px) {
+    position: fixed;
+    top: 5rem;
+    right: 0;
+    z-index: 1000;
+
+    display: ${(toggleShow => toggleShow ? 'block' : 'none')};
+
+    @media (max-width: 414px) {
+      top: 10vw;
+    }
+  }
+
   li.ps-menuitem-root {
     width: 100%;
   }
@@ -110,6 +123,8 @@ export const SideNavigationContainer = styled.div`
 `;
 
 export const BottomSideBarContainer = styled.div`
+
+
   margin-top: auto;
   min-height: 110px;
   display: flex;
@@ -118,21 +133,10 @@ export const BottomSideBarContainer = styled.div`
   ${(props => props.isonlyicons && 'align-items: center' )};
   padding-block: 0.7rem;
 
-  a {
-    display: flex;
-    margin-left: ${(props => props.isonlyicons ? '0' : '0.7rem')};
-    align-items: center;
-
-    p {
-      margin: 0;
-      display: ${(props => props.isonlyicons ? 'none' : 'flex')};
-    }
-
-    svg {
-      margin: 0 8.5px;
-      font-size: ${(props => props.isonlyicons ? '1.8rem' : '1.4rem')};
-    }
+   @media (max-width: 667px) {
+    display: none;
   }
+
 `
 export const UserContainer = styled.div`
   border-top: 0.1rem solid rgba(0, 0, 0, 0.1);
@@ -148,14 +152,13 @@ export const UserContainer = styled.div`
   }
 
   > button {
-
     background-color: transparent;
     border: none;
+    display: ${(props => props.isonlyicons ? 'none' : 'inline-flex')};
   
     > svg {
-    display: ${(props => props.isonlyicons ? 'none' : 'inline-flex')};
-    transform: rotate(180deg);
-    cursor: pointer;
+      transform: rotate(180deg);
+      cursor: pointer;
     }
   }
 
@@ -174,5 +177,24 @@ export const UserContainer = styled.div`
     > p {
       font-size: 0.8rem;
     }
+  }
+`
+
+export const SettingsContainer = styled.a`
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+
+  ${(props => !props.isonlyicons && 'margin-left: 2rem')};
+  > svg {
+    font-size: ${(props => props.isonlyicons ? '2.5rem' : '2.2rem')};
+    transition: font-size 0.3s ease;
+  }
+
+  > p {
+    margin: 0;
+    display: ${(props => props.isonlyicons ? 'none' : 'flex')};
+    font-size: 1.2rem;
+    font-weight: 500;
   }
 `

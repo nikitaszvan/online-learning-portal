@@ -4,32 +4,35 @@ import Calendar from 'react-calendar';
 
 
 export const ContainerTab = styled.button`
+@media (max-width: 667px) {
+    display: none 
+  }
     cursor: pointer;
     color: black;
     background-color: white;
-    position: relative;
+    position: fixed;
+    right: ${(props => props.xoffset ? `${props.xoffset}px` : '0')};
     height: fit-content;
     padding: 1.5rem 1rem;
-    z-index: 6;
+    z-index: 10;
     box-shadow: rgba(149, 157, 165, 0.2) -5px 8px 8px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     border: none;
-
-    > button {
-
-        border: none;
-        background-color: transparent;
+    transition: right 0.5s ease;
 
         > svg:nth-child(1) {
             font-size: 2rem;
             transition: transform 0.5s ease;
             ${(props => props.collapsecolumn ? 'transform: rotate(180deg)' : '')};
-        }
+
     }   
 `
 
 export const RightColumnContainer = styled.div`
+@media (max-width: 667px) {
+    display: none 
+  }
     padding-top: 1.6rem;
     position: relative;
     background-color: var(--color-primary);
@@ -43,7 +46,7 @@ export const RightColumnContainer = styled.div`
     // ${(props => props.collapsecolumn ? 'min-width: unset' : 'min-width: 205px;')};
     width: ${(props => props.collapsecolumn ? '0' : '48%')};
     max-width: 425px;
-    transition: ${(props => props.collapsecolumn ? 'width 0.5s ease-out' : 'width 0.5s ease-in')};
+    transition: width 0.5s ease;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `
 
@@ -158,6 +161,7 @@ export const ReactCalendar = styled(Calendar) `
     font-family: var(--font-family-theme);
     border: none;
     font-size: 1.5rem;
+    font-weight: 600;
     width: 80%;
 
     abbr[title] {
