@@ -1,4 +1,5 @@
-import { Fragment } from 'react';
+import { useContext, useEffect } from 'react';
+import { MyContext } from '../../contexts/contexts.component';
 import { Outlet } from 'react-router-dom';
 import SchoolLogo from '../../assets/school-logo.png';
 import CompanyLogo from '../../assets/company-logo.png';
@@ -16,9 +17,14 @@ import {
 } from './navigation.styles';
 
 const Navigation = ({ sectionTitle }) => {
+  const { toggleMobileMenu } = useContext(MyContext);
+
+  const onToggleClick = () => {
+    toggleMobileMenu(prev => !prev);
+  }
 
   return (
-    <Fragment>
+    <>
       <NavigationContainer>
         <LogoContainer onClick={() => {window.location.href = '/';}}>
           <img src={ SchoolLogo } alt='school logo'/>
@@ -32,12 +38,12 @@ const Navigation = ({ sectionTitle }) => {
           <NavSearchIcon />
           <NavSearchBar/>
         </NavHeaderRight>
-        <MobileMenuButton>
+        <MobileMenuButton onClick={() => onToggleClick()}>
           <DynamicIcon iconName='MenuOutlined'/>
         </MobileMenuButton>
       </NavigationContainer>
       <Outlet />
-    </Fragment>
+    </>
   );
 };
 

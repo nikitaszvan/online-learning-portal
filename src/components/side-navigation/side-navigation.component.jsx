@@ -1,4 +1,5 @@
-import { Fragment, useState, useEffect, useRef, useCallback, createRef } from 'react';
+import { Fragment, useState, useEffect, useRef, useContext, createRef } from 'react';
+import { MyContext } from '../../contexts/contexts.component';
 import { 
   BottomSideBarContainer,
   SideNavigationContainer,
@@ -15,8 +16,8 @@ import DynamicIcon from '../dynamic-icon.component';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 
-const SideNavigationBar = () => {
-
+const SideNavigationBar = ({mobileSize = false}) => {
+  const { mobileMenuOpen } = useContext(MyContext);
   const coursesMap = useSelector(selectCoursesMap);
   const sideNavMenuMap = useSelector(selectSideNavMenuMap);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -24,9 +25,8 @@ const SideNavigationBar = () => {
   const [loading, setLoading] = useState(true);
   const [classToAdd, setClass] = useState('expanded');
   const sideMenuOptionRefs = useRef({});
-  const [openMenus, setOpenMenus] = useState({});
   const widthRef = useRef(window.innerWidth);
-  const [isSideNavCollapsed, setIsSideNavCollapsed] = useState(() => window.innerWidth < 1281);
+  const [isSideNavCollapsed, setIsSideNavCollapsed] = useState(mobileSize ? false : () => window.innerWidth < 1281);
 
   useEffect(() => {
     if (Object.keys(sideNavMenuMap).length > 0) {
@@ -46,8 +46,6 @@ const SideNavigationBar = () => {
         window.removeEventListener('resize', handleResize);
       };
     }, []);
-
-  
 
   const renderPlaceholders = () => {
     return Array.from({ length: 6 }).map((_, index) => (
@@ -84,9 +82,8 @@ const SideNavigationBar = () => {
     setPopoverKey(null);
   };
 
-
   return (
-    <SideNavigationContainer isonlyicons={isSideNavCollapsed} className={classToAdd}>
+    <SideNavigationContainer isonlyicons={ mobileSize ? false : isSideNavCollapsed } className={ classToAdd } showMobileMenu={mobileMenuOpen}>
       <Sidebar style={{ overflowY: 'hidden'}}>
         <Menu>
           {loading ? renderPlaceholders() :
@@ -113,7 +110,7 @@ const SideNavigationBar = () => {
                           ref={sideMenuOptionRefs.current[key]}
                           icon={<DynamicIcon iconName={menuIcon} />}
                           label={menuTitle}
-                          onClick={(e) => isSideNavCollapsed ? handleOnClick(e) : null}
+                          onClick={(e) => (isSideNavCollapsed && !mobileSize)? handleOnClick(e) : null}
                         >
                           {subMenuOptions !== 'mapCourses' ?
                             Object.entries(subMenuOptions).map(([subKey, subMenuOption]) => {
@@ -152,7 +149,7 @@ const SideNavigationBar = () => {
                         ref={sideMenuOptionRefs.current[key]}
                         icon={<DynamicIcon iconName={menuIcon} />}
                         label={menuTitle}
-                        onClick={(e) => isSideNavCollapsed ? handleOnClick(e) : null}
+                        onClick={(e) => (isSideNavCollapsed && !mobileSize)? handleOnClick(e) : null}
                       >
                         {subMenuOptions !== 'mapCourses' ?
                           Object.entries(subMenuOptions).map(([subKey, subMenuOption]) => {

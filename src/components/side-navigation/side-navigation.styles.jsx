@@ -16,13 +16,15 @@ export const SideNavigationContainer = styled.div`
     top: 5rem;
     right: 0;
     z-index: 1000;
-
-    display: ${(toggleShow => toggleShow ? 'block' : 'none')};
+    width: 40%;
+    max-width: 265px;
+    display: ${(props => props.showMobileMenu ? 'block' : 'none')};
 
     @media (max-width: 414px) {
       top: 10vw;
     }
   }
+
 
   li.ps-menuitem-root {
     width: 100%;
@@ -50,6 +52,7 @@ export const SideNavigationContainer = styled.div`
     padding-right: 2rem;
     display: flex;
     ${(props => props.isonlyicons ? 'justify-content: center; padding-inline: 0;' : '')};
+
 
     > .ps-menu-icon {
       margin: 0;
@@ -79,6 +82,7 @@ export const SideNavigationContainer = styled.div`
   span.ps-submenu-expand-icon {
     margin-left: auto;
     ${(props => props.isonlyicons ? 'display: none; width: 0;' : 'display: inline-flex;')};
+
   }
 
   .css-1tqrhto > a {
@@ -133,9 +137,6 @@ export const BottomSideBarContainer = styled.div`
   ${(props => props.isonlyicons && 'align-items: center' )};
   padding-block: 0.7rem;
 
-   @media (max-width: 667px) {
-    display: none;
-  }
 
 `
 export const UserContainer = styled.div`

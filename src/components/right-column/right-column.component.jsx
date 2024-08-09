@@ -21,11 +21,8 @@ import 'react-calendar/dist/Calendar.css';
 const RightColumn = () => {
   const divRef = useRef(null);
   const coursesMap = useSelector(selectCoursesMap);
-  const [xPosition, setXPosition] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(0);
   const [loading, setLoading] = useState(true);
  const [date, setDate] = useState(new Date());
- const widthRef = useRef(window.innerWidth);
  const [ rightColumnCollapsed, collapseRightColumn ] = useState(() => window.innerWidth < 811);
 
   useEffect(() => {
@@ -34,36 +31,9 @@ const RightColumn = () => {
     }
   }, [coursesMap]);
 
-  const checkDivPosition = () => {
-    if (divRef.current) {
-      const position = divRef.current.offsetLeft;
-      setXPosition(position);
-    }
-  };
-
-  useEffect(() => {
-    // Initial position update
-    checkDivPosition();
-
-    // Handle window resize event
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth); // Update window width ref
-      checkDivPosition(); // Update xPosition on resize
-    };
-
-    // Set up resize event listener
-    window.addEventListener('resize', handleResize);
-
-    // Cleanup function to remove event listener
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  console.log(xPosition, windowWidth, windowWidth-xPosition);
-
-
-
+  const handleCollapseClick = () => {
+    collapseRightColumn(prev => !prev);
+  }
 
   const renderPlaceholders = () => {
     return (
@@ -80,14 +50,12 @@ const RightColumn = () => {
     );
   };
 
-  const handleCollapseClick = () => {
-    collapseRightColumn(!rightColumnCollapsed);
-  }
+ 
 
     return (
         // <RightColumnContainer collapsecolumn={ rightColumnCollapsed } >
         <>
-          <ContainerTab collapsecolumn={ rightColumnCollapsed } onClick={ handleCollapseClick } id='right-column-tab' xoffset={!rightColumnCollapsed && windowWidth - xPosition}>
+          <ContainerTab collapsecolumn={ rightColumnCollapsed } onClick={ () => handleCollapseClick() } id='right-column-tab'>
               <DynamicIcon iconName='ChevronRight' />
           </ContainerTab>
           <RightColumnContainer collapsecolumn={ rightColumnCollapsed } className='text-2' ref={divRef}>
@@ -116,7 +84,7 @@ const RightColumn = () => {
 
         </>
     )
-}
+  }
 
 
 export default RightColumn;

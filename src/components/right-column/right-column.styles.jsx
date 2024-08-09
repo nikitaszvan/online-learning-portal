@@ -10,8 +10,7 @@ export const ContainerTab = styled.button`
     cursor: pointer;
     color: black;
     background-color: white;
-    position: fixed;
-    right: ${(props => props.xoffset ? `${props.xoffset}px` : '0')};
+    position: relative;
     height: fit-content;
     padding: 1.5rem 1rem;
     z-index: 10;
@@ -19,7 +18,6 @@ export const ContainerTab = styled.button`
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     border: none;
-    transition: right 0.5s ease;
 
         > svg:nth-child(1) {
             font-size: 2rem;
