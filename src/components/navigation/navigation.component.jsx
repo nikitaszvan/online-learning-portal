@@ -9,19 +9,19 @@ import {
   MobileMenuButton,
   NavigationContainer,
   NavHeaderRight,
-  NavSearchBar,
-  NavSearchIcon,
   LogoContainer,
   SectionTitle,
   VerticalLine
 } from './navigation.styles';
+import SearchBarStyled from '../search-bar/search-bar.component';
 
 const Navigation = ({ sectionTitle }) => {
-  const { toggleMobileMenu } = useContext(MyContext);
+  const { mobileMenuOpen, toggleMobileMenu } = useContext(MyContext);
 
-  const onToggleClick = () => {
-    toggleMobileMenu(prev => !prev);
-  }
+  const onToggleClick = (prev) => {
+    toggleMobileMenu(!prev);
+  };
+
 
   return (
     <>
@@ -35,10 +35,9 @@ const Navigation = ({ sectionTitle }) => {
             <SectionTitle>{sectionTitle.toUpperCase()}</SectionTitle>
           }
         <NavHeaderRight>
-          <NavSearchIcon />
-          <NavSearchBar/>
+          <SearchBarStyled />
         </NavHeaderRight>
-        <MobileMenuButton onClick={() => onToggleClick()}>
+        <MobileMenuButton id='mobile-menu-btn' onClick={() => onToggleClick(mobileMenuOpen)}>
           <DynamicIcon iconName='MenuOutlined'/>
         </MobileMenuButton>
       </NavigationContainer>

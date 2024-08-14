@@ -1,12 +1,16 @@
-import { Fragment, useState, useEffect, useRef, useContext, createRef } from 'react';
+import { useState, useEffect, useRef, useContext, createRef } from 'react';
 import { MyContext } from '../../contexts/contexts.component';
 import { 
   BottomSideBarContainer,
+  MobileSearchBar,
+  SidebarStyled,
+  SubMenuStyled,
   SideNavigationContainer,
   SettingsContainer,
+  TopSectionDiv,
   UserContainer
 } from './side-navigation.styles';
-import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+import { Menu, MenuItem } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCoursesMap } from '../../store/courses/courses.selector';
@@ -15,17 +19,20 @@ import { selectSideNavMenuMap } from '../../store/side-nav/side-nav.selector';
 import DynamicIcon from '../dynamic-icon.component';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
+import SearchBarStyled from '../search-bar/search-bar.component';
 
 const SideNavigationBar = ({mobileSize = false}) => {
-  const { mobileMenuOpen } = useContext(MyContext);
+  const { mobileMenuOpen, toggleMobileMenu } = useContext(MyContext);
   const coursesMap = useSelector(selectCoursesMap);
   const sideNavMenuMap = useSelector(selectSideNavMenuMap);
   const [anchorEl, setAnchorEl] = useState(null);
   const [popoverKey, setPopoverKey] = useState(null);
   const [loading, setLoading] = useState(true);
   const [classToAdd, setClass] = useState('expanded');
+  const [openSubMenu, setKeySubMenu] = useState({currentOpen: null, prevOpen: null});
   const sideMenuOptionRefs = useRef({});
   const widthRef = useRef(window.innerWidth);
+  const divRef = useRef(null);
   const [isSideNavCollapsed, setIsSideNavCollapsed] = useState(mobileSize ? false : () => window.innerWidth < 1281);
 
   useEffect(() => {
@@ -34,6 +41,23 @@ const SideNavigationBar = ({mobileSize = false}) => {
     }
   }, [sideNavMenuMap]);
 
+  const handleClickOutside = (event) => {
+    if (
+      divRef.current && !divRef.current.contains(event.target) &&
+      !event.target.closest('#mobile-menu-btn')
+    ) {
+      toggleMobileMenu(false);
+    }
+  };
+
+
+console.log(mobileMenuOpen);
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
     useEffect(() => {
       const handleResize = () => {
@@ -57,20 +81,79 @@ const SideNavigationBar = ({mobileSize = false}) => {
     ));
   };
 
-  const handleOnClick = (e) => {
-    if (!isSideNavCollapsed) {
-      const elements = document.querySelectorAll('a.ps-menu-button.ps-open');
-      elements.forEach(element => {
-        element.click();
-      });
-      setClass('collapsed');
-    } else {
-      setClass('expanded');
-      
-    }
-    setIsSideNavCollapsed(prev => !prev);
-    setPopoverKey(null);
-  };
+
+  const triggerClick = (key, delay = 0) => {
+    setTimeout(() => {
+      const element = document.getElementById(`submenu-${key}`);
+    const event = new MouseEvent('click', {
+      bubbles: true,
+      cancelable: true,
+      view: window
+    });
+      element.dispatchEvent(event);
+    }, delay);
+  }
+
+  const handleOnClick = (e, key) => {
+    if (e.isTrusted) {
+      if (key && !openSubMenu.currentOpen && !openSubMenu.prevOpen) {
+        setKeySubMenu(prevState => { 
+          return ({
+          prevOpen: prevState.prevOpen,
+          currentOpen: key
+          });
+        });
+        if (isSideNavCollapsed) {
+          triggerClick(key, 100);
+          setIsSideNavCollapsed(false);
+          setClass('expanded');
+        }
+      }
+    
+      else if (openSubMenu.currentOpen == key && ((typeof key) == 'string')){
+        setKeySubMenu({
+          prevOpen: null,
+          currentOpen: null,
+        });
+      }
+
+      else if (key && !isSideNavCollapsed && openSubMenu.prevOpen == null) {
+        triggerClick(openSubMenu.currentOpen);
+        setKeySubMenu(prevState => { 
+          return {
+          prevOpen: prevState.currentOpen,
+          currentOpen: key
+        }});
+      }
+
+      else if (key && !isSideNavCollapsed && openSubMenu.prevOpen !== null) {
+        triggerClick(openSubMenu.currentOpen);
+        setKeySubMenu(prevState => { return {
+          prevOpen: prevState.currentOpen,
+          currentOpen: key
+        }});
+      }
+
+    } 
+  setPopoverKey(null);
+    };
+
+  const collapseSideNav = () => {
+    setIsSideNavCollapsed(true);
+    setKeySubMenu({currentOpen: null, prevOpen: null})
+    const elements = document.querySelectorAll('a.ps-menu-button.ps-open');
+    elements.forEach(element => {
+      element.click();
+    });
+    setClass('collapsed');
+  }
+
+  const expandSideNav = (e) => {
+    console.log(e)
+    setIsSideNavCollapsed(false);
+    setClass('expanded');
+  }
+
 
   const handlePopoverOpen = (event, key) => {
     setAnchorEl(event.currentTarget);
@@ -83,8 +166,49 @@ const SideNavigationBar = ({mobileSize = false}) => {
   };
 
   return (
-    <SideNavigationContainer isonlyicons={ mobileSize ? false : isSideNavCollapsed } className={ classToAdd } showMobileMenu={mobileMenuOpen}>
-      <Sidebar style={{ overflowY: 'hidden'}}>
+    <SideNavigationContainer isonlyicons={ mobileSize ? false : isSideNavCollapsed } className={ classToAdd } showMobileMenu={mobileMenuOpen} ref={divRef}>
+      {!mobileSize ? <TopSectionDiv isonlyicons={ mobileSize ? false : isSideNavCollapsed }>
+        <button onClick={(e) => isSideNavCollapsed && expandSideNav(e)}>
+          <DynamicIcon iconName='School'/>
+        </button>
+        { !isSideNavCollapsed && <>
+        <div>
+          <h3>Workspace</h3>
+          <p>Fall 2024</p>
+        </div>
+        <Typography
+          key={'collapse-btn'}
+          aria-owns={popoverKey === 0 ? 'mouse-over-popover' : undefined}
+          aria-haspopup="true"
+          onMouseEnter={(event) => handlePopoverOpen(event, 0)}
+          onMouseLeave={handlePopoverClose}
+        >
+        <button onClick={collapseSideNav}>
+          <DynamicIcon iconName='CloseFullscreen'/>
+        </button>
+        </Typography>
+        <Popover
+          key={`popover-collapse-btn`}
+          id="mouse-over-popover"
+          sx={{ pointerEvents: 'none' }}
+          open={popoverKey === 0}
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'left',
+          }}
+          onClose={handlePopoverClose}
+          disableRestoreFocus
+        >
+          <Typography key={`popover-typography-collapse-btn`} sx={{ p: 1 }}>Collapse</Typography>
+        </Popover>
+        </>}
+      </TopSectionDiv> : <MobileSearchBar><SearchBarStyled /></MobileSearchBar>}
+      <SidebarStyled style={{ overflowY: 'hidden'}} isonlyicons={ isSideNavCollapsed } ismobilesize={ mobileSize }>
         <Menu>
           {loading ? renderPlaceholders() :
             Object.entries(sideNavMenuMap)?.map(([key, sideNavSubMenu]) => {
@@ -93,11 +217,10 @@ const SideNavigationBar = ({mobileSize = false}) => {
               }
 
               const { menuIcon, menuTitle, subMenuOptions } = sideNavSubMenu;
-
               return (
-                <Fragment key={`menu-${key}`}>
-                  {isSideNavCollapsed ?
-                    <Fragment>
+                <>
+                  { isSideNavCollapsed ?
+                    <>
                       <Typography
                         key={`typography-${key}`}
                         aria-owns={popoverKey === key ? 'mouse-over-popover' : undefined}
@@ -105,12 +228,12 @@ const SideNavigationBar = ({mobileSize = false}) => {
                         onMouseEnter={(event) => handlePopoverOpen(event, key)}
                         onMouseLeave={handlePopoverClose}
                       >
-                        <SubMenu
+                        <SubMenuStyled
                           key={`submenu-${key}`}
                           ref={sideMenuOptionRefs.current[key]}
                           icon={<DynamicIcon iconName={menuIcon} />}
                           label={menuTitle}
-                          onClick={(e) => (isSideNavCollapsed && !mobileSize)? handleOnClick(e) : null}
+                          onClick={(e) => !mobileSize && handleOnClick(e, key)}
                         >
                           {subMenuOptions !== 'mapCourses' ?
                             Object.entries(subMenuOptions).map(([subKey, subMenuOption]) => {
@@ -121,7 +244,7 @@ const SideNavigationBar = ({mobileSize = false}) => {
                               return <MenuItem key={`course-item-${courseKey}`} to={courseSlug}>{courseCode}</MenuItem>;
                             })
                           }
-                        </SubMenu>
+                        </SubMenuStyled>
                       </Typography>
                       <Popover
                         key={`popover-${key}`}
@@ -142,14 +265,16 @@ const SideNavigationBar = ({mobileSize = false}) => {
                       >
                         <Typography key={`popover-typography-${key}`} sx={{ p: 1 }}>{menuTitle}</Typography>
                       </Popover>
-                    </Fragment> :
-                    <Fragment>
-                      <SubMenu
+                    </> :
+
+                    <>
+                      <SubMenuStyled
                         key={`submenu-${key}`}
+                        id={`submenu-${key}`}
                         ref={sideMenuOptionRefs.current[key]}
                         icon={<DynamicIcon iconName={menuIcon} />}
                         label={menuTitle}
-                        onClick={(e) => (isSideNavCollapsed && !mobileSize)? handleOnClick(e) : null}
+                        onClick={(e) => !mobileSize && handleOnClick(e, key)}
                       >
                         {subMenuOptions !== 'mapCourses' ?
                           Object.entries(subMenuOptions).map(([subKey, subMenuOption]) => {
@@ -160,27 +285,33 @@ const SideNavigationBar = ({mobileSize = false}) => {
                             return <MenuItem key={`course-item-${courseKey}`} to={courseSlug}>{courseCode}</MenuItem>;
                           })
                         }
-                      </SubMenu>
-                    </Fragment>
+                      </SubMenuStyled>
+                    </>
                   }
-                </Fragment>
+                </>
               );
             })
           }
         </Menu>
-      </Sidebar>
-      <BottomSideBarContainer isonlyicons={isSideNavCollapsed}>
+      </SidebarStyled>
+      <BottomSideBarContainer isonlyicons={isSideNavCollapsed} ismobilesize={ mobileSize }>
         <SettingsContainer href="/" isonlyicons={isSideNavCollapsed}>
-          <DynamicIcon iconName='SettingsOutlined' />
-          <p>Settings</p>
+        {!mobileSize && 
+          <>
+            <DynamicIcon iconName='SettingsOutlined' />
+            <p>Settings</p>
+          </>
+          }
         </SettingsContainer>
-        <UserContainer isonlyicons={isSideNavCollapsed}>
-          <img src={require('../../assets/studentprofilepic.jpeg')} alt="student profile" />
+        <UserContainer isonlyicons={isSideNavCollapsed} >
+          {!mobileSize &&
+            <img src={require('../../assets/studentprofilepic.jpeg')} alt="student profile" />
+          }
           <div>
             <h3>Nikita Van</h3>
             <p>nikitaszvan@mitmail.com</p>
           </div>
-          <button onClick={handleOnClick} id='collapse-side-nav-button'><DynamicIcon iconName='ExitToAppOutlined' /></button>
+          {mobileSize ? <DynamicIcon iconName='SettingsOutlined' /> : <DynamicIcon iconName='Logout' /> }
         </UserContainer>
       </BottomSideBarContainer>
     </SideNavigationContainer>

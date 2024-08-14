@@ -13,6 +13,7 @@ export const DirectoryContainer = styled.div`
 export const DirectoryHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-left: 2.5rem;
   @media (max-width: 1097px) {
     > button {
       display: none;
@@ -39,6 +40,7 @@ export const CourseCardsContainer = styled.div`
       display: grid;
       gap: 2rem 2rem;
       grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
+      margin-inline: 2rem 1rem;
     }
 
     > a {

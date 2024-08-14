@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import SearchIcon from '@mui/icons-material/Search';
 
 export const NavigationContainer = styled.nav`
   display: flex;
@@ -14,7 +12,6 @@ export const NavigationContainer = styled.nav`
   @media (max-width: 414px) {
     height: 10vw;
   }
-
 
   > h3 {
     color: black;
@@ -42,6 +39,7 @@ export const LogoContainer = styled.div`
 `;
 
 export const SectionTitle = styled.h2`
+  margin-top: 0.8rem;
   @media (max-width: 810px) {
     display: none;
   }
@@ -67,30 +65,6 @@ export const NavHeaderRight = styled.div`
     }
   
 `
-
-export const NavSearchIcon = styled(SearchIcon)`
-  margin-inline: 0.4rem;
-  color: rgb(0, 0, 0, 0.5);
-  font-size: 1.3rem;
-`
-
-export const NavSearchBar = styled.input`
-  border: none;
-  color: rgb(0, 0, 0, 0.5);
-  font-size: 1.1rem;
-  user-select: none;
-  height: 100%;
-
-
-  &::placeholder {
-    color: rgb(0, 0, 0, 0.5);
-  }
-
-  &:focus {
-    outline: none;
-  }
-`
-
 export const MobileMenuButton = styled.button`
   @media (min-width: 667px) {
     display: none;

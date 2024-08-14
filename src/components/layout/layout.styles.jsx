@@ -12,6 +12,7 @@ export const LayoutContainer = styled.div`
 
 export const CenterDiv = styled.div`
     flex: 1;
-        max-height: calc(100vh - 5rem);
+    max-height: calc(100vh - 5rem);
     overflow-y: auto;
+    margin-top: 1rem;
 `

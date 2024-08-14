@@ -1,10 +1,17 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, useContext } from 'react';
 
-const MyContext = createContext();
+export const MyContext = createContext({
+  mobileMenuOpen: false,
+  toggleMobileMenu: () => {}
+});
 
-const MyProvider = ({ children }) => {
-  const [mobileMenuOpen, toggleMobileMenu ] = useState(false);
+export const MyProvider = ({ children }) => {
+  const [mobileMenuOpen, setMobileMenuOpen ] = useState(false);
   const [ windowWidth, setWindowWidth ] = useState(window.innerWidth);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(prev => !prev);
+  };
 
   
   useEffect(() => {
@@ -12,7 +19,7 @@ const MyProvider = ({ children }) => {
       setWindowWidth(window.innerWidth);
 
       if (window.innerWidth > 667) {
-        toggleMobileMenu(false);
+        setMobileMenuOpen(false);
       }
     };
 
@@ -23,7 +30,6 @@ const MyProvider = ({ children }) => {
     };
   }, []);
 
-console.log(mobileMenuOpen, windowWidth);
   return (
     <MyContext.Provider value={{ mobileMenuOpen, toggleMobileMenu }}>
       {children}
@@ -31,4 +37,4 @@ console.log(mobileMenuOpen, windowWidth);
   );
 };
 
-export { MyContext, MyProvider };
+export const useMyContext = () => useContext(MyContext);

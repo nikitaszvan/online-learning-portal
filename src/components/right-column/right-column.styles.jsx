@@ -4,9 +4,10 @@ import Calendar from 'react-calendar';
 
 
 export const ContainerTab = styled.button`
-@media (max-width: 667px) {
-    display: none 
-  }
+    margin-top: 1rem;
+    @media (max-width: 667px) {
+        display: none 
+    }
     cursor: pointer;
     color: black;
     background-color: white;

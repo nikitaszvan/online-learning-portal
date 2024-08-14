@@ -1,4 +1,6 @@
+import { Sidebar, SubMenu } from 'react-pro-sidebar';
 import styled from 'styled-components';
+import SearchBarStyled from '../search-bar/search-bar.component';
 
 export const SideNavigationContainer = styled.div`
   display: flex;
@@ -6,10 +8,11 @@ export const SideNavigationContainer = styled.div`
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   min-width: 205px;
   ${(props => props.isonlyicons ? 'width: 5%; min-width:unset' : 'width: 14%')};
-  ${(props => props.isonlyicons ? 'min-width: 70px' : 'min-width: 200px; max-width: 265px')};
+  ${(props => props.isonlyicons ? 'min-width: 70px' : 'min-width: 200px; max-width: 225px')};
   transition: width 0.3s ease;
   padding-top: 1rem;
   background-color: white;
+
 
   @media (max-width: 667px) {
     position: fixed;
@@ -35,7 +38,6 @@ export const SideNavigationContainer = styled.div`
   }
 
   aside.css-1wvake5 {
-    border: none;
     width: 100%;
     min-width: unset;
   }
@@ -47,9 +49,9 @@ export const SideNavigationContainer = styled.div`
   a.ps-menu-button {
     border-radius: 8px;
     height: 2.5rem;
-    margin: 0.5rem 1rem;
-    padding: 2rem 1rem;
-    padding-right: 2rem;
+    margin: 0.5rem 0.5rem;
+    padding: 2rem 0.5rem;
+    padding-right: 1.5rem;
     display: flex;
     ${(props => props.isonlyicons ? 'justify-content: center; padding-inline: 0;' : '')};
 
@@ -126,25 +128,105 @@ export const SideNavigationContainer = styled.div`
   }
 `;
 
+export const SidebarStyled = styled(Sidebar)`
+${(props => (!props.isonlyicons && !props.ismobilesize) && 'padding-top: 0.5rem;')}
+  ${(props => !props.isonlyicons && 'border: none !important; border-top: 1px solid #eaebed !important;')}
+`
+
+export const SubMenuStyled = styled(SubMenu)`
+  padding-inline: 1rem;
+`
+
+export const MobileSearchBar = styled.div`
+  width: 80%;
+  height: 2.5rem;
+  border: 0.15rem solid #D9D9D9;
+  border-radius: 8px;
+  align-items: center;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1rem;
+`
+
 export const BottomSideBarContainer = styled.div`
-
-
   margin-top: auto;
-  min-height: 110px;
+  min-height: ${(props => props.ismobilesize ? 'unset' : '110px')};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   ${(props => props.isonlyicons && 'align-items: center' )};
   padding-block: 0.7rem;
-
-
 `
+
+export const TopSectionDiv = styled.div`
+
+  display: flex;
+  gap: 1.6rem;
+  background-color: #f2f2f2;
+  align-self: center;
+  padding: 1rem;
+  border-radius: 8px;
+  ${(props => !props.isonlyicons ? 'width: calc(100% - 3rem); padding-right: 0.8rem;' : 'cursor: pointer;')}
+
+  margin-block: 1.4rem 2rem;
+
+  > button:nth-of-type(1) {
+    background-color: #A61C38;
+    width: fit-content;
+    height: fit-content;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: none;
+
+    > svg {
+      font-size: 2rem;
+      color: white;
+    }
+  }
+
+  > div:nth-of-type(1) {
+
+    > * {
+      margin: 0;
+      position: relative;
+      top: 0.2rem;
+    }
+
+    > h3 {
+      font-size: 1.2rem;
+    }
+
+    > p {
+
+    }
+  } 
+
+  > p {
+    position: relative;
+    top: 0.5rem;
+    margin-left: auto;
+
+    > button {
+      background-color: transparent;
+      border: none;
+
+
+      > svg {
+        font-size: 2rem;
+      }
+    }
+  }
+`
+
 export const UserContainer = styled.div`
   border-top: 0.1rem solid rgba(0, 0, 0, 0.1);
-  padding: ${(props => props.isonlyicons ? '0.5rem 0 0 0' : '0.5rem 1rem 0 1rem')};
+  padding: ${(props => props.isonlyicons ? '0.5rem 0 0 0' : '2rem 1rem 1rem 1rem')};
+  margin-top: 1rem;
   display: flex;
   justify-content: ${(props => props.isonlyicons ? 'center' : 'space-between')};
   align-items: center;
+  align-self: none;
 
   img {
     height: 40px;
@@ -152,31 +234,25 @@ export const UserContainer = styled.div`
     border-radius: 50%;
   }
 
-  > button {
-    background-color: transparent;
-    border: none;
+  > svg {
+    font-size: 2rem;
     display: ${(props => props.isonlyicons ? 'none' : 'inline-flex')};
-  
-    > svg {
-      transform: rotate(180deg);
-      cursor: pointer;
-    }
   }
 
   > div {
-  
+
     > * {
       margin: 0;
       display: ${(props => props.isonlyicons ? 'none' : 'block')};
     }
 
     > h3 {
-      font-size: 1rem;
+      font-size: 1.2rem;
       font-weight: 600;
     }
 
     > p {
-      font-size: 0.8rem;
+      font-size: 1rem;
     }
   }
 `
