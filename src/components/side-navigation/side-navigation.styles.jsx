@@ -1,6 +1,6 @@
 import { Sidebar, SubMenu } from 'react-pro-sidebar';
 import styled from 'styled-components';
-import SearchBarStyled from '../search-bar/search-bar.component';
+import { ReactComponent as CollapseSideDiv } from '../../assets/svgs/collapse-side.svg';
 
 export const SideNavigationContainer = styled.div`
   display: flex;
@@ -202,21 +202,16 @@ export const TopSectionDiv = styled.div`
     }
   } 
 
-  > p {
-    position: relative;
-    top: 0.5rem;
-    margin-left: auto;
-
-    > button {
+    > button:nth-of-type(2) {
       background-color: transparent;
       border: none;
-
-
-      > svg {
-        font-size: 2rem;
-      }
+      margin-left: auto;
     }
-  }
+`
+
+export const CollapseDivIcon = styled(CollapseSideDiv)`
+  width: 2.5rem;
+  aspect-ratio: 1/1;
 `
 
 export const UserContainer = styled.div`
@@ -234,9 +229,13 @@ export const UserContainer = styled.div`
     border-radius: 50%;
   }
 
-  > svg {
-    font-size: 2rem;
-    display: ${(props => props.isonlyicons ? 'none' : 'inline-flex')};
+  > button {
+    border: none;
+    background-color: transparent;
+    > svg {
+      font-size: 2rem;
+      display: ${(props => props.isonlyicons ? 'none' : 'inline-flex')};
+    }
   }
 
   > div {

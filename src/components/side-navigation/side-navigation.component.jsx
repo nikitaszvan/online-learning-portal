@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useContext, createRef } from 'react';
 import { MyContext } from '../../contexts/contexts.component';
 import { 
   BottomSideBarContainer,
+  CollapseDivIcon,
   MobileSearchBar,
   SidebarStyled,
   SubMenuStyled,
@@ -12,7 +13,7 @@ import {
 } from './side-navigation.styles';
 import { Menu, MenuItem } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectCoursesMap } from '../../store/courses/courses.selector';
 import Skeleton from '../skeleton-loader/skeleton-loader.component';
 import { selectSideNavMenuMap } from '../../store/side-nav/side-nav.selector';
@@ -20,8 +21,12 @@ import DynamicIcon from '../dynamic-icon.component';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import SearchBarStyled from '../search-bar/search-bar.component';
+import { signOutStart } from '../../store/user/user.action';
+import { useNavigate } from 'react-router-dom';
 
 const SideNavigationBar = ({mobileSize = false}) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { mobileMenuOpen, toggleMobileMenu } = useContext(MyContext);
   const coursesMap = useSelector(selectCoursesMap);
   const sideNavMenuMap = useSelector(selectSideNavMenuMap);
@@ -41,6 +46,15 @@ const SideNavigationBar = ({mobileSize = false}) => {
     }
   }, [sideNavMenuMap]);
 
+  const handleSignOutUser = async (e) => {
+    try {
+      dispatch(signOutStart());
+      navigate('/auth');
+    } catch (error) {
+      console.log('user sign out failed', error);
+    }
+  };
+
   const handleClickOutside = (event) => {
     if (
       divRef.current && !divRef.current.contains(event.target) &&
@@ -50,8 +64,6 @@ const SideNavigationBar = ({mobileSize = false}) => {
     }
   };
 
-
-console.log(mobileMenuOpen);
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
@@ -176,36 +188,9 @@ console.log(mobileMenuOpen);
           <h3>Workspace</h3>
           <p>Fall 2024</p>
         </div>
-        <Typography
-          key={'collapse-btn'}
-          aria-owns={popoverKey === 0 ? 'mouse-over-popover' : undefined}
-          aria-haspopup="true"
-          onMouseEnter={(event) => handlePopoverOpen(event, 0)}
-          onMouseLeave={handlePopoverClose}
-        >
         <button onClick={collapseSideNav}>
-          <DynamicIcon iconName='CloseFullscreen'/>
+          <CollapseDivIcon />
         </button>
-        </Typography>
-        <Popover
-          key={`popover-collapse-btn`}
-          id="mouse-over-popover"
-          sx={{ pointerEvents: 'none' }}
-          open={popoverKey === 0}
-          anchorEl={anchorEl}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-          onClose={handlePopoverClose}
-          disableRestoreFocus
-        >
-          <Typography key={`popover-typography-collapse-btn`} sx={{ p: 1 }}>Collapse</Typography>
-        </Popover>
         </>}
       </TopSectionDiv> : <MobileSearchBar><SearchBarStyled /></MobileSearchBar>}
       <SidebarStyled style={{ overflowY: 'hidden'}} isonlyicons={ isSideNavCollapsed } ismobilesize={ mobileSize }>
@@ -311,7 +296,7 @@ console.log(mobileMenuOpen);
             <h3>Nikita Van</h3>
             <p>nikitaszvan@mitmail.com</p>
           </div>
-          {mobileSize ? <DynamicIcon iconName='SettingsOutlined' /> : <DynamicIcon iconName='Logout' /> }
+          <button onClick={() => mobileSize? null : handleSignOutUser() }>{mobileSize ? <DynamicIcon iconName='SettingsOutlined' /> : <DynamicIcon iconName='Logout' /> }</button>
         </UserContainer>
       </BottomSideBarContainer>
     </SideNavigationContainer>

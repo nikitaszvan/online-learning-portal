@@ -17,7 +17,7 @@ export const DirectoryItemContainer = styled(Link)`
     `
     // width: calc(23rem+40%);
     max-width: 350px;
-    height: calc(23rem*0.98);
+    height: 23rem;
     flex-direction: column;
     border-radius: 15px;
     justify-content: space-between;
@@ -167,7 +167,7 @@ export const CardCourseInfoContainer = styled.div`
 
   img {
     ${( props => !props.cardForm ? '0' : '4')};
-    ${( props => !props.cardForm ? 'height: 100%' : 'width: 15%')};
+    ${( props => !props.cardForm ? 'height: 100%' : 'width: 10%')};
     ${( props => !props.cardForm && 'margin-right: 1rem')};
     aspect-ratio: 1 / 1;
     border-radius: ${( props => !props.cardForm ? '20%' : '50%')};

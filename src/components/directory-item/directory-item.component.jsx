@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react'
+import { useState } from 'react'
 import {
   CardImage,
   CardCourseInfoContainer,
@@ -10,7 +10,7 @@ import {
 import ReactStyledProgressBar from '../course-progress-bar/course-progress-bar.component';
 
 import Skeleton from '../skeleton-loader/skeleton-loader.component';
-import { images } from '../../utils/load-images/load-images.utils';
+import { lecturerImages } from '../../utils/load-images/load-images.utils';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 
@@ -48,7 +48,7 @@ const DirectoryItem =
 
   const getImagePath = (courseId) => {
     const imageName = `lecturer-${courseId}.jpg`;
-    return images[imageName] || 'default-image-path.jpg'; // Provide a default image path if not found
+    return lecturerImages[imageName] || 'default-image-path.jpg'; // Provide a default image path if not found
   };
 
   const imageSrc = getImagePath(courseId);

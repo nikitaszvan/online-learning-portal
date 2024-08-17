@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSelector } from 'react-redux';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Router } from 'react-router-dom';
 import { Layout } from './components/layout/layout.component';
 import Directory from './components/directory/directory.component';
 import QuizSummary from './routes/quiz-summary/quiz-summary.component';
@@ -16,6 +16,8 @@ import {
   selectCoursesMap
 } from './store/courses/courses.selector';
 import StyledBreadcrumb from './components/bootstrap-breadcrumb/bootstrap-breadcrumb.component';
+import SignInPage from './routes/sign-in-page/sign-in-page.component';
+import ProtectedRoute from './routes/protected-route/protected-route.component';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -42,9 +44,11 @@ const widthRef = useRef(window.innerWidth);
     }, []);
 
   return (
-    <>
+<>
       <Routes>
-          <Route path="/" element={<Layout children={<Directory />} pageTitle='homepage'/>} />
+
+          <Route path="/" element={<ProtectedRoute><Layout children={<Directory />} pageTitle='homepage'/></ProtectedRoute>} />
+          <Route path='/auth/*' element={<SignInPage />}/>
           {Object.entries(coursesMap).map(([key, course]) => {
             const {courseSlug, courseName} = course;
             
@@ -54,7 +58,7 @@ const widthRef = useRef(window.innerWidth);
           <Route path='quiz-summary' element={<Layout children={<>{window.innerWidth > 809 &&<StyledBreadcrumb breadcrumbitems={[{label: 'Home', href:'/'},{label: 'Quiz Summary', href:'quiz-summary'}]}/>}<QuizSummary /></>} pageTitle='Quiz Summary'/>} />
           <Route path='quiz' element={<Layout children={<QuizPage />} pageTitle='Quiz Page'/>} />  
       </Routes>
-    </>
+      </>
   );
 };
 

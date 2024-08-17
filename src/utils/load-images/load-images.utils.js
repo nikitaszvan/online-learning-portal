@@ -7,7 +7,10 @@ export const importAllImages = (requireContext) => {
   };
   
   // Create the context
-  const imagesContext = require.context('../../assets/lecturers', true);
+  const lecturerImagesContext = require.context('../../assets/lecturers', true);
+
+  const imagesContext = require.context('../../assets', true);
   
   // Export the imported images
+  export const lecturerImages = importAllImages(lecturerImagesContext);
   export const images = importAllImages(imagesContext);

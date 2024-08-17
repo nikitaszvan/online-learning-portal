@@ -1,11 +1,18 @@
 import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux';
 import Navigation from '../navigation/navigation.component';
 import RightColumn from '../right-column/right-column.component';
 import SideNavigationBar from '../side-navigation/side-navigation.component';
 import { LayoutContainer, CenterDiv } from './layout.styles';
+import { checkUserSession } from './store/user/user.action';
 
 export const Layout = ({ children, pageTitle }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(checkUserSession());
+  }, []);
     
     useEffect(() => {
       const handleResize = () => {
