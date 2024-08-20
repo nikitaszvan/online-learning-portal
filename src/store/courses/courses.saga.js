@@ -3,7 +3,7 @@ import { takeLatest, all, call, put } from 'redux-saga/effects';
 import { 
   getCoursesAndDocuments,
   updateGradeVisibilityInDatabase
-} from '../../utils/firebase/firebase.utils';
+} from '../../utils/firebase/firebase.utils.mjs';
 
 import {
   fetchCoursesSuccess,

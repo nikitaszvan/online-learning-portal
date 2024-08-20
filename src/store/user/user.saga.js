@@ -18,7 +18,7 @@ import {
   signInAuthUserWithEmailAndPassword,
   createAuthUserWithEmailAndPassword,
   signOutUser,
-} from '../../utils/firebase/firebase.utils';
+} from '../../utils/firebase/firebase.utils.mjs';
 
 export function* getSnapshotFromUserAuth(userAuth, additionalDetails) {
 
@@ -78,7 +78,9 @@ export function* signUp({ payload: { email, password, displayName } }) {
       email,
       password
     );
+    yield call(createUserDocumentFromAuth, user, { displayName });
     yield put(signUpSuccess(user, { displayName }));
+    yield call(signInWithEmail, { payload: { email, password } });
   } catch (error) {
     yield put(signUpFailed(error));
   }

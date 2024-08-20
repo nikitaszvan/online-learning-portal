@@ -12,10 +12,13 @@ import {
   selectCoursesMap,
 } from '../../store/courses/courses.selector';
 
+import { selectCurrentUser } from '../../store/user/user.selector';
+
 const Directory = () => {
   const [loading, setLoading] = useState(true);
   const [coursesCardForm, setCoursesCardForm] = useState(true);
   const coursesMap = useSelector(selectCoursesMap);
+  const currentUser = useSelector(selectCurrentUser);
 
   useEffect(() => {
     if (Object.keys(coursesMap).length > 0) {
@@ -27,6 +30,14 @@ const Directory = () => {
     return Array.from({ length: 6 }).map((_, index) => (
       <DirectoryItem key={index} cardForm = {coursesCardForm}/>
     ));
+  };
+
+  const getAllButLastName = (namesString) => {
+    const namesArray = namesString.trim().split(/\s+/);
+    if (namesArray.length <= 1) {
+      return namesString;
+    }
+    return namesArray.slice(0, -1).join(' ');
   };
 
   const renderCourses = () => {
@@ -48,7 +59,7 @@ const Directory = () => {
   return (
     <DirectoryContainer>
       <DirectoryHeaderContainer>
-        <h1>Welcome Back, Nikita</h1>
+        <h1>Welcome Back, {getAllButLastName(currentUser.displayName)}</h1>
         { <button onClick={() => setCoursesCardForm(!coursesCardForm)}>{coursesCardForm ? <DynamicIcon iconName='MenuOutlined' /> : <DynamicIcon iconName='Apps'/>}</button>}
       </DirectoryHeaderContainer>
       <CourseCardsContainer className={coursesCardForm ? 'grid-layout' : 'block-layout'}>

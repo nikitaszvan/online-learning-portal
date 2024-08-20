@@ -70,6 +70,24 @@ const SignInPage = () => {
         setSignUpForm(hash === '#sign-up');
     }, [location.hash]);
 
+    useEffect(() => {
+      const keyDownHandler = (e) => {
+        if (e.key === 'Enter') {
+          if (signUpForm) {
+            handleSignUpSubmit(e);
+          } else {
+            handleSignInSubmit(e);
+          }
+        }
+      };
+    
+      document.addEventListener('keydown', keyDownHandler);
+    
+      return () => {
+        document.removeEventListener('keydown', keyDownHandler);
+      };
+    }, [formFields]); 
+
     const resetFormFields = () => {
         setFormFields(getDefaultFormFields());
       };
@@ -81,23 +99,34 @@ const SignInPage = () => {
       const handleSignInSubmit = async (e) => {
         e.preventDefault();
         try {
-          dispatch(emailSignInStart(email, password));
+          dispatch(emailSignInStart(email.toLowerCase(), password));
           resetFormFields();
         } catch (error) {
           console.log('user sign in failed', error);
         }
       };
 
+      function toTitleCase(name) {
+
+        return name
+          .toLowerCase()                    
+          .split(/\s+/)                    
+          .map(word =>                       
+            word.charAt(0).toUpperCase() + word.slice(1)
+          )
+          .join(' ');                       
+      }
+
       const handleSignUpSubmit = async (e) => {
         e.preventDefault();
     
-        if (password !== confirmPassword) {
+        if (password !== confirmPassword){
           alert("passwords do not match");
           return;
         }
     
         try {
-          dispatch(signUpStart(email, password, displayName));
+          dispatch(signUpStart(email.toLowerCase(), password, toTitleCase(displayName)));
           resetFormFields();
         } catch (error) {
           if (error.code === "auth/email-already-in-use") {
@@ -130,7 +159,7 @@ const SignInPage = () => {
                      <UserSignUpContainer onSubmit={handleSignUpSubmit}> 
                         <h2>Get started</h2>
                         <p>Enter your personal details</p>
-                        <RoundedBorderButton disabled={true} onClick={signInWithGoogle}><DynamicIcon iconName='Google'/>Sign up with Google</RoundedBorderButton>
+                        <RoundedBorderButton disabled={!signUpForm} onClick={signInWithGoogle}><DynamicIcon iconName='Google'/>Sign up with Google</RoundedBorderButton>
                         <div><hr />OR<hr /></div>
                         <RoundedBorderInput disabled={!signUpForm} onChange={handleChange} type="text" placeholder='First and Last Name' name='displayName' value={displayName} required/>
                         <RoundedBorderInput disabled={!signUpForm} onChange={handleChange} type="email" placeholder='Email' name='email' value={email} required/>
@@ -152,7 +181,7 @@ const SignInPage = () => {
                 <UserSignInContainer onSubmit={handleSignInSubmit}>
                     <h2>Welcome back</h2>
                     <p>Enter your student account details</p>
-                    <RoundedBorderButton disabled={true} onClick={signInWithGoogle}><DynamicIcon iconName='Google'/>Log in with Google</RoundedBorderButton>
+                    <RoundedBorderButton disabled={signUpForm} onClick={signInWithGoogle}><DynamicIcon iconName='Google'/>Log in with Google</RoundedBorderButton>
                     <div><hr />OR<hr /></div>
                     <RoundedBorderInput disabled={signUpForm} onChange={handleChange} type="text" placeholder='Email or username' name='email' value={email}/>
                     <RoundedBorderInput disabled={signUpForm} onChange={handleChange} type='password' placeholder='Password' name='password' value={password}/>

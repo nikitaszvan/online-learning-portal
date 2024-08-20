@@ -15,6 +15,7 @@ import { Menu, MenuItem } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCoursesMap } from '../../store/courses/courses.selector';
+import { selectCurrentUser } from '../../store/user/user.selector';
 import Skeleton from '../skeleton-loader/skeleton-loader.component';
 import { selectSideNavMenuMap } from '../../store/side-nav/side-nav.selector';
 import DynamicIcon from '../dynamic-icon.component';
@@ -27,6 +28,7 @@ import { useNavigate } from 'react-router-dom';
 const SideNavigationBar = ({mobileSize = false}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const currentUser = useSelector(selectCurrentUser);
   const { mobileMenuOpen, toggleMobileMenu } = useContext(MyContext);
   const coursesMap = useSelector(selectCoursesMap);
   const sideNavMenuMap = useSelector(selectSideNavMenuMap);
@@ -293,8 +295,8 @@ const SideNavigationBar = ({mobileSize = false}) => {
             <img src={require('../../assets/studentprofilepic.jpeg')} alt="student profile" />
           }
           <div>
-            <h3>Nikita Van</h3>
-            <p>nikitaszvan@mitmail.com</p>
+            <h3>{currentUser.displayName}</h3>
+            <p>{currentUser.email}</p>
           </div>
           <button onClick={() => mobileSize? null : handleSignOutUser() }>{mobileSize ? <DynamicIcon iconName='SettingsOutlined' /> : <DynamicIcon iconName='Logout' /> }</button>
         </UserContainer>

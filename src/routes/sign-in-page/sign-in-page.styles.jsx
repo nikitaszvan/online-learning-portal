@@ -26,7 +26,7 @@ export const ImageContainer = styled.div`
     -webkit-box-shadow: 2px -2px 20px 0px rgba(255,255,255,1), -2px 2px 20px 0px rgba(255,255,255,1);
     -moz-box-shadow: 2px -52x 20px 0px rgba(255,255,255,1), -2px 2px 20px 0px rgba(255,255,255,1);
     z-index: 10;
-    background-color: '#F5F5F5'
+    background-color: #F5F5F5;
 
     &::after {
         content: '';
@@ -185,6 +185,10 @@ export const RoundedBorderButton = styled.button`
         background-color: black;
         color: white;
     }
+
+    &:disabled {
+        color: #808080;
+    }
 `
 
 export const DarkVariantButton = styled(RoundedBorderButton)`
@@ -196,6 +200,10 @@ export const DarkVariantButton = styled(RoundedBorderButton)`
         background-color: white;
         color: black;
         border: 0.2rem solid black;
+    }
+
+    &:disabled {
+        background-color: #808080;
     }
 `
 

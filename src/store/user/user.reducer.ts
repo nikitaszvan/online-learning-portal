@@ -1,7 +1,11 @@
 import { USER_ACTION_TYPES } from './user.types';
 import { UserAction } from './user.action';
 
-import { UserData } from '../../utils/firebase/firebase.utils';
+export type UserData = {
+  createdAt: Date;
+  displayName: string;
+  email: string;
+};
 
 export type UserState = {
   readonly currentUser: UserData | null;

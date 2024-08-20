@@ -2,7 +2,7 @@ import { takeLatest, all, call, put } from 'redux-saga/effects';
 
 import { 
     getSideNavMenuOptions
-} from '../../utils/firebase/firebase.utils';
+} from '../../utils/firebase/firebase.utils.mjs';
 
 import {
     fetchSideNavMenuSuccess,

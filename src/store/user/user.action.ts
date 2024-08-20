@@ -1,11 +1,18 @@
 import { USER_ACTION_TYPES } from './user.types';
 import { createAction, Action } from '../../utils/reducer/reducer.utils';
 
-import {
-  UserData,
-  AdditionalInformation,
-} from '../../utils/firebase/firebase.utils';
 import { User } from 'firebase/auth';
+
+export type UserData = {
+  createdAt: Date;
+  displayName: string;
+  email: string;
+};
+
+export type AdditionalInformation = {
+  displayName?: string;
+};
+
 
 export type CheckUserSession = Action<USER_ACTION_TYPES.CHECK_USER_SESSION>;
 

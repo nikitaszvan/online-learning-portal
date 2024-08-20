@@ -14,18 +14,27 @@
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "13.5.0",
     "@types/jest": "27.4.1",
-    "@types/node": "17.0.22",
     "@types/react": "18.3.3",
     "@types/react-dom": "^18.3.0",
     "apexcharts": "^3.49.1",
+    "assert": "^2.1.0",
     "bootstrap": "^5.3.3",
-    "dotenv": "^16.0.0",
+    "browserify-zlib": "^0.2.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.0",
+    "dotenv": "^16.4.5",
     "express": "^4.17.3",
     "firebase": "9.6.6",
     "history": "^5.3.0",
+    "https-browserify": "^1.0.0",
+    "os-browserify": "^0.3.0",
+    "path": "^0.12.7",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
     "re-resizable": "^6.9.17",
     "react": "^18.3.1",
     "react-apexcharts": "^1.4.1",
+    "react-app-rewired": "^2.2.1",
     "react-bootstrap": "^2.10.2",
     "react-calendar": "^5.0.0",
     "react-countdown": "^2.3.5",
@@ -45,16 +54,19 @@
     "reselect": "4.1.5",
     "sass": "1.49.7",
     "serverless-http": "^2.7.0",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
     "stripe": "^8.210.0",
     "styled-components": "5.3.3",
-    "typescript": "4.6.2",
+    "url": "^0.11.4",
     "uuid": "^10.0.0",
+    "vm-browserify": "^1.1.2",
     "web-vitals": "2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -74,5 +86,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.143",
+    "@types/estree": "^1.0.5",
+    "@types/json-schema": "^7.0.15",
+    "@types/node": "^22.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
   }
 }
