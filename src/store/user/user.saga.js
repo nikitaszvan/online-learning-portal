@@ -9,6 +9,8 @@ import {
   signUpFailed,
   signOutSuccess,
   signOutFailed,
+  googleSignInFailed,
+  googleSignInSuccess,
 } from './user.action';
 
 import {
@@ -20,31 +22,37 @@ import {
   signOutUser,
 } from '../../utils/firebase/firebase.utils.mjs';
 
-export function* getSnapshotFromUserAuth(userAuth, additionalDetails) {
+// export function* getSnapshotFromUserAuth(userAuth, additionalDetails) {
 
-  /* This line declares a generator function named getSnapshotFromUserAuth. 
-  Generator functions are functions that can be paused and resumed, allowing for
-  asynchronous control flow using Redux Saga. */
-  try {
-    const userSnapshot = yield call(
-      /*This line uses the call effect from Redux Saga to invoke the createUserDocumentFromAuth 
-      function asynchronously. The yield keyword pauses the generator function until the asynchronous operation completes. */
-      createUserDocumentFromAuth,
-      userAuth,
-      additionalDetails
-    );
-    yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
-  } catch (error) {
-    yield put(signInFailed(error));
-  }
-}
+//   /* This line declares a generator function named getSnapshotFromUserAuth. 
+//   Generator functions are functions that can be paused and resumed, allowing for
+//   asynchronous control flow using Redux Saga. */
+//   try {
+//     const userSnapshot= yield call(
+//       /*This line uses the call effect from Redux Saga to invoke the createUserDocumentFromAuth 
+//       function asynchronously. The yield keyword pauses the generator function until the asynchronous operation completes. */
+//       createUserDocumentFromAuth,
+//       userAuth,
+//       additionalDetails
+//     );
+//     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
+//   } catch (error) {
+//     yield put(signInFailed(error));
+//   }
+// }
 
 export function* signInWithGoogle() {
   try {
     const { user } = yield call(signInWithGooglePopup);
-    yield call(getSnapshotFromUserAuth, user);
+    const userSnapshot= yield call(
+      /*This line uses the call effect from Redux Saga to invoke the createUserDocumentFromAuth 
+      function asynchronously. The yield keyword pauses the generator function until the asynchronous operation completes. */
+      createUserDocumentFromAuth,
+      user
+    );
+    yield put(googleSignInSuccess(user));
   } catch (error) {
-    yield put(signInFailed(error));
+    yield put(googleSignInFailed(error));
   }
 }
 
@@ -55,9 +63,17 @@ export function* signInWithEmail({ payload: { email, password } }) {
       email,
       password
     );
-    yield call(getSnapshotFromUserAuth, user);
+    const userSnapshot= yield call(
+      /*This line uses the call effect from Redux Saga to invoke the createUserDocumentFromAuth 
+      function asynchronously. The yield keyword pauses the generator function until the asynchronous operation completes. */
+      createUserDocumentFromAuth,
+      user
+    );
+    yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
+    
   } catch (error) {
     yield put(signInFailed(error));
+    
   }
 }
 
@@ -65,9 +81,13 @@ export function* isUserAuthenticated() {
   try {
     const userAuth = yield call(getCurrentUser);
     if (!userAuth) return;
-    yield call(getSnapshotFromUserAuth, userAuth);
+    const userSnapshot= yield call(
+      /*This line uses the call effect from Redux Saga to invoke the createUserDocumentFromAuth 
+      function asynchronously. The yield keyword pauses the generator function until the asynchronous operation completes. */
+      createUserDocumentFromAuth,
+      userAuth
+    );
   } catch (error) {
-    yield put(signInFailed(error));
   }
 }
 
@@ -96,7 +116,19 @@ export function* signOut() {
 }
 
 export function* signInAfterSignUp({ payload: { user, additionalDetails } }) {
-  yield call(getSnapshotFromUserAuth, user, additionalDetails);
+
+  try {
+    const userSnapshot= yield call(
+      /*This line uses the call effect from Redux Saga to invoke the createUserDocumentFromAuth 
+      function asynchronously. The yield keyword pauses the generator function until the asynchronous operation completes. */
+      createUserDocumentFromAuth,
+      user,
+      additionalDetails
+    );
+    yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
+  } catch (error) {
+    
+  }
 }
 
 export function* onGoogleSignInStart() {

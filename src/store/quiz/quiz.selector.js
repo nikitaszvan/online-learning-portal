@@ -1,25 +1,25 @@
 import { createSelector } from 'reselect';
 
-export const getQuizState = (state) => state.quiz;
+export const selectQuizState = (state) => state.quiz;
 
-export const getAllAnswers = createSelector(
-  [getQuizState],
+export const selectAllAnswers = createSelector(
+  [selectQuizState],
   (quizState) => quizState.answers
 );
 
-export const getQuizStartTime = createSelector(
-  [getQuizState],
+export const selectQuizStartTime = createSelector(
+  [selectQuizState],
   (quizState) => quizState.quizStartTime
 );
 
-export const getQuizSubmit = createSelector(
-  [getQuizState],
+export const selectQuizSubmit = createSelector(
+  [selectQuizState],
   (quizState) => quizState.quizSubmit
 );
 
-export const getAnswerForQuestion = (questionId) =>
+export const selectAnswerForQuestion = (questionId) =>
   createSelector(
-    [getAllAnswers],
+    [selectAllAnswers],
     (answers) => answers[questionId]
   );
 

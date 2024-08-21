@@ -5,7 +5,8 @@ import {
   TextContainer
 } from './quiz-summary.styles';
 import 
-  { getQuizStartTime,
+  { selectQuizStartTime,
+    selectQuizSubmit
     }
   from '../../store/quiz/quiz.selector'; 
 
@@ -30,20 +31,25 @@ export const getQuizDataFromLocalStorage = () => {
 
 const QuizSummary = () => {
   const dispatch = useDispatch();
+  const quizStartTimeFromState = useSelector(selectQuizStartTime);
+  const quizSubmitFromState = useSelector(selectQuizSubmit);
   const [isWindowClosed, setIsWindowClosed] = useState(false);
   const checkWindowClosedInterval = useRef(null);
   const openedWindow = useRef(null);
   const [quizSubmit, setQuizSubmit] = useState(false);
-  const [ buttonActivity, setButtonActivity ] = useState(true);
-  const quizStartTimeFromState = useSelector(getQuizStartTime);
+  const [ buttonActivity, setButtonActivity ] = useState(quizSubmitFromState ? false : true);
   const [windowOpenTimestamp, setWindowOpenTimestamp] = useState(quizStartTimeFromState && new Date(quizStartTimeFromState).toLocaleString());
-  const [ buttonLabel, setButtonLabel ] = useState(windowOpenTimestamp ? 'Continue Quiz' : 'Start Quiz');
+  console.log(quizSubmitFromState);
+  const [ buttonLabel, setButtonLabel ] = useState(
+    quizSubmitFromState ? 'Completed' :
+    quizStartTimeFromState ? 'Continue Quiz' :
+    'Start Quiz'
+  );
 
   useEffect(() => {
     const handleDelayedClick = () => {
       if (document.querySelector('.expanded')) {
         const collapseSideNavElement = document.querySelector('#collapse-side-nav-button');
-        console.log(collapseSideNavElement);
         if (collapseSideNavElement) {
           collapseSideNavElement.click();
         }

@@ -13,7 +13,7 @@ export const DirectoryItemContainer = styled(Link)`
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   width: 100%;
 
-  ${( props => props.cardForm ? 
+  ${( props => props.cardform.toLowerCase() === 'true' ? 
     `
     // width: calc(23rem+40%);
     max-width: 350px;
@@ -45,9 +45,9 @@ export const DirectoryItemContainer = styled(Link)`
     padding-inline: 2rem;
     `)}
 
-  > .css-ahj2mt-MuiTypography-root {
+  > .styled-progress-bar {
     order: 3;
-    ${( props => !props.cardForm ? 'width: 12%' : 'width: 100%')}; 
+    ${( props => props.cardform?.toLowerCase() === 'false' ? 'width: 12%' : 'width: 100%')}; 
   }
   
 
@@ -109,6 +109,11 @@ export const DirectoryItemContainer = styled(Link)`
     }
   }
 }
+
+ @media (max-width: 481px) {
+        max-width: unset;
+        width: 90%;
+      }
  
 `;
 
@@ -120,7 +125,7 @@ export const CardImage = styled.div`
     background-position: center;
     align-self: center;
     background-image: ${({ imageUrl }) => `url(${imageUrl})`};
-    display: ${( props => !props.cardForm ? 'none' : 'block')};
+    display: ${( props => props.cardform.toLowerCase() === 'false' ? 'none' : 'block')};
     overflow: hidden;
 `;
 
@@ -131,10 +136,10 @@ export const CardTag = styled.div`
   font-weight: 600;
   padding: 0.4rem 1.5rem;
   margin-top: 0.5rem;
-  order: 1;
+  order: ${( props => props.cardform.toLowerCase() === 'true' ? '0' : '1')}; 
   width: fit-content;
   white-space: nowrap;
-  ${( props => !props.cardForm && ' height: fit-content')};
+  ${( props => props.cardform.toLowerCase() === 'false' && ' height: fit-content')};
 
     &::before {
     content: '${(props => props.cardtagtitle && props.cardtagtitle)}';
@@ -149,7 +154,7 @@ export const CardCourseTitle = styled.h2`
   display: flex;
   align-items: center;
   order: 2;
-  ${( props => !props.cardForm && 'width : 35%')};
+  ${( props => props.cardform.toLowerCase() === 'false' && 'width : 35%')};
 
       &::before {
     content: '${(props => props.coursenametitle && props.coursenametitle)}';
@@ -161,16 +166,15 @@ export const CardCourseInfoContainer = styled.div`
   display: flex;
   gap: 0.4rem;
   margin-top: 0.3rem;
-  ${( props => props.cardForm && 'width: 100%')};
-  ${( props => !props.cardForm && 'width: 18%; min-width: 110px; height: 100%')};
-  order: ${( props => !props.cardForm ? '0' : '4')}; 
+  ${( props => props.cardform.toLowerCase() === 'true' && 'width: 100%')};
+  ${( props => props.cardform.toLowerCase() === 'false' && 'width: 18%; min-width: 110px; height: 100%')};
+  order: ${( props => props.cardform.toLowerCase() === 'false' ? '0' : '4')}; 
 
   img {
-    ${( props => !props.cardForm ? '0' : '4')};
-    ${( props => !props.cardForm ? 'height: 100%' : 'width: 10%')};
-    ${( props => !props.cardForm && 'margin-right: 1rem')};
+    ${( props => props.cardform.toLowerCase() === 'false' ? 'height: 100%' : 'width: 10%')};
+    ${( props => props.cardform.toLowerCase() === 'false' && 'margin-right: 1rem')};
     aspect-ratio: 1 / 1;
-    border-radius: ${( props => !props.cardForm ? '20%' : '50%')};
+    border-radius: ${( props => props.cardform.toLowerCase() === 'false' ? '20%' : '50%')};
   }
 
   > div {
@@ -180,12 +184,12 @@ export const CardCourseInfoContainer = styled.div`
     }
 
     > p:first-of-type {
-      font-size: ${( props => !props.cardForm ? '1.3rem' : '1rem')};
+      font-size: ${( props => props.cardform.toLowerCase() === 'false' ? '1.3rem' : '1rem')};
       font-weight: 500;
     }
 
     > p:nth-child(2) {
-      font-size: ${( props => !props.cardForm ? '1rem' : '0.8rem')};
+      font-size: ${( props => props.cardform.toLowerCase() === 'false' ? '1rem' : '0.8rem')};
     }
 }
 

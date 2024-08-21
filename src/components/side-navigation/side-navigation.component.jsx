@@ -292,7 +292,7 @@ const SideNavigationBar = ({mobileSize = false}) => {
         </SettingsContainer>
         <UserContainer isonlyicons={isSideNavCollapsed} >
           {!mobileSize &&
-            <img src={require('../../assets/studentprofilepic.jpeg')} alt="student profile" />
+            <img src={currentUser.photoURL ? currentUser.photoURL : require('../../assets/studentprofilepic.jpeg')} alt="student profile" />
           }
           <div>
             <h3>{currentUser.displayName}</h3>

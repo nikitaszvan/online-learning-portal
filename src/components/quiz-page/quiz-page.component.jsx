@@ -16,26 +16,21 @@ import {
 import QuizQuestion from '../quiz-question/quiz-question.component';
 import ReactStyledProgressBar from '../course-progress-bar/course-progress-bar.component';
 
-import { getQuizStartTime,
-        getAllAnswers
+import { selectQuizStartTime,
+        selectAllAnswers
  } from '../../store/quiz/quiz.selector'; 
 
  import { getQuizDataFromLocalStorage } from '../../routes/quiz-summary/quiz-summary.component'
 
 const QuizPage = () => {
   const dispatch = useDispatch();
-  const startTimeFromState = useSelector(getQuizStartTime);
+  const startTimeFromState = useSelector(selectQuizStartTime);
   const [ startTime, setStartTime ] = useState(new Date(startTimeFromState));
   const [ quizSubmitted, submitQuiz ] = useState(false);
   const isInvalidDate = (date) => {
       return Object.prototype.toString.call(date) === '[object Date]' && isNaN(date.getTime());
     };
 
-  useEffect(() => {
-    if (document.querySelector('.expanded')) {
-      document.querySelector('#collapse-side-nav-button').click();
-  }
-  }, []);
   
   const handleSubmitQuiz = () => {
     submitQuiz(true);
@@ -165,7 +160,7 @@ const QuizPage = () => {
         return result;
       };
 
-    const userAnswers = useSelector(getAllAnswers); // Get answers from Redux store
+    const userAnswers = useSelector(selectAllAnswers); // Get answers from Redux store
     const results = checkAnswers(userAnswers);
     const [currentIndex, setCurrentIndex] = useState(lastAnswered ? lastAnswered -1 : 0);
 
@@ -213,7 +208,7 @@ const QuizPage = () => {
             <h3>Submission Id: {uuidv4().replace(/-/g, '').slice(0, 20)}</h3>
             <button onClick={() => window.close()}>Return to Student Portal</button>
           </QuizResultContainer>
-        
+     
   )
 }
 

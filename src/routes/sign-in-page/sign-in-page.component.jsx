@@ -159,15 +159,15 @@ const SignInPage = () => {
                      <UserSignUpContainer onSubmit={handleSignUpSubmit}> 
                         <h2>Get started</h2>
                         <p>Enter your personal details</p>
-                        <RoundedBorderButton disabled={!signUpForm} onClick={signInWithGoogle}><DynamicIcon iconName='Google'/>Sign up with Google</RoundedBorderButton>
+                        <RoundedBorderButton disabled={!signUpForm} onClick={signInWithGoogle} type='button'><DynamicIcon iconName='Google'/>Sign up with Google</RoundedBorderButton>
                         <div><hr />OR<hr /></div>
                         <RoundedBorderInput disabled={!signUpForm} onChange={handleChange} type="text" placeholder='First and Last Name' name='displayName' value={displayName} required/>
                         <RoundedBorderInput disabled={!signUpForm} onChange={handleChange} type="email" placeholder='Email' name='email' value={email} required/>
                         <RoundedBorderInput disabled={!signUpForm} onChange={handleChange} type="password" placeholder='Password' name='password' value={password} required/>
                         <RoundedBorderInput disabled={!signUpForm} onChange={handleChange} type="password" placeholder='Confirm Password' name='confirmPassword' value={confirmPassword} required/>
                         <div>
-                            <input type="checkbox" name="" id="keepSignedIn" />
-                            <label htmlFor="keepSignedIn">I accept all terms and conditions</label>
+                            <input type="checkbox" name="" id="acceptTermsConditions" />
+                            <label htmlFor="acceptTermsConditions">I accept all terms and conditions</label>
                         </div>
                         <DarkVariantButton disabled={!signUpForm} type='submit'>Sign in</DarkVariantButton>
                     </UserSignUpContainer>
@@ -181,7 +181,7 @@ const SignInPage = () => {
                 <UserSignInContainer onSubmit={handleSignInSubmit}>
                     <h2>Welcome back</h2>
                     <p>Enter your student account details</p>
-                    <RoundedBorderButton disabled={signUpForm} onClick={signInWithGoogle}><DynamicIcon iconName='Google'/>Log in with Google</RoundedBorderButton>
+                    <RoundedBorderButton disabled={signUpForm} onClick={signInWithGoogle} type='button'><DynamicIcon iconName='Google'/>Log in with Google</RoundedBorderButton>
                     <div><hr />OR<hr /></div>
                     <RoundedBorderInput disabled={signUpForm} onChange={handleChange} type="text" placeholder='Email or username' name='email' value={email}/>
                     <RoundedBorderInput disabled={signUpForm} onChange={handleChange} type='password' placeholder='Password' name='password' value={password}/>

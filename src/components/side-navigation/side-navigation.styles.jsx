@@ -232,9 +232,10 @@ export const UserContainer = styled.div`
   > button {
     border: none;
     background-color: transparent;
+    display: ${(props => props.isonlyicons ? 'none' : 'inline-flex')};
+    
     > svg {
       font-size: 2rem;
-      display: ${(props => props.isonlyicons ? 'none' : 'inline-flex')};
     }
   }
 

@@ -76,7 +76,7 @@ const AssignmentQuizComponent = ({ status, type, eventKey, taskName }) => {
                             <>
                                 <div>
                                     <DynamicIcon iconName='PlayCircleFilledWhiteOutlined'/>
-                                    <Link to='/quiz'><p>START QUIZ</p></Link>
+                                    <Link to='/quiz-summary'><p>START QUIZ</p></Link>
                                 </div>
                                 <div>
                                     <DynamicIcon iconName='AccessTime'/>

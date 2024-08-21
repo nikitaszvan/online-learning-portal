@@ -13,7 +13,6 @@ export type AdditionalInformation = {
   displayName?: string;
 };
 
-
 export type CheckUserSession = Action<USER_ACTION_TYPES.CHECK_USER_SESSION>;
 
 /*An action in the Redux pattern imported from reducer.utils that requires a type const and an optional payload, USER_ACTION_TYPES.CHECK_USER_SESSION 
@@ -21,11 +20,14 @@ export type CheckUserSession = Action<USER_ACTION_TYPES.CHECK_USER_SESSION>;
 
 export type GoogleSignInStart = Action<USER_ACTION_TYPES.GOOGLE_SIGN_IN_START>;
 
+export type GoogleSignInSuccess = Action<USER_ACTION_TYPES.GOOGLE_SIGN_IN_SUCCESS, UserData>;
+
+export type GoogleSignInFailed = Action<USER_ACTION_TYPES.GOOGLE_SIGN_IN_FAILED, Error>;
+
 export type EmailSignInStart = Action<
   USER_ACTION_TYPES.EMAIL_SIGN_IN_START,
   { email: string; password: string }
 >;
-
 
 export type SignInSuccess = Action<USER_ACTION_TYPES.SIGN_IN_SUCCESS, UserData>;
 
@@ -52,6 +54,8 @@ export type SignOutFailed = Action<USER_ACTION_TYPES.SIGN_OUT_FAILED, Error>;
 export type UserAction =
   | CheckUserSession
   | GoogleSignInStart
+  | GoogleSignInSuccess
+  | GoogleSignInFailed
   | EmailSignInStart
   | SignInSuccess
   | SignInFailed
@@ -70,6 +74,12 @@ export const checkUserSession = (): CheckUserSession =>
 
 export const googleSignInStart = (): GoogleSignInStart =>
   createAction(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START);
+
+export const googleSignInSuccess = (user: UserData): GoogleSignInSuccess =>
+  createAction(USER_ACTION_TYPES.GOOGLE_SIGN_IN_SUCCESS, user);
+
+export const googleSignInFailed = (error: Error): GoogleSignInFailed =>
+  createAction(USER_ACTION_TYPES.GOOGLE_SIGN_IN_FAILED, error);
 
 export const emailSignInStart = (
   email: string,

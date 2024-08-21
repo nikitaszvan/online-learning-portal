@@ -16,7 +16,7 @@ import Typography from '@mui/material/Typography';
 
 const DirectoryItem = 
   ({redirectpath,
-  cardForm,
+  cardform,
   course,
   course: {
     courseDepartment = '',
@@ -54,20 +54,21 @@ const DirectoryItem =
   const imageSrc = getImagePath(courseId);
 
   return (
-    <DirectoryItemContainer cardForm = {cardForm} to = {redirectpath ? redirectpath : '/'} >
+    <DirectoryItemContainer cardform = {cardform} to = {redirectpath ? redirectpath : '/'} >
       { course ? 
       <>
-        <CardImage imageUrl={imageUrl} cardForm = {cardForm}/>
-        <CardTag style={{ backgroundColor: primaryColour, color: accentColour }} cardtagtitle={courseCode} cardForm = {cardForm}/>
+        <CardImage imageUrl={imageUrl} cardform = {cardform}/>
+        <CardTag style={{ backgroundColor: primaryColour, color: accentColour }} cardtagtitle={courseCode} cardform = {cardform}/>
         
-        <CardCourseTitle style={{ fontSize: courseName?.length >= 28 ? '1.5em' : '1.7rem', marginBlock: courseName?.length >= 28 && '0.3rem' }} coursenametitle= {courseName} cardForm = {cardForm}/>
+        <CardCourseTitle style={{ fontSize: courseName?.length >= 28 ? '1.5em' : '1.7rem', marginBlock: courseName?.length >= 28 && '0.3rem' }} coursenametitle= {courseName} cardform = {cardform}/>
         <Typography
+              className='styled-progress-bar'
               aria-owns={popoverKey === courseId ? 'mouse-over-popover' : undefined}
               aria-haspopup="true"
               onMouseEnter={(event) => handlePopoverOpen(event, courseId)}
               onMouseLeave={handlePopoverClose}
             >
-            <ReactStyledProgressBar now={Math.trunc((completedTasks / totalTasks) * 100)} progressbarcolour={accentColour} cardForm = {cardForm}/>
+            <ReactStyledProgressBar now={Math.trunc((completedTasks / totalTasks) * 100)} progressbarcolour={accentColour} cardform = {cardform}/>
             </Typography>
             <Popover
               id="mouse-over-popover"
@@ -87,21 +88,21 @@ const DirectoryItem =
             >
               <Typography sx={{ p: 1 }}>{completedTasks}/{totalTasks} tasks completed</Typography>
             </Popover> 
-        <CardCourseInfoContainer cardForm = {cardForm}>
+        <CardCourseInfoContainer cardform = {cardform}>
           <img src={imageSrc} alt={`lecturer-${courseId}`} />
           <div>
             <p>{ lecturerName }</p>
             <p>{ courseDepartment }</p>
           </div> 
         </CardCourseInfoContainer>
-        {!cardForm && <p style={{order: !cardForm ? '999' : '0', width: 'fit-content', margin: '0'}}>{ courseTerm }</p>}
+        {(cardform.toLowerCase() === 'false') && <p style={{order: (cardform.toLowerCase() === 'false') ? '999' : '0', width: 'fit-content', margin: '0'}}>{ courseTerm }</p>}
       </> :
       <>
         <Skeleton />
         <Skeleton />
         <Skeleton />
         <Skeleton />
-        <CardCourseInfoContainer cardForm = {cardForm}>
+        <CardCourseInfoContainer cardform = {cardform}>
           <Skeleton />
           <div>
             <Skeleton />

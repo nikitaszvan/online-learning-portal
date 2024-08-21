@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { updateAnswer } from '../../store/quiz/quiz.action';
-import { getAnswerForQuestion } from '../../store/quiz/quiz.selector';
+import { selectAnswerForQuestion } from '../../store/quiz/quiz.selector';
 import {
   AnswerBox,
   QuestionContainer,
@@ -11,8 +11,8 @@ import {
 
 const QuizQuestion = ({ questionId, question, options }) => {
   const dispatch = useDispatch();
-  const selectAnswerForQuestion = getAnswerForQuestion(questionId);
-  const selectedAnswer = useSelector(selectAnswerForQuestion);
+  const getAnswerForQuestion = selectAnswerForQuestion(questionId);
+  const selectedAnswer = useSelector(getAnswerForQuestion);
 
   const handleChange = (questionId, optionChoice) => {
     dispatch(updateAnswer(questionId, optionChoice));

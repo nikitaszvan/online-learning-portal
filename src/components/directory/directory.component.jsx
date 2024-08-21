@@ -28,7 +28,7 @@ const Directory = () => {
 
   const renderPlaceholders = () => {
     return Array.from({ length: 6 }).map((_, index) => (
-      <DirectoryItem key={index} cardForm = {coursesCardForm}/>
+      <DirectoryItem key={index} cardform = {`${coursesCardForm}`}/>
     ));
   };
 
@@ -47,7 +47,7 @@ const Directory = () => {
         <DirectoryItem 
           redirectpath={`/course/${courseSlug}`}
           key={key} 
-          cardForm = {coursesCardForm}
+          cardform = {`${coursesCardForm}`}
           course={course} 
           courseId={key} 
           primaryColour={Color[courseColour][50]} 
@@ -59,7 +59,7 @@ const Directory = () => {
   return (
     <DirectoryContainer>
       <DirectoryHeaderContainer>
-        <h1>Welcome Back, {getAllButLastName(currentUser.displayName)}</h1>
+        {coursesCardForm && <h1>Welcome Back, {getAllButLastName(currentUser.displayName)}</h1>}
         { <button onClick={() => setCoursesCardForm(!coursesCardForm)}>{coursesCardForm ? <DynamicIcon iconName='MenuOutlined' /> : <DynamicIcon iconName='Apps'/>}</button>}
       </DirectoryHeaderContainer>
       <CourseCardsContainer className={coursesCardForm ? 'grid-layout' : 'block-layout'}>
