@@ -1,12 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { 
-    AddTaskButton,
-    SortByButton,
     TaskListContainer,
     TaskListContent,
     TaskListGradient,
-    TaskListHeader,
 } from "./task-list.styles";
 
 import { selectTasksMap } from '../../store/tasks/tasks.selector';

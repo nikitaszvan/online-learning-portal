@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { MyContext } from '../../contexts/contexts.component';
 import { Outlet } from 'react-router-dom';
 import SchoolLogo from '../../assets/school-logo.png';

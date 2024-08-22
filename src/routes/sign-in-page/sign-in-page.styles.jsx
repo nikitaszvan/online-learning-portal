@@ -5,13 +5,13 @@ export const SignInContainer = styled.div`
     background-color: #F5F5F5;
     padding: 2rem;
     height: 100%;
-
 `
 
 export const LeftDiv = styled.div`
     flex: 1;
     position: relative;
     display: flex;
+    ${(props => props.rightexpanded?.toLowerCase() === 'true' && 'min-width: 800px;')}
 `
 
 export const ImageContainer = styled.div`
@@ -62,6 +62,8 @@ export const SignInSection = styled(AuthSection) `
         top: 3rem;
         right: 3rem;
     }
+
+    ${(props => props.rightexpanded?.toLowerCase() === 'false' && 'min-width: 800px;')}
 `
 
 export const SignUpSection = styled(AuthSection) `
@@ -70,6 +72,8 @@ export const SignUpSection = styled(AuthSection) `
         top: 1rem;
         left: 1rem;
     }
+
+    
 ` 
 
 export const PlainTextButton = styled.button`

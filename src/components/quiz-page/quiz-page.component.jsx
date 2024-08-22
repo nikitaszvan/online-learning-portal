@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { 
@@ -9,8 +9,6 @@ import {
  } from './quiz-page.styles';
 import CountdownTimer from '../countdown-timer/countdown-timer.component';
 import { 
-    firstTimeQuizStart,
-    resetTimeQuizStart,
     updateQuizSubmission,
     } from '../../store/quiz/quiz.action';
 import QuizQuestion from '../quiz-question/quiz-question.component';
@@ -25,7 +23,7 @@ import { selectQuizStartTime,
 const QuizPage = () => {
   const dispatch = useDispatch();
   const startTimeFromState = useSelector(selectQuizStartTime);
-  const [ startTime, setStartTime ] = useState(new Date(startTimeFromState));
+  const startTime = new Date(startTimeFromState);
   const [ quizSubmitted, submitQuiz ] = useState(false);
   const isInvalidDate = (date) => {
       return Object.prototype.toString.call(date) === '[object Date]' && isNaN(date.getTime());

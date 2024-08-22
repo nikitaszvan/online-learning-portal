@@ -153,7 +153,7 @@ const SignInPage = () => {
 
     return (
         <SignInContainer>
-            <LeftDiv>
+            <LeftDiv rightexpanded={`${signUpForm}`}>
                 <SignUpSection>
                     <PlainTextButton disabled={!signUpForm} onClick={onToggle}>Have an account? Sign in</PlainTextButton>
                      <UserSignUpContainer onSubmit={handleSignUpSubmit}> 
@@ -176,7 +176,7 @@ const SignInPage = () => {
                     <img src={images['auth-page-img.jpg']}/>
                 </ImageContainer>
             </LeftDiv>
-            <SignInSection>
+            <SignInSection rightexpanded={`${signUpForm}`}>
                 <PlainTextButton disabled={signUpForm} onClick={onToggle}>Don't have an account? Sign up</PlainTextButton>
                 <UserSignInContainer onSubmit={handleSignInSubmit}>
                     <h2>Welcome back</h2>

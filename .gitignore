@@ -127,4 +127,3 @@ dist
 .pnp.*
 
 # Custom project gitignores
-src/backend/service-account-key.json

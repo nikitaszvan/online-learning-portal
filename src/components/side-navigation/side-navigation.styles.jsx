@@ -227,6 +227,7 @@ export const UserContainer = styled.div`
     height: 40px;
     aspect-ratio: 1/1;
     border-radius: 50%;
+    ${(props => props.isonlyicons && 'cursor: pointer;')}
   }
 
   > button {

@@ -33,13 +33,10 @@ const QuizSummary = () => {
   const dispatch = useDispatch();
   const quizStartTimeFromState = useSelector(selectQuizStartTime);
   const quizSubmitFromState = useSelector(selectQuizSubmit);
-  const [isWindowClosed, setIsWindowClosed] = useState(false);
   const checkWindowClosedInterval = useRef(null);
   const openedWindow = useRef(null);
-  const [quizSubmit, setQuizSubmit] = useState(false);
   const [ buttonActivity, setButtonActivity ] = useState(quizSubmitFromState ? false : true);
   const [windowOpenTimestamp, setWindowOpenTimestamp] = useState(quizStartTimeFromState && new Date(quizStartTimeFromState).toLocaleString());
-  console.log(quizSubmitFromState);
   const [ buttonLabel, setButtonLabel ] = useState(
     quizSubmitFromState ? 'Completed' :
     quizStartTimeFromState ? 'Continue Quiz' :
@@ -80,7 +77,6 @@ const QuizSummary = () => {
         `status=no,height=600,width=800,resizable=yes,left=${leftPosition},top=${topPosition},screenX=${leftPosition},screenY=${topPosition},toolbar=no,menubar=no,scrollbars=no,location=no,directories=no`);
   
       setButtonActivity(false);
-      setIsWindowClosed(false);
   
       checkWindowClosedInterval.current = setInterval(() => {
         const checkSubmit = checkQuizSubmit();
@@ -89,7 +85,6 @@ const QuizSummary = () => {
           setButtonActivity(false);
           clearInterval(checkWindowClosedInterval.current);
         } else if (openedWindow.current.closed) {
-          setIsWindowClosed(true);
           setButtonActivity(true);
           setButtonLabel('Continue Quiz');
           clearInterval(checkWindowClosedInterval.current);

@@ -6,7 +6,6 @@ import LectureEventCard from '../lecture-event/lecture-event.component';
 import {
   CarouselStyled,
   CarouselStyledContainer,
-  DateTaskList,
   LectureEventHeader,
   ContainerTab,
   RightColumnContainer,
