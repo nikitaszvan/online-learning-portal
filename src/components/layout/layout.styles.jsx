@@ -15,4 +15,14 @@ export const CenterDiv = styled.div`
     max-height: calc(100vh - 5rem);
     overflow-y: auto;
     margin-top: 1rem;
+
+    ${(props => props.isblurred?.toLowerCase() == 'true' && 
+    `
+        -webkit-filter: blur(5px);
+        -moz-filter: blur(5px);
+        -o-filter: blur(5px);
+        -ms-filter: blur(5px);
+        filter: blur(5px);
+    `)}
+
 `
