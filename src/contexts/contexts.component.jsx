@@ -10,7 +10,7 @@ export const MyProvider = ({ children }) => {
   const [ windowWidth, setWindowWidth ] = useState(window.innerWidth);
 
   const toggleMobileMenu = (bool = null) => {
-    if (bool) {
+    if (bool !== null) {
       setMobileMenuOpen(bool) 
       const elements = document.querySelectorAll('a.ps-menu-button.ps-open');
     elements.forEach(element => {

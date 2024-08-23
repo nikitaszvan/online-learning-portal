@@ -19,6 +19,7 @@ const Navigation = ({ sectionTitle }) => {
   const { mobileMenuOpen, toggleMobileMenu } = useContext(MyContext);
 
   const onToggleClick = (prev) => {
+    console.log('here');
     toggleMobileMenu(!prev);
   };
 

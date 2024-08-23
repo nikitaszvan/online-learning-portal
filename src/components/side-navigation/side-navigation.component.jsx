@@ -48,8 +48,6 @@ const SideNavigationBar = ({mobileSize = false}) => {
     }
   }, [sideNavMenuMap]);
 
-  console.log(openSubMenu);
-
   // useEffect(() => {
 
   //   const handleClick = (event) => {
@@ -88,6 +86,7 @@ const SideNavigationBar = ({mobileSize = false}) => {
   };
 
   const handleClickOutside = (event) => {
+
     if (
       divRef.current && !divRef.current.contains(event.target) &&
       !event.target.closest('#mobile-menu-btn')

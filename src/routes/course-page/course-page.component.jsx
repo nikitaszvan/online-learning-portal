@@ -61,7 +61,6 @@ export const CoursePage = ({course}) => {
     const handleDelayedClick = () => {
       if (document.querySelector('.expanded')) {
         const collapseSideNavElement = document.querySelector('#collapse-side-nav-button');
-        console.log(collapseSideNavElement);
         if (collapseSideNavElement) {
           collapseSideNavElement.click();
         }
@@ -105,8 +104,6 @@ export const CoursePage = ({course}) => {
       };
 
   }, []); 
-
-  const toggleOpen = () => setIsOpen(!isOpen);
 
   const handlePreview = () => {
     // Open the preview in a new tab or window
