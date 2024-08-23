@@ -255,6 +255,12 @@ export const UserContainer = styled.div`
     > p {
       font-size: 1rem;
     }
+
+    > button {
+      border: none;
+      background-color: transparent;
+      font-weight: 600;
+    }
   }
 `
 

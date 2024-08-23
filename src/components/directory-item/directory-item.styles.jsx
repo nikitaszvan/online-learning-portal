@@ -7,7 +7,7 @@ export const DirectoryItemContainer = styled(Link)`
   background-color: var(--color-primary);
   // align-items: flex-start;
   justify-content: space-between;
-  padding: 0.9em 1.3em;
+  padding: 1.3em;
   // box-shadow: 0.5rem 0.5rem 0.5rem 0px rgba(180,180,180,0.85);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -19,7 +19,7 @@ export const DirectoryItemContainer = styled(Link)`
     max-width: 350px;
     height: 23rem;
     flex-direction: column;
-    border-radius: 15px;
+    border-radius: 18px;
     justify-content: space-between;
 
     &:hover {
@@ -120,7 +120,7 @@ export const DirectoryItemContainer = styled(Link)`
 export const CardImage = styled.div`
     width: 100%;
     height: 48%;
-    border-radius: 15px;
+    border-radius: 1.3em;
     background-size: 100%;
     background-position: center;
     align-self: center;

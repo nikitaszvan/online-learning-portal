@@ -9,8 +9,20 @@ export const MyProvider = ({ children }) => {
   const [mobileMenuOpen, setMobileMenuOpen ] = useState(false);
   const [ windowWidth, setWindowWidth ] = useState(window.innerWidth);
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(prev => !prev);
+  const toggleMobileMenu = (bool = null) => {
+    if (bool) {
+      setMobileMenuOpen(bool) 
+      const elements = document.querySelectorAll('a.ps-menu-button.ps-open');
+    elements.forEach(element => {
+      element.click();
+    });
+    } else {
+      setMobileMenuOpen(prev => !prev);
+      const elements = document.querySelectorAll('a.ps-menu-button.ps-open');
+    elements.forEach(element => {
+      element.click();
+    });
+    }
   };
 
   

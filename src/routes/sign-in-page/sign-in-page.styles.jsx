@@ -5,22 +5,27 @@ export const SignInContainer = styled.div`
     background-color: #F5F5F5;
     padding: 2rem;
     height: 100%;
+    max-height: 100vh;
 `
 
-export const LeftDiv = styled.div`
-    flex: 1;
-    position: relative;
-    display: flex;
-    ${(props => props.rightexpanded?.toLowerCase() === 'true' && 'min-width: 800px;')}
-`
 
 export const ImageContainer = styled.div`
     position: absolute;
-    top: 0;
-    left: ${(props => props.translateright? '100%' : '0%')};
-    transition: left 0.5s ease-in-out;
-    height: 100%;
-    width: 100%;
+    top: 2rem;
+    width: 50%;
+    @media (max-width: 1019px) {
+        display: none;
+    }
+    @media (min-width: 1020px) {
+        left: ${(props => (props.signinmode.toLowerCase() === 'false' && props.signupdivsize) ? `calc(2rem + ${props.signupdivsize}px)` : '2rem')};
+        width: ${(props => (props.signinmode.toLowerCase() === 'false' && props.signindivsize && props.signupdivsize) ? `${props.signindivsize}px` : `${props.signupdivsize}px`)};
+    }
+
+    @media (max-width: 1280px) {
+        ${(props => (props.signinmode.toLowerCase() === 'true' && !props.signupdivsize) && 'width: calc(100vw - 660px);')}
+    }
+    transition: left 0.3s ease-in-out;
+    height: calc(100% - 4rem);
     border-radius: 40px;
     box-shadow: 2px -2px 20px 0px rgba(255,255,255,1), -2px 2px 20px 0px rgba(255,255,255,1);
     -webkit-box-shadow: 2px -2px 20px 0px rgba(255,255,255,1), -2px 2px 20px 0px rgba(255,255,255,1);
@@ -57,20 +62,64 @@ export const AuthSection = styled.div`
 `
 
 export const SignInSection = styled(AuthSection) `
+    flex: 1;
+    display: flex;
+
+    @media (max-width: 1019px) {
+        ${( props => props.signinmode.toLowerCase() === 'false' && 'display: none;')}
+    }
+
+    @media (min-width: 1445px) {
+        min-width: 1px;
+        ${( props => (props.signinmode.toLowerCase() === 'true' && props.signindivsize) && `min-width: ${props.signindivsize}px;`)}
+        transition: min-width 0.3s ease-in-out;
+    }
+
+    @media (max-width: 1280px) {
+        ${(props => props.signinmode.toLowerCase() === 'true' && 'min-width: 660px;')}
+    }
+
+    @media (max-width: 699px) {
+        min-width: unset;
+    }
+
+
     > button:nth-of-type(1) {
         position: absolute;
         top: 3rem;
         right: 3rem;
     }
 
-    ${(props => props.rightexpanded?.toLowerCase() === 'false' && 'min-width: 800px;')}
 `
 
 export const SignUpSection = styled(AuthSection) `
-    > button:nth-of-type(1) {
+    flex: 1;
+    display: flex;
+
+ 
+
+    @media (max-width: 1019px) {
+        ${( props => props.signinmode.toLowerCase() === 'true' && 'display: none;')}
+    }
+
+    @media (min-width: 1445px) {
+        min-width: 1px;
+        ${( props => (props.signinmode.toLowerCase() === 'false' && props.signupdivsize) && `min-width: ${props.signupdivsize}px;`)}
+        transition: min-width 0.3s ease-in-out;
+    }
+
+    @media (max-width: 1280px) {
+        ${(props => props.signinmode.toLowerCase() === 'false' && 'min-width: 660px;')}
+    }
+
+       @media (max-width: 699px) {
+        min-width: unset;
+    }
+
+    > button:nth-of-type(1) { 
         position: absolute;
-        top: 1rem;
-        left: 1rem;
+        top: 3rem;
+        left: 3rem;
     }
 
     
@@ -89,12 +138,20 @@ export const UserAuthContainer = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
     width: 70%;
     max-width: 700px;
     max-height: 70rem;
     height: 60%;
     justify-content: space-between;
+
+    @media (max-width: 414px) {
+        gap: 0.5rem;
+    }
+
+    @media (max-width: 699px) {
+        width: 90%;
+    }
+
 
     > * {
         width: 100%;
@@ -156,12 +213,21 @@ export const UserAuthContainer = styled.form`
 `
 
 export const UserSignInContainer = styled(UserAuthContainer)`
+    @media (max-width: 414px) {
+        height: 80%;
+        max-height: unset;
+    }   
 
 `
 
 export const UserSignUpContainer = styled(UserAuthContainer)`
     height: 70%;
     max-height: 80rem;
+
+    @media (max-width: 414px) {
+        height: 80%;
+        max-height: unset;
+    }
 
 `
 
@@ -180,6 +246,11 @@ export const RoundedBorderButton = styled.button`
     gap: 1rem;
     justify-content: center;
     transition: background-color 0.3s ease;
+
+     @media (max-width: 414px) {
+        min-height: 4rem;
+        max-height: 5rem;
+    }
 
     > svg {
         font-size: 2.2rem;
@@ -220,6 +291,11 @@ export const RoundedBorderInput = styled.input`
     font-size: 1.4rem;
     min-height: 6rem;
     max-height: 7rem;
+
+      @media (max-width: 414px) {
+        min-height: 4rem;
+        max-height: 5rem;
+    }
 `
 
 

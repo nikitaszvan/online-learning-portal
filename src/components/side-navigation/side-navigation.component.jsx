@@ -48,8 +48,38 @@ const SideNavigationBar = ({mobileSize = false}) => {
     }
   }, [sideNavMenuMap]);
 
-  const handleSignOutUser = async (e) => {
+  console.log(openSubMenu);
+
+  // useEffect(() => {
+
+  //   const handleClick = (event) => {
+  //     if ((event.target.tagName === 'SPAN' && !event.target.parentNode.id) || !event.target.id){
+  //       toggleMobileMenu(false);
+  //       console.log('Mobile menu open state:', mobileMenuOpen);
+  //     }
+  //   }
+
+  //   const menuButtons1 = document.querySelectorAll('a.ps-menu-button');
+  //   const menuButtons2 = document.querySelectorAll('span.ps-menu-label');
+
+  //   const combinedMenuButtons = [...menuButtons1, ...menuButtons2];
+
+  //   combinedMenuButtons.forEach(button => {
+  //     button.addEventListener('click', handleClick);
+  //   });
+
+
+  //   return () => {
+  //     combinedMenuButtons.forEach(button => {
+  //       button.removeEventListener('click', handleClick);
+  //     });
+
+  //   };
+  // }, []);
+  
+  const handleSignOutUser = async () => {
     try {
+      toggleMobileMenu(false);
       dispatch(signOutStart());
       navigate('/auth');
     } catch (error) {
@@ -65,6 +95,16 @@ const SideNavigationBar = ({mobileSize = false}) => {
       toggleMobileMenu(false);
     }
   };
+
+  const handleMobileMenuClick = () => {
+    setKeySubMenu({currentOpen: null, prevOpen: null})
+    const elements = document.querySelectorAll('a.ps-menu-button.ps-open');
+    elements.forEach(element => {
+      element.click();
+    });
+    toggleMobileMenu(false)
+
+  }
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
@@ -131,7 +171,7 @@ const SideNavigationBar = ({mobileSize = false}) => {
         });
       }
 
-      else if (key && !isSideNavCollapsed && openSubMenu.prevOpen == null) {
+      else if (key && (!isSideNavCollapsed) && openSubMenu.prevOpen == null) {
         triggerClick(openSubMenu.currentOpen);
         setKeySubMenu(prevState => { 
           return {
@@ -220,15 +260,15 @@ const SideNavigationBar = ({mobileSize = false}) => {
                           ref={sideMenuOptionRefs.current[key]}
                           icon={<DynamicIcon iconName={menuIcon} />}
                           label={menuTitle}
-                          onClick={(e) => !mobileSize && handleOnClick(e, key)}
+                          onClick={(e) => handleOnClick(e, key)}
                         >
                           {subMenuOptions !== 'mapCourses' ?
                             Object.entries(subMenuOptions).map(([subKey, subMenuOption]) => {
                               const { label, redirect_path } = subMenuOption;
-                              return (<MenuItem key={`submenu-item-${subKey}`} component={<Link to={'/' + redirect_path} />}>{label}</MenuItem>);
+                              return (<MenuItem key={`submenu-item-${subKey}`} component={<Link to={'/' + redirect_path} />} onClick={() => handleMobileMenuClick()}>{label}</MenuItem>);
                             }) : Object.entries(coursesMap)?.map(([courseKey, course]) => {
                               const { courseCode, courseSlug } = course;
-                              return <MenuItem key={`course-item-${courseKey}`} to={courseSlug}>{courseCode}</MenuItem>;
+                              return <MenuItem key={`course-item-${courseKey}`} component={<Link to={'course/' + courseSlug} />} onClick={() => handleMobileMenuClick()}>{courseCode}</MenuItem>;
                             })
                           }
                         </SubMenuStyled>
@@ -261,15 +301,15 @@ const SideNavigationBar = ({mobileSize = false}) => {
                         ref={sideMenuOptionRefs.current[key]}
                         icon={<DynamicIcon iconName={menuIcon} />}
                         label={menuTitle}
-                        onClick={(e) => !mobileSize && handleOnClick(e, key)}
+                        onClick={(e) => handleOnClick(e, key)}
                       >
                         {subMenuOptions !== 'mapCourses' ?
                           Object.entries(subMenuOptions).map(([subKey, subMenuOption]) => {
                             const { label, redirect_path } = subMenuOption;
-                            return (<MenuItem key={`submenu-item-${subKey}`} component={<Link to={'/' + redirect_path} />}>{label}</MenuItem>);
+                            return (<MenuItem key={`submenu-item-${subKey}`} component={<Link to={'/' + redirect_path} />} onClick={() => handleMobileMenuClick()}>{label}</MenuItem>);
                           }) : Object.entries(coursesMap)?.map(([courseKey, course]) => {
                             const { courseCode, courseSlug } = course;
-                            return <MenuItem key={`course-item-${courseKey}`} to={courseSlug}>{courseCode}</MenuItem>;
+                            return <MenuItem key={`course-item-${courseKey}`} component={<Link to={'/course/' + courseSlug} />} onClick={() => handleMobileMenuClick()}>{courseCode}</MenuItem>;
                           })
                         }
                       </SubMenuStyled>
@@ -291,12 +331,13 @@ const SideNavigationBar = ({mobileSize = false}) => {
           }
         </SettingsContainer>
         <UserContainer isonlyicons={isSideNavCollapsed} >
-          {!mobileSize &&
             <img onClick={(e) => isSideNavCollapsed && expandSideNav(e)} src={currentUser.photoURL ? currentUser.photoURL : require('../../assets/studentprofilepic.jpeg')} alt="student profile" />
-          }
           <div>
             <h3>{currentUser.displayName}</h3>
+            { mobileSize ? 
+            <button onClick={() => handleSignOutUser()}>Logout</button> :
             <p>{currentUser.email}</p>
+            }
           </div>
           <button onClick={() => mobileSize? null : handleSignOutUser() }>{mobileSize ? <DynamicIcon iconName='SettingsOutlined' /> : <DynamicIcon iconName='Logout' /> }</button>
         </UserContainer>
