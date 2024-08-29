@@ -53,16 +53,16 @@ export const DirectoryItemContainer = styled(Link)`
 
   > .skeleton-loader:nth-child(1) {
     width: 100%;
-    height: 45%;
-    border-radius: 15px;
+    height: 48%;
+    border-radius: 1.3em;
     align-self: center;
   }
 
 
   > .skeleton-loader:nth-child(2) {
     border-radius: 50px;
-    color: #E57373;
     height: 1.5rem;
+    margin-top: 0.5rem;
     font-weight: 600;
     width: 6.3rem;
     padding: 0.4rem 1.5rem 1.5rem 1.5rem;
@@ -83,9 +83,11 @@ export const DirectoryItemContainer = styled(Link)`
   }
 
   > div > .skeleton-loader:nth-child(1) {
-    width: 15%;
-    aspect-ratio: 1/1;
     border-radius: 50%;
+    width: 10%;
+    min-width: 32.3px;
+    height: 100%;
+    aspect-ratio: 1/1;
   }
 
   > div > div {

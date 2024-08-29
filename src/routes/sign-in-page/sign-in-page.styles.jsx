@@ -95,7 +95,6 @@ export const SignInSection = styled(AuthSection) `
 export const SignUpSection = styled(AuthSection) `
     flex: 1;
     display: flex;
-
  
 
     @media (max-width: 1019px) {

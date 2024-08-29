@@ -124,14 +124,23 @@ const SideNavigationBar = ({mobileSize = false}) => {
       };
     }, []);
 
-  const renderPlaceholders = () => {
-    return Array.from({ length: 6 }).map((_, index) => (
-      <div className="skeleton-side-nav-container" key={`skeleton-${index}`}>
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-      </div>
-    ));
+  const renderPlaceholders = (state) => {
+    if (state) {
+      return Array.from({ length: 6 }).map((_, index) => (
+        <div className="skeleton-side-nav-container-collapsed" key={`skeleton-${index}`}>
+          <Skeleton />
+        </div>
+      ));
+    }
+    else {
+      return Array.from({ length: 6 }).map((_, index) => (
+        <div className="skeleton-side-nav-container" key={`skeleton-${index}`}>
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+        </div>
+      ));
+    }
   };
 
 
@@ -219,7 +228,7 @@ const SideNavigationBar = ({mobileSize = false}) => {
   };
 
   return (
-    <SideNavigationContainer isonlyicons={ mobileSize ? false : isSideNavCollapsed } className={ classToAdd } showMobileMenu={mobileMenuOpen} ref={divRef}>
+    <SideNavigationContainer isonlyicons={ mobileSize ? false : isSideNavCollapsed } ismobilesize={ mobileSize } className={ classToAdd } showMobileMenu={mobileMenuOpen} ref={divRef}>
       {!mobileSize ? <TopSectionDiv isonlyicons={ mobileSize ? false : isSideNavCollapsed }>
         <button onClick={(e) => isSideNavCollapsed && expandSideNav(e)}>
           <DynamicIcon iconName='School'/>
@@ -236,7 +245,7 @@ const SideNavigationBar = ({mobileSize = false}) => {
       </TopSectionDiv> : <MobileSearchBar><SearchBarStyled /></MobileSearchBar>}
       <SidebarStyled style={{ overflowY: 'hidden'}} isonlyicons={ isSideNavCollapsed } ismobilesize={ mobileSize }>
         <Menu>
-          {loading ? renderPlaceholders() :
+          {loading ? renderPlaceholders(isSideNavCollapsed) :
             Object.entries(sideNavMenuMap)?.map(([key, sideNavSubMenu]) => {
               if (!sideMenuOptionRefs.current[key]) {
                 sideMenuOptionRefs.current[key] = createRef();

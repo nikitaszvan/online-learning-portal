@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import DirectoryItem from '../directory-item/directory-item.component';
 import { useSelector } from 'react-redux';
 import * as Color from '@mui/material/colors';
@@ -13,12 +13,14 @@ import {
 } from '../../store/courses/courses.selector';
 
 import { selectCurrentUser } from '../../store/user/user.selector';
+import { MyContext } from '../../contexts/contexts.component';
 
 const Directory = () => {
   const [loading, setLoading] = useState(true);
   const [coursesCardForm, setCoursesCardForm] = useState(true);
   const coursesMap = useSelector(selectCoursesMap);
   const currentUser = useSelector(selectCurrentUser);
+  const { mobileMenuOpen } = useContext(MyContext);
 
   useEffect(() => {
     if (Object.keys(coursesMap).length > 0) {
@@ -62,7 +64,7 @@ const Directory = () => {
         {coursesCardForm && <h1>Welcome Back, {getAllButLastName(currentUser.displayName)}</h1>}
         { <button onClick={() => setCoursesCardForm(!coursesCardForm)}>{coursesCardForm ? <DynamicIcon iconName='MenuOutlined' /> : <DynamicIcon iconName='Apps'/>}</button>}
       </DirectoryHeaderContainer>
-      <CourseCardsContainer className={coursesCardForm ? 'grid-layout' : 'block-layout'}>
+      <CourseCardsContainer className={coursesCardForm ? 'grid-layout' : 'block-layout'} disablelinks={`${mobileMenuOpen}`}>
         {!coursesCardForm && 
           <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', paddingInline: '2rem'}}>
             <p style={{width: '18%', textAlign: 'center'}}>Instructor Name and Faculty</p>

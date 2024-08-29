@@ -33,7 +33,7 @@ export const Layout = ({ children, pageTitle }) => {
       <Navigation sectionTitle={pageTitle} />
       <div className="main-body">
         {windowWidth > 667 && <SideNavigationBar />}
-        <CenterDiv isblurred={ `${mobileMenuOpen}` }>
+        <CenterDiv isblurred={`${mobileMenuOpen}`}>
           {children}
         </CenterDiv>
         {renderRightColumn}

@@ -19,7 +19,6 @@ export const SideNavigationContainer = styled.div`
     top: 5rem;
     right: 0;
     z-index: 1000;
-    width: 40%;
     max-width: 265px;
     display: ${(props => props.showMobileMenu ? 'block' : 'none')};
 
@@ -60,7 +59,7 @@ export const SideNavigationContainer = styled.div`
       margin: 0;
 
       > svg {
-        font-size: ${(props => props.isonlyicons ? '2.5rem' : '2.2rem')};
+        font-size: ${(props => props.isonlyicons ? '2.7rem' : '2.2rem')};
         transition: font-size 0.3s ease;
       }
     }
@@ -126,6 +125,27 @@ export const SideNavigationContainer = styled.div`
       height: 1.5rem;
     } 
   }
+
+  .skeleton-side-nav-container-collapsed {
+
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-block: 2rem;
+
+    &:nth-of-type(1) {
+      margin-top: 1rem;
+    }
+
+    > div {
+      height: 30px;
+      width: 35px;
+      border-radius: 5px;
+    }
+  }
+
+  ${(props => (props.showMobileMenu && props.ismobilesize) && 'width: 60vw;')} 
 `;
 
 export const SidebarStyled = styled(Sidebar)`

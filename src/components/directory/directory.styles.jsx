@@ -8,6 +8,7 @@ export const DirectoryContainer = styled.div`
   box-sizing: border-box;
   flex: 1;
   padding-inline: 2rem;
+  padding-bottom: 3rem;
 
   @media (max-width: 450px) {
     padding-inline: 0.5rem;
@@ -58,4 +59,5 @@ export const CourseCardsContainer = styled.div`
     > a {
       // width: fit-content;
     }
+  
 `;

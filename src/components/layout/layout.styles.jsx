@@ -23,6 +23,7 @@ export const CenterDiv = styled.div`
         -o-filter: blur(5px);
         -ms-filter: blur(5px);
         filter: blur(5px);
+        pointer-events: none; 
     `)}
 
 `
