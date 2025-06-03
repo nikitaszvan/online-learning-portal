@@ -190,6 +190,8 @@ export const CoursePage = ({course}) => {
             <h3>Discrete Mathematics I Course Syllabus- Fall 2024</h3>
             <button onClick={handlePreview}><DynamicIcon iconName='FindInPage'/></button>
           </div>
+          <Document file={pdfPath}><Page pageNumber={1}/><Page pageNumber={2}/></Document> 
+          
           {/*<SyllabusButtonContainer>
             <p onClick={() => toggleShowPreview(!showPreview)}>Preview</p>
             

@@ -211,7 +211,6 @@ const SideNavigationBar = ({mobileSize = false}) => {
   }
 
   const expandSideNav = (e) => {
-    console.log(e)
     setIsSideNavCollapsed(false);
     setClass('expanded');
   }

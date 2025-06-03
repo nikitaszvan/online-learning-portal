@@ -26,8 +26,6 @@ export const Layout = ({ children, pageTitle }) => {
     child.props.isDirectory ? <RightColumn /> : null
   );
 
-  console.log(mobileMenuOpen);
-
   return (
     <LayoutContainer>
       <Navigation sectionTitle={pageTitle} />

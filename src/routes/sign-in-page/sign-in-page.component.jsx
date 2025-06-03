@@ -53,6 +53,15 @@ const SignInPage = () => {
         navigate('/');
         }
     }, [currentUser, navigate]);
+    useEffect(() => {
+      if (signUpRef.current) {
+          setSignUpDivSize(signUpRef.current.offsetWidth);
+      }
+      if (signInRef.current) {
+          setSignInDivSize(signInRef.current.offsetWidth);
+      }
+  }, [signUpForm]);
+
 
     useEffect(() => {
       const handleResize = () => {
@@ -83,6 +92,15 @@ const SignInPage = () => {
         password = undefined,
         confirmPassword = undefined,
     } = formFields || {};
+
+    useEffect(() => {
+    if (signUpRef.current) {
+        setSignUpDivSize(signUpRef.current.offsetWidth);
+    }
+    if (signInRef.current) {
+        setSignInDivSize(signInRef.current.offsetWidth);
+    }
+}, []);
 
 
     useEffect(() => {
@@ -163,18 +181,31 @@ const SignInPage = () => {
         setFormFields({ ...formFields, [name]: value });
       };
 
-    const onToggle = () => {
-        const newHash = signUpForm ? 'sign-in' : 'sign-up';
-        const newSignInDivSize = signUpDivSize;
-        const newSignUpDivSize = signInDivSize;
-        setSignInDivSize(newSignInDivSize);
-        setSignUpDivSize(newSignUpDivSize);
-        setSignUpForm(newHash === 'sign-up');
-        setFormFields(getDefaultFormFields());
-        navigate(`#${newHash}`);
-    };
+    // const onToggle = () => {
+    //     const newHash = signUpForm ? 'sign-in' : 'sign-up';
+    //     const newSignInDivSize = signUpDivSize;
+    //     const newSignUpDivSize = signInDivSize;
+    //     setSignInDivSize(newSignInDivSize);
+    //     setSignUpDivSize(newSignUpDivSize);
+    //     setSignUpForm(newHash === 'sign-up');
+    //     setFormFields(getDefaultFormFields());
+    //     navigate(`#${newHash}`);
+    // };
 
-    console.log({signUpDivSize, signInDivSize});
+    const onToggle = () => {
+      const newHash = signUpForm ? 'sign-in' : 'sign-up';
+      
+      // Calculate the new size and left position based on current refs
+      const newSignInDivSize = signInRef.current ? signInRef.current.offsetWidth : 0;
+      const newSignUpDivSize = signUpRef.current ? signUpRef.current.offsetWidth : 0;
+      
+      setSignInDivSize(newSignInDivSize);
+      setSignUpDivSize(newSignUpDivSize);
+      setSignUpForm(!signUpForm);
+      setFormFields(getDefaultFormFields());
+      navigate(`#${newHash}`);
+  };
+
     return (
         <SignInContainer>
           <SignUpSection signinmode={`${!signUpForm}`} ref={signUpRef} signupdivsize={signUpDivSize} signindivsize={signInDivSize}>

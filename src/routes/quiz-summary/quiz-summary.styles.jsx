@@ -9,6 +9,10 @@ export const SummaryContainer = styled.div`
 export const TextContainer = styled.div`
     height: 95%;
     width: 60%;
+
+    @media (max-width: 750px) {
+        width: 80%;
+    }
     line-height: 2.5rem;
     display: flex;
     flex-direction: column;
